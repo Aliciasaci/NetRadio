@@ -28,6 +28,12 @@ const routes = [{
         component: () =>
             import ('../views/Programmes.vue')
     },
+    {
+        path: '/EnDirect',
+        name: 'EnDirect',
+        component: () =>
+            import ('../views/BordAnimateur.vue')
+    },
 ]
 
 const router = new VueRouter({

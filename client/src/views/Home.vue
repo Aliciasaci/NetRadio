@@ -1,13 +1,13 @@
 <template>
   <section>
-      <Header/>
+      <HeaderPrincipal />
       <div id="content-accueil">
         <div id="content-left">
             <img src="img/bg-emission.png">
             <div id="content-info">
                 <h1>Le journal : Episode 101</h1>
                 <h3>Par George</h3>
-                <router-link to="/">
+                <router-link to="/Auditeur">
                     <button type="submit" id="btn-play">
                         <img src="img/play.png">
                         <strong>Ecouter le direct</strong>
@@ -33,7 +33,7 @@
                     <p class="content-program-time"><strong>À suivre</strong></p>
                     <p class="content-program-name"><strong>Le journal : Episode 104</strong></p>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
     <Footer />
@@ -41,12 +41,7 @@
 </template>
 
 <script>
-
-export default {
-  name: 'Home',
-}
 </script>
 <style lang="scss">
-
 //npm run build
 </style>

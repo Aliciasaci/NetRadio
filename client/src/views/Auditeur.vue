@@ -1,81 +1,47 @@
 <template>
   <section>
-    <Header />
-    <div class="main">
-      <h1 class="title">Auditeur</h1>
-      <div class="btn">
-        <button @click="joinLive" id="join_live_btn">Join live</button>
-        <button @click="quitLive" id="quit_live_btn">Quit live</button>
+    <HeaderPrincipal />
+      <div id="ledirect-content">
+          <div id="ledirect-content-title">
+              <h1><u>"LE JOURNAL" - EPISODE 101</u></h1>
+          </div>
+          <div id="ledirect-content-img">
+              <img src="/img/lejournal.png" alt="Le journal">
+          </div>
+          <button @click="quitLive" type="submit" id="btn-stop">Arrêter le direct</button>
       </div>
-    </div>
+    <Footer />
   </section>
 </template>
 
 <script>
 import { io } from "socket.io-client";
 export default {
-  data() {
+ data() {
     return {
       socket: io("http://localhost:3000"),
       blob: {},
       audio: "",
     };
-  },
-  methods: {
-    joinLive() {
-      console.log("You joined the live");
+},
+mounted(){
+   console.log("You joined the live");
       this.socket.on("voice", (arrayBuffer) => {
+          console.log(arrayBuffer);
         this.blob = new Blob([arrayBuffer], { type: "audio/ogg; codecs=opus" });
         this.audio = document.createElement("audio");
         this.audio.src = window.URL.createObjectURL(this.blob);
         this.audio.play();
-      });
-    },
-    quitLive() {
+});
+},
+methods : {
+ quitLive() {
       this.$router.push("/");
     },
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss">
-.main {
-  display: flex;
-  flex-wrap: wrap;
-  text-align: center;
-  position: fixed;
-  top: 30%;
-  left: 37%;
-  .title {
-    flex-basis: 100%;
-    color: white;
-  }
-  .btn {
-    flex-basis: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    #join_live_btn {
-      background: rgb(34, 114, 19);
-      border: none;
-      border-radius: 3px;
-      outline: none;
-      cursor: pointer;
-      width: 100px;
-      height: 100px;
-      margin-right: 2em;
-    }
-    #quit_live_btn {
-      background: rgb(168, 8, 8);
-      border: none;
-      border-radius: 3px;
-      outline: none;
-      width: 100px;
-      height: 100px;
-      cursor: pointer;
-      margin-right: 2em;
-    }
-  }
-}
+
 </style>

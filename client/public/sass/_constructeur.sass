@@ -120,6 +120,10 @@ $third-color-default: #242424 !default
   @if($type == "podcasts")
     border-right: $border-right-default
 
+  
+  @if($type == "emissions")
+    border-right: $border-right-default
+
 
   @if($type == "ledirect")
     @include background-color(rgba(24,24,24,0.4))
@@ -169,6 +173,21 @@ $third-color-default: #242424 !default
 
   @if ($size == "large")
     grid-column: 2/3
+    @include padding(18px, 10px, 18px, 0)
+
+
+
+@mixin navbar-emissions($size)
+  @if ($size == "small")
+    grid-column: 3/4
+
+
+  @if ($size == "medium")
+    grid-column: 3/4
+
+
+  @if ($size == "large")
+    grid-column: 3/4
     @include padding(18px, 10px, 18px, 0)
 
 
@@ -245,14 +264,14 @@ $third-color-default: #242424 !default
 
 
 @mixin footer
-  @include background-color(rgba(24,24,24,0.7))
+  @include background-color(rgba(24,24,24,0.9))
   @include text-color($first-color-default)
   padding: 20px 20px
   font-weight: bold
   text-align: center
   bottom: 0
-  position: fixed
   width: 100%
+  margin-left: -10px
 
 
 @mixin input($width, $height, $font)

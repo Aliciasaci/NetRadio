@@ -9,8 +9,11 @@ import axios from 'axios'
 
 Vue.config.productionTip = false
 
-Vue.component("Header", () =>
-    import ("@/components/Header.vue"));
+Vue.component("HeaderPrincipal", () =>
+    import ("@/components/HeaderPrincipal.vue"));
+
+Vue.component("HeaderAnimateur", () =>
+    import ("@/components/HeaderAnimateur.vue"));
 
 Vue.component("Footer", () =>
     import ("@/components/Footer.vue"));

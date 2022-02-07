@@ -3,6 +3,8 @@
 html, body
   @include font-family
   @include background-color(#242424)
+  margin: 0
+  padding: 0
 
 
 .navbar
@@ -27,6 +29,10 @@ html, body
 
 #navbar-content ul #podcasts
   @include navbar-content('podcasts')
+
+
+#navbar-content ul #emissions
+  @include navbar-content('emissions')
 
 
 #navbar-content ul #ledirect
@@ -498,6 +504,10 @@ footer
     @include padding(18px, 34%, 23px, 34%)
 
 
+  #navbar-content ul #emissions a
+    @include padding(18px, 27%, 23px, 25%)
+
+
   #navbar-content ul #ledirect a:hover
     @include padding(10px, 10%, 10px, 10%)
     @include margin(0, 0, 0, 0)
@@ -513,6 +523,10 @@ footer
 
   #navbar-content ul #podcasts
     @include navbar-podcasts('large')
+
+
+  #navbar-content ul #emissions
+    @include navbar-emissions('large')
 
 
   #navbar-content ul #ledirect a
