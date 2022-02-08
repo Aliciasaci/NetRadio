@@ -7,7 +7,7 @@
             <div id="content-info">
                 <h1>Le journal : Episode 101</h1>
                 <h3>Par George</h3>
-                <router-link to="/Auditeur">
+                <router-link to="/EcouterDirect">
                     <button type="submit" id="btn-play">
                         <img src="img/play.png">
                         <strong>Ecouter le direct</strong>

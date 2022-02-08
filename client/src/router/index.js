@@ -5,10 +5,10 @@ Vue.use(VueRouter)
 
 const routes = [{
         path: '/',
-        name: 'Home',
+        name: 'Accueil',
 
         component: () =>
-            import ('../views/Home.vue')
+            import ('../views/Accueil.vue')
     },
     {
         path: '/Animateur',
@@ -17,10 +17,10 @@ const routes = [{
             import ('../views/Animateur.vue')
     },
     {
-        path: '/Auditeur',
-        name: 'Auditeur',
+        path: '/EcouterDirect',
+        name: 'EcouterDirect',
         component: () =>
-            import ('../views/Auditeur.vue')
+            import ('../views/EcouterDirect.vue')
     },
     {
         path: '/Programmes',

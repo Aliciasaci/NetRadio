@@ -121,27 +121,7 @@ export default {
             this.audio.play();
             console.log(this.audio.src);
             console.log(this.audio.src.slice(27, 63));
-            var folderId = '1xRWWITV8QozelF4qwxBBkG94HETeWnXi';
-            var fileMetadata = {
-            'name': 'audio.mp3',
-            parents: [folderId]
-            };
-            var media = {
-                mimeType: 'audio/mp3',
-                body: fs.createReadStream(this.audio.src)
-            };
-            drive.files.create({
-                resource: fileMetadata,
-                media: media,
-                fields: 'id'
-                }, function (err, file) {
-                if (err) {
-                    // Handle error
-                    console.error(err);
-                } else {
-                    console.log('File Id: ', file.id);
-                }
-            });
+        
         },
     },
 };

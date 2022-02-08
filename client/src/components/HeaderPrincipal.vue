@@ -6,13 +6,13 @@
         <div id="navbar-content">
             <ul>
                 <li id="programmes">
-                    <router-link to="/EnDirect"><strong>Programmes</strong></router-link>
+                    <router-link to="/Programmes"><strong>Programmes</strong></router-link>
                 </li>
                 <li id="podcasts">
-                    <router-link to="/"><strong>Podcasts</strong></router-link>
+                    <router-link to="/EnDirect"><strong>Podcasts</strong></router-link>
                 </li>
                 <li id="ledirect">
-                    <router-link to="/">
+                    <router-link to="/EcouterDirect">
                         <div id="ledirect-play">
                             <img src="img/ledirect.png" alt="Le direct">
                         </div>
