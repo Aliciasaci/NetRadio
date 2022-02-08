@@ -61,5 +61,16 @@ const deleteAuditeur = (req, res) => {
         }
     });
 }
+const checkCredentialsAuditeur = (req, res) =>{
+    const email = req.params.email;
+    const password = req.params.password;
+    auditeur.checkCredentials(email, password,(err,results)=>{
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+}
 
-module.exports = { deleteAuditeur, updateAuditeur, createAuditeur, showAuditeurById, showAuditeurs };
+module.exports = { deleteAuditeur, updateAuditeur, createAuditeur, showAuditeurById, showAuditeurs, checkCredentialsAuditeur };

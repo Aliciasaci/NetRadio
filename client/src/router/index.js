@@ -28,6 +28,12 @@ const routes = [{
         component: () =>
             import ('../views/Programmes.vue')
     },
+    {
+        path: '/connexion',
+        name: 'ConnexionInscription',
+        component: () =>
+            import ('../views/Connexion.vue')
+    }
 ]
 
 const router = new VueRouter({

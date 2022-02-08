@@ -1,6 +1,6 @@
 const animateur = require('../models/animateurModel.js');
 
-//Oublis pas de vérifier les codes d'erreurs et les exceptions
+// Oublis pas de vérifier les codes d'erreurs et les exceptions
 
 // Get All auditeurs
 const showAnimateurs = (req, res) => {

@@ -43,6 +43,13 @@ module.exports = app => {
 
     // delete un animateur
     router.delete('/animateurs/:id', animateur.deleteAnimateur);
+    
 
 
+
+
+
+    
+    //auditeur connexion
+    router.post('/connexion', auditeur.checkCredentialsAuditeur);
 }

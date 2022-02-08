@@ -16,7 +16,7 @@ app.use(cors());
 
 
 // require router 
-// require("./src/routes/routes.js")(app);
+require("./src/routes/routes.js")(app);
 
 
 //Serveur socket.io
