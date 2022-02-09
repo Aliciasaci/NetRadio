@@ -14,6 +14,8 @@ app.use(express.json());
 // use cors
 app.use(cors());
 
+//timezone
+process.env.TZ = 'Europe/Paris';
 
 // require router 
 require("./src/routes/routes.js")(app);

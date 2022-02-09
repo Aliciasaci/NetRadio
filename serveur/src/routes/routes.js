@@ -5,6 +5,7 @@ module.exports = app => {
 
     const auditeur = require('../controllers/auditeurController');
     const animateur = require('../controllers/animateurController');
+    const emission = require('../controllers/emissionController');
 
     /**
      * Routes des auditeurs
@@ -45,4 +46,22 @@ module.exports = app => {
     router.delete('/animateurs/:id', animateur.deleteAnimateur);
 
 
+
+    /**
+     * Routes des émissions
+     */
+    //get toutes les émissions
+    router.get('/emissions', emission.showEmissions);
+
+    // get une seule émission par id 
+    router.get('/emissions/:id', emission.showEmissionById);
+
+    // Créer nouvelle émission
+    router.post('/emissions', emission.createEmission);
+
+    // update une émission
+    router.put('/emissions/:id', emission.updateEmission);
+
+    // delete une émission
+    router.delete('/emissions/:id', emission.deleteEmission);
 }
