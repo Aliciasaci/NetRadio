@@ -17,7 +17,7 @@ let idEmission = 0;
 
 // Get all emissions with their episodes
 Emission.getEmissions = (result) => {
-    db.query("SELECT * FROM emission emi LEFT JOIN episode ep ON emi.idEmission = ep.idEmission ORDER BY emi.diffusionTime ASC", (err, results) => {
+    db.query("SELECT emi.*, ep.* FROM emission emi LEFT JOIN episode ep ON emi.idEmission = ep.emission ORDER BY emi.diffusionTime ASC", (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);
@@ -29,7 +29,7 @@ Emission.getEmissions = (result) => {
 
 // Get an emission with it's episode by id
 Emission.getEmissionById = (id, result) => {
-    db.query("SELECT * FROM emission emi LEFT JOIN episode ep ON emi.idEmission = ep.idEmission WHERE emi.idEmission = ?", [id], (err, results) => {
+    db.query("SELECT * FROM emission emi LEFT JOIN episode ep ON emi.idEmission = ep.emission WHERE emi.idEmission = ?", [id], (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);
@@ -59,7 +59,7 @@ Emission.insertEmission = (data, result) => {
                 console.log(err);
             } else {
                 idEmission = results[0].idEmission;
-                db.query("INSERT INTO episode SET idEmission = ?, titleEpisode = ?, nbEpisode = ?;", 
+                db.query("INSERT INTO episode SET emission = ?, titleEpisode = ?, nbEpisode = ?;", 
                 [idEmission, data.titleEpisode, data.nbEpisode], (err, results) => {
                     if (err) {
                         console.log(err);
@@ -76,15 +76,58 @@ Emission.insertEmission = (data, result) => {
     
 }
 
-// Update an emission with it's episode by id to database
+// Update an emission with it's episode when there's an episode or update an emission and add/create an episode for an emission by id to database
 Emission.updateEmissionById = (data, id, result) => {
-    db.query("UPDATE emission, episode SET emission.nomEmission = ?, emission.diffusionDate = ?, emission.diffusionTime = ?, emission.description = ?, emission.genre = ?, episode.titleEpisode = ?, episode.nbEpisode = ? WHERE emission.idEmission = ? AND episode.idEmission = ?", 
-    [data.nomEmission, data.diffusionDate, data.diffusionTime, data.description, data.genre, data.titleEpisode, data.nbEpisode, id, id], (err, results) => {
+    let episodeEmission = 0;
+    db.query("SELECT emission FROM episode WHERE emission = ?;", [id], (err, results) => {
         if (err) {
             console.log(err);
-            result(err, null);
-        } else {
-            result(null, results);
+        } 
+        else {
+            episodeEmission = results.length;
+            if(episodeEmission == 0)
+            {
+                db.query("UPDATE emission SET nomEmission = ?, diffusionDate = ?, diffusionTime = ?, description = ?, genre = ? WHERE idEmission = ?", 
+                [data.nomEmission, data.diffusionDate, data.diffusionTime, data.description, data.genre, id], (err, results) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else{
+                        db.query("INSERT INTO episode SET emission = ?, titleEpisode = ?, nbEpisode = ?;", 
+                        [id, data.titleEpisode, data.nbEpisode], (err, results) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log(results);
+                            }
+                        });
+                        result(null, results);
+                        
+                    }
+                });
+                
+            }
+            else
+            {
+                db.query("UPDATE emission SET nomEmission = ?, diffusionDate = ?, diffusionTime = ?, description = ?, genre = ? WHERE idEmission = ?", 
+                [data.nomEmission, data.diffusionDate, data.diffusionTime, data.description, data.genre, id], (err, results) => {
+                    if (err) {
+                        console.log(err);
+                        result(err, null);
+                    } else {
+                        result(null, results);
+                    }
+                });
+
+                db.query("UPDATE episode SET titleEpisode = ?, nbEpisode = ? WHERE emission = ?", 
+                [data.titleEpisode, data.nbEpisode, id], (err, results) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(results);
+                    }
+                });
+            }
         }
     });
 }
@@ -100,7 +143,7 @@ Emission.deleteEmissionById = (id, result) => {
         }
     });
 
-    db.query("DELETE FROM episode WHERE idEmission = ?", [id], (err, results) => {
+    db.query("DELETE FROM episode WHERE emission = ?", [id], (err, results) => {
         if (err) {
             console.log(err);
         } else {
