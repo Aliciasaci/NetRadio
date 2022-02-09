@@ -3,81 +3,83 @@
     <HeaderPrincipal />
     <div id="programmes-content">
         <h1 class="title"><u><strong>PROGRAMMES DE LA SEMAINE</strong></u></h1>
-       
-            <div class="programmes-content-date">
-                <div v-if="emission_date == date()">
-                    <p v-on:click="emission_date = date()" class="disabled">{{date()}}</p>
-                </div>
-                <div v-else>
-                    <p v-on:click="emission_date = date()" class="notdisabled">{{date()}}</p>
-                </div>
-                <div v-if="emission_date == moment().add(1, 'days').format('dddd, DD MMMM YYYY')">
-                    <p v-on:click="emission_date = moment().add(1, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(1, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
-                <div v-else>
-                    <p v-on:click="emission_date = moment().add(1, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(1, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
-                <div v-if="emission_date == moment().add(2, 'days').format('dddd, DD MMMM YYYY')">
-                    <p v-on:click="emission_date = moment().add(2, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(2, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
-                <div v-else>
-                    <p v-on:click="emission_date = moment().add(2, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(2, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
-                <div v-if="emission_date == moment().add(3, 'days').format('dddd, DD MMMM YYYY')">
-                    <p v-on:click="emission_date = moment().add(3, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(3, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
-                <div v-else>
-                    <p v-on:click="emission_date = moment().add(3, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(3, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
-            </div>
 
-            <div class="programmes-content-date">
-                <div v-if="emission_date == moment().add(4, 'days').format('dddd, DD MMMM YYYY')">
-                    <p v-on:click="emission_date = moment().add(4, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(4, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
-                <div v-else>
-                    <p v-on:click="emission_date = moment().add(4, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(4, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
-                <div v-if="emission_date == moment().add(5, 'days').format('dddd, DD MMMM YYYY')">
-                    <p v-on:click="emission_date = moment().add(5, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(5, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
-                <div v-else>
-                    <p v-on:click="emission_date = moment().add(5, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(5, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
-                <div v-if="emission_date == moment().add(6, 'days').format('dddd, DD MMMM YYYY')">
-                    <p v-on:click="emission_date = moment().add(6, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(6, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
-                <div v-else>
-                    <p v-on:click="emission_date = moment().add(6, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(6, 'days').format('dddd, DD MMMM YYYY')}} </p>
-                </div>
+        <div class="programmes-content-date">
+            <div v-if="emission_date == date()">
+                <p v-on:click="emission_date = date()" class="disabled">{{date()}}</p>
             </div>
-                
-  
+            <div v-else>
+                <p v-on:click="emission_date = date()" class="notdisabled">{{date()}}</p>
+            </div>
+            <div v-if="emission_date == moment().add(1, 'days').format('dddd, DD MMMM YYYY')">
+                <p v-on:click="emission_date = moment().add(1, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(1, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+            <div v-else>
+                <p v-on:click="emission_date = moment().add(1, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(1, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+            <div v-if="emission_date == moment().add(2, 'days').format('dddd, DD MMMM YYYY')">
+                <p v-on:click="emission_date = moment().add(2, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(2, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+            <div v-else>
+                <p v-on:click="emission_date = moment().add(2, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(2, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+            <div v-if="emission_date == moment().add(3, 'days').format('dddd, DD MMMM YYYY')">
+                <p v-on:click="emission_date = moment().add(3, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(3, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+            <div v-else>
+                <p v-on:click="emission_date = moment().add(3, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(3, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+        </div>
+
+        <div class="programmes-content-date">
+            <div v-if="emission_date == moment().add(4, 'days').format('dddd, DD MMMM YYYY')">
+                <p v-on:click="emission_date = moment().add(4, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(4, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+            <div v-else>
+                <p v-on:click="emission_date = moment().add(4, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(4, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+            <div v-if="emission_date == moment().add(5, 'days').format('dddd, DD MMMM YYYY')">
+                <p v-on:click="emission_date = moment().add(5, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(5, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+            <div v-else>
+                <p v-on:click="emission_date = moment().add(5, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(5, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+            <div v-if="emission_date == moment().add(6, 'days').format('dddd, DD MMMM YYYY')">
+                <p v-on:click="emission_date = moment().add(6, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(6, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+            <div v-else>
+                <p v-on:click="emission_date = moment().add(6, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(6, 'days').format('dddd, DD MMMM YYYY')}} </p>
+            </div>
+        </div>
+
         <div id="programmes-content-emission">
-       
             <div v-for="emission in emissions" v-bind:key="emission.id">
                 <div v-if="emission_date == date(emission.diffusionDate)">
                     <div class="programmes-content-emission-time">
                         <h2><u>{{time(emission.diffusionTime)}}</u></h2>
                         <img src="img/favoris.png" alt="Favoris">
                     </div>
-        
+
                     <ul class="programmes-content-emission-list">
-                        <li>
-                            <h3>{{emission.title}} - EPISODE {{emission.episode}}</h3>
+                        <li v-if="emission.titleEpisode != null">
+                            <h3>{{emission.nomEmission}} - {{emission.titleEpisode}}</h3>
+                            <button v-on:click="voirDetail(emission.idEmission)" type="submit" class="btn-info">Voir plus</button>
+                        </li>
+                        <li v-else>
+                            <h3>{{emission.nomEmission}}</h3>
                             <button v-on:click="voirDetail(emission.idEmission)" type="submit" class="btn-info">Voir plus</button>
                         </li>
                     </ul>
+
                 </div>
             </div>
-    
         </div>
 
         <div id="popup-programme" class="modal" v-if="emission_data">
-            <div class="modal-content">
+            <div class="modal-content" v-if="emission_data.nbEpisode != null">
                 <span class="close" v-on:click="close()">&times;</span>
                 <h2><u>NOM DE L'EMISSION</u></h2>
-                <p>{{emission_data.title}}</p>
+                <p>{{emission_data.nomEmission}}</p>
                 <h2><u>DATE ET HEURE DE L'EMISSION</u></h2>
                 <p>{{date(emission_data.diffusionDate)}}</p>
                 <p>{{time(emission_data.diffusionTime)}}</p>
@@ -85,8 +87,24 @@
                 <p>{{emission_data.genre}}</p>
                 <h2><u>DESCRIPTION DE L'EMISSION</u></h2>
                 <p>{{emission_data.description}}</p>
-                <div id="popup-programme-footer">
-                    <h2><u>N DE L'EPISODE : {{emission_data.episode}}</u></h2>
+                <div class="popup-programme-footer">
+                    <h2><u>N DE L'EPISODE : {{emission_data.nbEpisode}}</u></h2>
+                    <img src="img/notification.png">
+                </div>
+            </div>
+            <div class="modal-content" v-else>
+                <span class="close" v-on:click="close()">&times;</span>
+                <h2><u>NOM DE L'EMISSION</u></h2>
+                <p>{{emission_data.nomEmission}}</p>
+                <h2><u>DATE ET HEURE DE L'EMISSION</u></h2>
+                <p>{{date(emission_data.diffusionDate)}}</p>
+                <p>{{time(emission_data.diffusionTime)}}</p>
+                <h2><u>GENRE</u></h2>
+                <p>{{emission_data.genre}}</p>
+                <h2><u>DESCRIPTION DE L'EMISSION</u></h2>
+                <p>{{emission_data.description}}</p>
+                <div class="popup-programme-footer">
+                    <h2><u>N DE L'EPISODE :</u> -</h2>
                     <img src="img/notification.png">
                 </div>
             </div>
@@ -107,8 +125,7 @@ export default {
             emissions: null,
             emission_data: null,
             emission_time: null,
-            emission_date: this.date(),
-            click: false
+            emission_date: this.date()
         }
     },
     methods: {
@@ -123,7 +140,7 @@ export default {
         close() {
             document.querySelectorAll(".close").forEach(closeBtn => {
                 closeBtn.addEventListener('click', () => {
-                   document.getElementById("popup-programme").style.display = "none";
+                    document.getElementById("popup-programme").style.display = "none";
                 })
             })
             window.onclick = function (event) {
@@ -159,7 +176,7 @@ export default {
                     console.log(error);
                 });
         },
-        moment(){
+        moment() {
             return moment();
         }
     },
@@ -173,32 +190,39 @@ export default {
                 console.log(error);
             });
     }
-    
-    
+
 }
 </script>
 
 <style lang="scss">
-.title{
+.title {
     padding-bottom: 50px;
 }
 
-.programmes-content-date{
+#programmes-content{
+    margin: 0 2% 0 2%;
+}
+
+.programmes-content-date {
     display: flex;
     flex-direction: row;
 }
 
-.programmes-content-date:nth-of-type(1){
+.programmes-content-date p{
+    cursor: pointer;
+}
+
+.programmes-content-date:nth-of-type(1) {
     margin: 0 8%;
 }
 
-.programmes-content-date:nth-of-type(2){
-    margin: 0 20%;
+.programmes-content-date:nth-of-type(2) {
+    margin: 0 20% 8% 20%;
 }
 
-.disabled{
+.disabled {
     background-color: gray;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255, 255, 255, 0.4);
     border-radius: 15px;
     border: 1px solid gray;
     font-size: 19px;
@@ -209,7 +233,7 @@ export default {
     margin: 20px 10px 20px auto;
 }
 
-.notdisabled{
+.notdisabled {
     border-radius: 15px;
     border: 1px solid #E43C3C;
     font-size: 19px;
@@ -221,5 +245,4 @@ export default {
     color: white;
     background-color: #E43C3C;
 }
-
 </style>
