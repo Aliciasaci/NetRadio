@@ -24,7 +24,7 @@ const showAuditeurById = (req, res) => {
     });
 }
 
-// Create New Auditeur                                                          //S'assurer de mettre le content-type à json/application
+// Create New Auditeur        // S'assurer de mettre le content-type à json/application
 const createAuditeur = (req, res) => {
     const data = req.body;
     auditeur.insertAuditeur(data, (err, results) => {
@@ -61,14 +61,31 @@ const deleteAuditeur = (req, res) => {
         }
     });
 }
-const checkCredentialsAuditeur = (req, res) =>{
-    const email = req.params.email;
-    const password = req.params.password;
+
+const checkCredentialsAuditeur = (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    var rand = function() {
+        return Math.random().toString(36).substr(2); // remove `0.`
+    };
+    
+    var token = function() {
+        return rand() + rand(); // to make it longer
+    };
+    
+
     auditeur.checkCredentials(email, password,(err,results)=>{
         if (err) {
+            console.log('error dans le controller');
             res.send(err);
         } else {
-            res.json(results);
+            if (Object.keys(results).length != 0) {
+                console.log('ok --> connecté');
+                res.json({"token" : token()});
+            } else {
+                res.json({"message":"Impossible de se connecter"});
+            }
+            
         }
     });
 }

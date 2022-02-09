@@ -46,10 +46,8 @@ module.exports = app => {
     
 
 
+    // CONNEXION
 
-
-
-    
-    //auditeur connexion
+    // Auditeur connexion
     router.post('/connexion', auditeur.checkCredentialsAuditeur);
 }

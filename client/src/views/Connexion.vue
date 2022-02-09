@@ -82,6 +82,12 @@ export default {
 				email: this.emailconnexion,
 				password: this.passwordconnexion,
 			};
+			this.$api
+				.post("/connexion",donnees)
+				.then((response) => {
+					alert('connecté');
+					this.$store.commit('setToken',response.token);
+				})
 		},
 		validationInscription() {
 			let donnees = {
