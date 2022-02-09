@@ -3,9 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-// import { io } from "socket.io-client";
+import VueAxios from 'vue-axios'
 
-// const socket = io("http://localhost:3000")
+Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false
 

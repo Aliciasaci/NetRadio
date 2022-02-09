@@ -1,101 +1,225 @@
 <template>
-    <section>
-      <HeaderPrincipal/>
-      <div id="programmes-content">
-        <h1><u><strong>PROGRAMMES DE LA SEMAINE</strong></u></h1>
-        <div id="programmes-content-date">
-            <img src="img/btn-previous.png">
-            <p>Mardi, 14 decembre 2021</p>
-            <img src="img/btn-next.png">
-        </div>
+<section>
+    <HeaderPrincipal />
+    <div id="programmes-content">
+        <h1 class="title"><u><strong>PROGRAMMES DE LA SEMAINE</strong></u></h1>
+       
+            <div class="programmes-content-date">
+                <div v-if="emission_date == date()">
+                    <p v-on:click="emission_date = date()" class="disabled">{{date()}}</p>
+                </div>
+                <div v-else>
+                    <p v-on:click="emission_date = date()" class="notdisabled">{{date()}}</p>
+                </div>
+                <div v-if="emission_date == moment().add(1, 'days').format('dddd, DD MMMM YYYY')">
+                    <p v-on:click="emission_date = moment().add(1, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(1, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+                <div v-else>
+                    <p v-on:click="emission_date = moment().add(1, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(1, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+                <div v-if="emission_date == moment().add(2, 'days').format('dddd, DD MMMM YYYY')">
+                    <p v-on:click="emission_date = moment().add(2, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(2, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+                <div v-else>
+                    <p v-on:click="emission_date = moment().add(2, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(2, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+                <div v-if="emission_date == moment().add(3, 'days').format('dddd, DD MMMM YYYY')">
+                    <p v-on:click="emission_date = moment().add(3, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(3, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+                <div v-else>
+                    <p v-on:click="emission_date = moment().add(3, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(3, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+            </div>
+
+            <div class="programmes-content-date">
+                <div v-if="emission_date == moment().add(4, 'days').format('dddd, DD MMMM YYYY')">
+                    <p v-on:click="emission_date = moment().add(4, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(4, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+                <div v-else>
+                    <p v-on:click="emission_date = moment().add(4, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(4, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+                <div v-if="emission_date == moment().add(5, 'days').format('dddd, DD MMMM YYYY')">
+                    <p v-on:click="emission_date = moment().add(5, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(5, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+                <div v-else>
+                    <p v-on:click="emission_date = moment().add(5, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(5, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+                <div v-if="emission_date == moment().add(6, 'days').format('dddd, DD MMMM YYYY')">
+                    <p v-on:click="emission_date = moment().add(6, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(6, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+                <div v-else>
+                    <p v-on:click="emission_date = moment().add(6, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(6, 'days').format('dddd, DD MMMM YYYY')}} </p>
+                </div>
+            </div>
+                
+  
         <div id="programmes-content-emission">
-            <div class="programmes-content-emission-time">
-                <h2><u>10H00</u></h2>
-                <img src="img/favoris.png" alt="Favoris">
+       
+            <div v-for="emission in emissions" v-bind:key="emission.id">
+                <div v-if="emission_date == date(emission.diffusionDate)">
+                    <div class="programmes-content-emission-time">
+                        <h2><u>{{time(emission.diffusionTime)}}</u></h2>
+                        <img src="img/favoris.png" alt="Favoris">
+                    </div>
+        
+                    <ul class="programmes-content-emission-list">
+                        <li>
+                            <h3>{{emission.title}} - EPISODE {{emission.episode}}</h3>
+                            <button v-on:click="voirDetail(emission.idEmission)" type="submit" class="btn-info">Voir plus</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <ul class="programmes-content-emission-list">
-                <li>
-                    <h3>"Le journal" - Episode 101</h3>
-                    <button @click="voirDetail()" type="submit" class="btn-info">Voir plus</button>
-                </li>
-                <li>
-                    <h3>"Emission X" - Episode 89</h3>
-                    <button @click="voirDetail()" type="submit" class="btn-info">Voir plus</button>
-                </li>
-            </ul>
-            <div class="programmes-content-emission-time">
-                <h2><u>11H00</u></h2>
-                <img src="img/favoris.png" alt="Favoris">
-            </div>
-            <ul class="programmes-content-emission-list">
-                <li>
-                    <h3>"Le chronique de George" - Episode 2</h3>
-                    <button @click="voirDetail()" type="submit" class="btn-info">Voir plus</button>
-                </li>
-            </ul>
-            <div class="programmes-content-emission-time">
-                <h2><u>12H00</u></h2>
-                <img src="img/favoris.png" alt="Favoris">
-            </div>
-            <ul class="programmes-content-emission-list">
-                <li>
-                    <h3>"Le journal" - Episode 102</h3>
-                    <button @click="voirDetail()" type="submit" class="btn-info">Voir plus</button>
-                </li>
-            </ul>
+    
         </div>
-        <div id="popup-programme" class="modal">
-          <div class="modal-content">
-              <span class="close" @click="close()">&times;</span>
-              <h2><u>NOM DE L'EMISSION</u></h2>
-              <p>Le journal</p>
-              <h2><u>DATE ET HEURE DE L'EMISSION</u></h2>
-              <p>Mardi, 14 decembre 2021</p>
-              <p>10H00</p>
-              <h2><u>DESCRIPTION DE L'EMISSION</u></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-              <div id="popup-programme-footer">
-                  <h2><u>N DE L'EPISODE : 100</u></h2>
-                  <img src="img/notification.png">
-              </div>
-          </div>
+
+        <div id="popup-programme" class="modal" v-if="emission_data">
+            <div class="modal-content">
+                <span class="close" v-on:click="close()">&times;</span>
+                <h2><u>NOM DE L'EMISSION</u></h2>
+                <p>{{emission_data.title}}</p>
+                <h2><u>DATE ET HEURE DE L'EMISSION</u></h2>
+                <p>{{date(emission_data.diffusionDate)}}</p>
+                <p>{{time(emission_data.diffusionTime)}}</p>
+                <h2><u>GENRE</u></h2>
+                <p>{{emission_data.genre}}</p>
+                <h2><u>DESCRIPTION DE L'EMISSION</u></h2>
+                <p>{{emission_data.description}}</p>
+                <div id="popup-programme-footer">
+                    <h2><u>N DE L'EPISODE : {{emission_data.episode}}</u></h2>
+                    <img src="img/notification.png">
+                </div>
+            </div>
         </div>
-      </div>
-      <Footer />
-  </section>
+    </div>
+    <Footer />
+</section>
 </template>
 
 <script>
+import axios from 'axios';
+import moment from 'moment';
 
 export default {
-    data(){
-      return{
-        test: false
-      }
+    name: 'Programmes',
+    data() {
+        return {
+            emissions: null,
+            emission_data: null,
+            emission_time: null,
+            emission_date: this.date(),
+            click: false
+        }
     },
     methods: {
-      close() {
-         document.querySelectorAll(".close").forEach(closeBtn => {
-              closeBtn.addEventListener('click', () => {
-                  document.getElementById("popup-programme").style.display = "none";
-              })
-          });
-          window.onclick = function(event) {
-              if (event.target === document.getElementById("popup-programme")) {
-                  document.getElementById("popup-programme").style.display = "none";
-              }
-          }
-      },
-      voirDetail(){
-          document.querySelectorAll(".btn-info").forEach(programmeBtn => {
-              programmeBtn.addEventListener('click', () => {
-                  document.getElementById("popup-programme").style.display = "block";
-              })
-          });
+        voirDetail(id) {
+            this.getEmissionById(id);
+            document.querySelectorAll(".btn-info").forEach(programmeBtn => {
+                programmeBtn.addEventListener('click', () => {
+                    document.getElementById("popup-programme").style.display = "block";
+                });
+            });
+        },
+        close() {
+            document.querySelectorAll(".close").forEach(closeBtn => {
+                closeBtn.addEventListener('click', () => {
+                   document.getElementById("popup-programme").style.display = "none";
+                })
+            })
+            window.onclick = function (event) {
+                if (event.target === document.getElementById("popup-programme")) {
+                    document.getElementById("popup-programme").style.display = "none";
+                }
+            }
+        },
+        date(value) {
+            if (value) {
+                return moment(String(value)).format('dddd, DD MMMM YYYY');
+            } else {
+                return moment().format('dddd, DD MMMM YYYY');
+            }
+        },
+        time(value) {
+            if (value) {
+                const duration = moment.duration(value);
+                if (duration.minutes() == '00') {
+                    return duration.hours() + 'H' + duration.minutes() + '0';
+                } else {
+                    return duration.hours() + 'H' + duration.minutes();
+                }
+            }
+        },
+        getEmissionById(id) {
+            axios
+                .get("http://localhost:3000/emissions/" + id)
+                .then(response => {
+                    this.emission_data = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        moment(){
+            return moment();
         }
+    },
+    created() {
+        axios
+            .get("http://localhost:3000/emissions")
+            .then(response => {
+                this.emissions = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
+    
+    
 }
 </script>
+
 <style lang="scss">
+.title{
+    padding-bottom: 50px;
+}
+
+.programmes-content-date{
+    display: flex;
+    flex-direction: row;
+}
+
+.programmes-content-date:nth-of-type(1){
+    margin: 0 8%;
+}
+
+.programmes-content-date:nth-of-type(2){
+    margin: 0 20%;
+}
+
+.disabled{
+    background-color: gray;
+    color: rgba(255,255,255,0.4);
+    border-radius: 15px;
+    border: 1px solid gray;
+    font-size: 19px;
+    text-align: center;
+    padding: 15px 20px 15px 20px;
+    width: fit-content;
+    font-weight: bold;
+    margin: 20px 10px 20px auto;
+}
+
+.notdisabled{
+    border-radius: 15px;
+    border: 1px solid #E43C3C;
+    font-size: 19px;
+    text-align: center;
+    padding: 15px 20px 15px 20px;
+    width: fit-content;
+    font-weight: bold;
+    margin: 20px 10px 20px auto;
+    color: white;
+    background-color: #E43C3C;
+}
 
 </style>
