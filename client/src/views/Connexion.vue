@@ -4,33 +4,30 @@
 			<a href="accueil.html"><img src="img/logo.png" /></a>
 		</div>
 		<div id="compte-content">
-			<form id="compte-content-connection">
+			<form @submit.prevent="validationConnexion()" id="compte-content-connection">
 				<h1>CONNEXION</h1>
 				<div id="compte-content-connection-form">
 					<p>Email</p>
-					<input type="text" class="input" />
+					<input required v-model="emailconnexion" type="email" class="input" />
 					<p>Mot de passe</p>
-					<input type="text" class="input" />
+					<input required v-model="passwordconnexion" type="password" class="input" />
 					<div class="btn">
-						<a href="#">
-                                   <button id="btn-connection">Se connecter</button>
-                              </a>
+                        <button id="btn-connection">Se connecter</button>
 					</div>
 				</div>
 			</form>
-			<form id="compte-content-register">
+
+			<form @submit.prevent="validationInscription()" id="compte-content-register">
 				<h1>INSCRIPTION</h1>
 				<div id="compte-content-register-form">
 					<p>Nom</p>
-					<input type="text" class="input" />
+					<input required v-model="nominscription" type="text" class="input" />
 					<p>Email</p>
-					<input type="text" class="input" />
+					<input required v-model="emailinscription" type="email" class="input" />
 					<p>Mot de passe</p>
-					<input type="text" class="input" />
+					<input required v-model="passwordinscription" type="password" class="input" />
 					<div class="btn">
-						<a href="#">
-                                   <button id="btn-register">S'inscrire</button>
-                              </a>
+                        <button id="btn-register">S'inscrire</button>
 					</div>
 				</div>
 			</form>
@@ -39,28 +36,22 @@
 			<p>
 				Vous êtes invité(e) ?
                     <router-link to="/invite">
-                         <button type="submit" id="btn-invitation">Cliquez ici</button>
+                        <button id="btn-invitation">Cliquez ici</button>
+                    </router-link>
+			</p>
+			<p>
+				Vous êtes un(e) Animateur(e) ?
+                    <router-link to="/connexionAnimateur">
+                        <button id="btn-invitation">Cliquez ici</button>
                     </router-link>
 			</p>
 			<div id="compte-footer-btn">
 				<router-link to="/">
-                         <button type="submit" id="btn-accueil">Retourner à l'accueil</button>
-                    </router-link>
+					<button type="submit" id="btn-accueil">Retourner à l'accueil</button>
+				</router-link>
 			</div>
 		</div>
 		<footer>@Net'Radio - 2021/2022</footer>
-		<div id="form-invitation" class="modal">
-			<div class="modal-content">
-				<span class="close">&times;</span>
-				<h1><u>METTEZ VOTRE LIEN D'INVITATION</u></h1>
-				<form>
-					<input type="text" class="input" />
-					<div class="btn-form">
-						<button type="button" id="btn-confirm">Confirmer</button>
-					</div>
-				</form>
-			</div>
-		</div>
 	</div>
 </template>
 
@@ -73,7 +64,7 @@ export default {
 			passwordconnexion: "",
 			nominscription: "",
 			emailinscription: "",
-			passwordinscription: "",
+			passwordinscription: ""
 		};
 	},
 	methods: {
@@ -83,18 +74,33 @@ export default {
 				password: this.passwordconnexion,
 			};
 			this.$api
-				.post("/connexion",donnees)
+				.post("/connexionAuditeur",donnees)
 				.then((response) => {
-					alert('connecté');
-					this.$store.commit('setToken',response.token);
-				})
+					alert(response.data.message);
+					this.$store.commit('setToken',response.data.token);
+					this.$store.commit('adjustMember',{
+						member : response.data.member,
+						status : response.data.status
+						});
+					this.$router.push("/")
+				});
 		},
 		validationInscription() {
 			let donnees = {
-				nom: this.nominscription,
-				email: this.emailinscription,
-				password: this.passwordinscription,
+				fullNameAuditeur: this.nominscription,
+				emailAuditeur: this.emailinscription,
+				mdpAuditeur: this.passwordinscription,
 			};
+			this.$api
+				.post("/auditeurs",donnees)
+				.then((response) => {
+					console.log(response.message);
+					alert("Compte créé, veuillez vous connecter");
+					this.nominscription = "",
+					this.emailinscription = "",
+					this.passwordinscription = ""
+				});
+
 		},
 	},
 };

@@ -49,5 +49,8 @@ module.exports = app => {
     // CONNEXION
 
     // Auditeur connexion
-    router.post('/connexion', auditeur.checkCredentialsAuditeur);
+    router.post('/connexionAuditeur', auditeur.checkCredentialsAuditeur);
+    
+    // Animateur connexion
+    router.post('/connexionAnimateur', animateur.checkCredentialsAnimateur);
 }

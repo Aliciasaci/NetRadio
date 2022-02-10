@@ -10,7 +10,7 @@ import axios from 'axios'
 Vue.config.productionTip = false
 
 Vue.prototype.$api = axios.create({
-    baseURL : 'localhost:3000',
+    baseURL : 'http://localhost:3000',
     params:{}
 });
 

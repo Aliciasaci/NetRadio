@@ -33,6 +33,18 @@ const routes = [{
         name: 'ConnexionInscription',
         component: () =>
             import ('../views/Connexion.vue')
+    },
+    {
+        path: '/invite',
+        name: 'Invite',
+        component: () =>
+            import ('../views/Invite.vue')
+    },
+    {
+        path: '/connexionAnimateur',
+        name: 'ConnexionAnimateur',
+        component: () =>
+            import ('../views/ConnexionAnimateur.vue')
     }
 ]
 

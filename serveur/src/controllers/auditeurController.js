@@ -62,6 +62,7 @@ const deleteAuditeur = (req, res) => {
     });
 }
 
+// Connexion Auditeur
 const checkCredentialsAuditeur = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -81,8 +82,10 @@ const checkCredentialsAuditeur = (req, res) => {
         } else {
             if (Object.keys(results).length != 0) {
                 res.json({
-                    "message" : "Connection réussi",
-                    "token" : token()
+                    "message" : "Connexion réussi",
+                    "token" : token(),
+                    "status" : "auditeur",
+                    "member" : true
                 });
             } else {
                 res.json({

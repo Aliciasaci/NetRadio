@@ -69,7 +69,7 @@ Animateur.deleteAnimateurById = (id, result) => {
 }
 
 // connexion animateur
-Animateur.checkCredentialsAnimateur = (email,password) =>{
+Animateur.checkCredentials = (email, password, result) =>{
     db.query("SELECT * FROM animateur WHERE emailAnimateur = ? AND mdpAnimateur = ?",[email, password],(err, results) => {
         if (err) {
             console.log(err);
@@ -79,5 +79,6 @@ Animateur.checkCredentialsAnimateur = (email,password) =>{
         }
     });
 }
+
 
 module.exports = Animateur;

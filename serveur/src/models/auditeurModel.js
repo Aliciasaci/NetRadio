@@ -79,4 +79,6 @@ Auditeur.checkCredentials = (email,password, result) => {
         }
     });
 }
+
+
 module.exports = Auditeur;
