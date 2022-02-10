@@ -80,10 +80,14 @@ const checkCredentialsAuditeur = (req, res) => {
             res.send(err);
         } else {
             if (Object.keys(results).length != 0) {
-                console.log('ok --> connecté');
-                res.json({"token" : token()});
+                res.json({
+                    "message" : "Connection réussi",
+                    "token" : token()
+                });
             } else {
-                res.json({"message":"Impossible de se connecter"});
+                res.json({
+                    "message" : "Impossible de se connecter"
+                });
             }
             
         }
