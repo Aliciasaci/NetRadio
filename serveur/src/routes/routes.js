@@ -6,6 +6,7 @@ module.exports = app => {
     const auditeur = require('../controllers/auditeurController');
     const animateur = require('../controllers/animateurController');
     const emission = require('../controllers/emissionController');
+    const creneau = require('../controllers/creneauController');
 
     /**
      * Routes des auditeurs
@@ -64,4 +65,27 @@ module.exports = app => {
 
     // delete une émission
     router.delete('/emissions/:id', emission.deleteEmission);
+
+
+
+    /**
+     * Routes des créneaux
+     */
+    // get tous les créneaux
+    router.get('/creneaux', creneau.showCreneaux);
+
+    // get tous les créneaux par date
+    router.get('/creneaux/:date', creneau.showCreneauxByDate);
+
+    // get un seul créneau par date et heure
+    router.get('/creneaux/:date/:heure', creneau.showCreneauByDateTime);
+
+    // créer un créneau
+    router.post('/creneaux', creneau.createCreneau);
+
+    // update un créneau
+    router.put('/creneaux/:date/:heure', creneau.updateCreneau);
+
+    // delete un créneau
+    router.delete('/creneaux/:date/:heure', creneau.deleteCreneau);
 }
