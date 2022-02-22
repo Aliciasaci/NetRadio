@@ -1,20 +1,15 @@
 <template>
-    <nav id="navbar-anim">
+    <nav id="navbar-admin">
         <div id="navbar-logo">
             <router-link to="/"><img src="img/logo.png" alt="Net'Radio"></router-link>
         </div>
         <div id="navbar-content">
             <ul>
                 <li id="programmes">
-                    <router-link to="/Programmes"><strong>Créneaux</strong></router-link>
+                    <router-link to="/Programmes"><strong>Calendrier</strong></router-link>
                 </li>
                 <li id="podcasts">
-                    <router-link to="/"><strong>Podcasts</strong></router-link>
-                </li>
-                <li id="emissions">
-                    <router-link to="/">
-                        <strong>Mes émissions</strong>
-                    </router-link>
+                    <router-link to="/"><strong>Animateurs</strong></router-link>
                 </li>
             </ul>
         </div>
@@ -29,26 +24,23 @@ export default {};
 </script>
 
 <style lang="scss">
-   #navbar-anim{
+   #navbar-admin{
        background-color: #424242;
        display: grid;
-       grid-template-columns: 0.3fr 1fr 0.1fr;
+       grid-template-columns: 0.6fr 0.4fr 0.13fr;
    }
 
-   #navbar-anim #navbar-content ul{
-       grid-template-columns: 0.16fr 0.22fr 0.27fr;
+   #navbar-admin #navbar-content ul{
+       grid-template-columns: 0.55fr 0.85fr;
    }
 
-   #navbar-anim #navbar-content ul #programmes{
+   #navbar-admin #navbar-content ul #programmes{
        grid-column: 1/2;
    }
 
-   #navbar-anim #navbar-content ul #podcasts{
-       grid-column: 2/3;  
-   }
-
-   #navbar-anim #navbar-content ul #ledirect{
-       grid-column: 3/4;  
+   #navbar-admin #navbar-content ul #podcasts{
+       grid-column: 2/3;
+       
    }
 
    #navbar-compte{

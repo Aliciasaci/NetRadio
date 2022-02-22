@@ -9,7 +9,7 @@
                     <router-link to="/Programmes"><strong>Programmes</strong></router-link>
                 </li>
                 <li id="podcasts">
-                    <router-link to="/EnDirect"><strong>Podcasts</strong></router-link>
+                    <router-link to="/Calendrier"><strong>Podcasts</strong></router-link>
                 </li>
                 <li id="ledirect">
                     <router-link to="/EcouterDirect">
