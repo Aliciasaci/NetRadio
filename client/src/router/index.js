@@ -34,6 +34,12 @@ const routes = [{
         component: () =>
             import ('../views/BordAnimateur.vue')
     },
+    {
+        path: '/Calendrier',
+        name: 'Calendrier',
+        component: () =>
+            import ('../views/CalendrierAdmin.vue')
+    }
 ]
 
 const router = new VueRouter({
