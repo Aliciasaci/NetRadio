@@ -80,8 +80,11 @@ module.exports = app => {
     // get tous les créneaux par date
     router.get('/creneaux/:date', creneau.showCreneauxByDate);
 
+    // get tous les créneaux par date et heure
+    router.get('/creneaux/:date/:heure', creneau.showCreneauxByDateTime);
+
     // get un seul créneau par date et heure
-    router.get('/creneaux/:date/:heure', creneau.showCreneauByDateTime);
+    router.get('/creneau/:date/:heure', creneau.showCreneauByDateTime);
 
     // créer un créneau
     router.post('/creneaux', creneau.createCreneau);
