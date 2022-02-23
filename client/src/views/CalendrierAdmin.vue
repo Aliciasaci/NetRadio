@@ -67,7 +67,7 @@ export default {
   methods: {
     getCreneaux(){
       axios
-        .get("http://localhost:3000/creneaux/" + this.momentDate(this.selectedDate) + this.selectedHeure.heure)
+        .get("http://localhost:3000/creneau/" + this.momentDate(this.selectedDate) + this.selectedHeure.heure)
         .then(response => {
             this.creneaux = response.data;
         })
