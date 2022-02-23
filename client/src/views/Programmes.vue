@@ -54,20 +54,20 @@
 
         <div id="programmes-content-emission">
             <div v-for="emission in emissions" v-bind:key="emission.id">
-                <div v-if="emission_date == date(emission.diffusionDate)">
+                <div v-if="emission_date == date(emission.date)">
                     <div class="programmes-content-emission-time">
-                        <h2><u>{{time(emission.diffusionTime)}}</u></h2>
+                        <h2><u>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</u></h2>
                         <img src="img/favoris.png" alt="Favoris">
                     </div>
 
                     <ul class="programmes-content-emission-list">
                         <li v-if="emission.titleEpisode != null">
                             <h3>{{emission.nomEmission}} - {{emission.titleEpisode}}</h3>
-                            <button v-on:click="voirDetail(emission.idEmission)" type="submit" class="btn-info">Voir plus</button>
+                            <button v-on:click="voirDetail(emission.idCreneau)" type="submit" class="btn-info">Voir plus</button>
                         </li>
                         <li v-else>
                             <h3>{{emission.nomEmission}}</h3>
-                            <button v-on:click="voirDetail(emission.idEmission)" type="submit" class="btn-info">Voir plus</button>
+                            <button v-on:click="voirDetail(emission.idCreneau)" type="submit" class="btn-info">Voir plus</button>
                         </li>
                     </ul>
 
@@ -81,8 +81,8 @@
                 <h2><u>NOM DE L'EMISSION</u></h2>
                 <p>{{emission_data.nomEmission}}</p>
                 <h2><u>DATE ET HEURE DE L'EMISSION</u></h2>
-                <p>{{date(emission_data.diffusionDate)}}</p>
-                <p>{{time(emission_data.diffusionTime)}}</p>
+                <p>{{date(emission_data.date)}}</p>
+                <p>{{emission_data.heure.substr(0, 2) + 'H' + emission_data.heure.substr(3, 2)}}</p>
                 <h2><u>GENRE</u></h2>
                 <p>{{emission_data.genre}}</p>
                 <h2><u>DESCRIPTION DE L'EMISSION</u></h2>
@@ -97,8 +97,8 @@
                 <h2><u>NOM DE L'EMISSION</u></h2>
                 <p>{{emission_data.nomEmission}}</p>
                 <h2><u>DATE ET HEURE DE L'EMISSION</u></h2>
-                <p>{{date(emission_data.diffusionDate)}}</p>
-                <p>{{time(emission_data.diffusionTime)}}</p>
+                <p>{{date(emission_data.date)}}</p>
+                <p>{{emission_data.heure.substr(0, 2) + 'H' + emission_data.heure.substr(3, 2)}}</p>
                 <h2><u>GENRE</u></h2>
                 <p>{{emission_data.genre}}</p>
                 <h2><u>DESCRIPTION DE L'EMISSION</u></h2>
@@ -156,21 +156,11 @@ export default {
                 return moment().format('dddd, DD MMMM YYYY');
             }
         },
-        time(value) {
-            if (value) {
-                const duration = moment.duration(value);
-                if (duration.minutes() == '00') {
-                    return duration.hours() + 'H' + duration.minutes() + '0';
-                } else {
-                    return duration.hours() + 'H' + duration.minutes();
-                }
-            }
-        },
         getEmissionById(id) {
             axios
-                .get("http://localhost:3000/emissions/" + id)
+                .get("http://localhost:3000/creneau/" + id)
                 .then(response => {
-                    this.emission_data = response.data;
+                    this.emission_data = response.data[0];
                 })
                 .catch(error => {
                     console.log(error);
@@ -180,9 +170,9 @@ export default {
             return moment();
         }
     },
-    created() {
-        axios
-            .get("http://localhost:3000/emissions")
+    created(){
+         axios
+            .get("http://localhost:3000/creneaux")
             .then(response => {
                 this.emissions = response.data;
             })
