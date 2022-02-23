@@ -9,7 +9,7 @@
                     <router-link to="/Calendrier"><strong>Calendrier</strong></router-link>
                 </li>
                 <li id="podcasts">
-                    <router-link to="/"><strong>Animateurs</strong></router-link>
+                    <router-link to="/Animateurs"><strong>Animateurs</strong></router-link>
                 </li>
             </ul>
         </div>

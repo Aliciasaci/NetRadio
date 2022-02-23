@@ -11,12 +11,6 @@ const routes = [{
             import ('../views/Accueil.vue')
     },
     {
-        path: '/Animateur',
-        name: 'Animateur',
-        component: () =>
-            import ('../views/Animateur.vue')
-    },
-    {
         path: '/EcouterDirect',
         name: 'EcouterDirect',
         component: () =>
@@ -39,7 +33,14 @@ const routes = [{
         name: 'Calendrier',
         component: () =>
             import ('../views/CalendrierAdmin.vue')
+    },
+    {
+        path: '/Animateurs',
+        name: 'ListeAnimateurs',
+        component: () =>
+            import ('../views/ListeAnimateursAdmin.vue')
     }
+
 ]
 
 const router = new VueRouter({
