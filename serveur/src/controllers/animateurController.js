@@ -4,7 +4,7 @@ const animateur = require('../models/animateurModel.js');
 
 // Get All auditeurs
 const showAnimateurs = (req, res) => {
-    auditeur.getAnimateurs((err, results) => {
+    animateur.getAnimateurs((err, results) => {
         if (err) {
             res.send(err);
         } else {

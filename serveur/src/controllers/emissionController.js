@@ -13,7 +13,7 @@ const showEmissions = (req, res) => {
     });
 }
 
-// Get an emission with it's episode by id
+// Get an emission with its episodes by id
 const showEmissionById = (req, res) => {
     emission.getEmissionById(req.params.id, (err, results) => {
         if (err) {
@@ -25,7 +25,7 @@ const showEmissionById = (req, res) => {
 }
 
 
-// Create a new emission with it's episode                                                        //S'assurer de mettre le content-type à json/application
+// Create a new emission                                                       //S'assurer de mettre le content-type à json/application
 const createEmission = (req, res) => {
     const data = req.body;
     emission.insertEmission(data, (err, results) => {
@@ -37,7 +37,7 @@ const createEmission = (req, res) => {
     });
 }
 
-// Update an emission with it's episode
+// Update an emission
 const updateEmission = (req, res) => {
     const data = req.body;
     const id = req.params.id;
@@ -51,7 +51,7 @@ const updateEmission = (req, res) => {
 }
 
 
-// Delete an emission with it's episode
+// Delete an emission 
 const deleteEmission = (req, res) => {
     const id = req.params.id;
     emission.deleteEmissionById(id, (err, results) => {
