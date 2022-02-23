@@ -12,14 +12,18 @@
               </div>
             </div>
         </div>
-      </div>
+      </div> <br/>
+      <Categories/>
   </section>
 </template>
 
 <script>
-
+import Categories from '../components/Categories.vue'
 export default {
-  name: 'Home',
+  name: 'Programmes',
+  components: {
+    Categories,
+  }
 }
 </script>
 <style lang="scss">

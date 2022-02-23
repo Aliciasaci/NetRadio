@@ -6,7 +6,7 @@ const Categorie = function (categorie) {
 };
 
 Categorie.getCategories = (result) => {
-	db.query("SELECT * FROM categorie;", (err, results) => {
+	db.query("SELECT * FROM categories;", (err, results) => {
 		if (err) {
 			console.log(err);
 			result(err, null);
@@ -19,7 +19,7 @@ Categorie.getCategories = (result) => {
 Categorie.createNewCategorie = (data, result) => {
 	db.query(
 		"INSERT INTO categories SET nom = ?;",
-		[data.nomCategorie],
+		[data.nom],
 		(err, results) => {
 			if (err) {
 				console.log(err);
@@ -30,3 +30,5 @@ Categorie.createNewCategorie = (data, result) => {
 		}
 	);
 };
+
+module.exports = Categorie;

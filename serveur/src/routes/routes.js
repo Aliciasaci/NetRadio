@@ -5,6 +5,7 @@ module.exports = (app) => {
 	const auditeur = require("../controllers/auditeurController");
 	const animateur = require("../controllers/animateurController");
 	const categorie = require("../controllers/categorieController");
+	const emission = require("../controllers/emissionController");
 
 	/**
 	 * Routes des auditeurs
@@ -53,6 +54,9 @@ module.exports = (app) => {
 	// get les categories
 	router.get("/categories", categorie.showCategories);
 
-	//create a categorie
+	// create a categorie
 	router.post("/createCategorie", categorie.createCategorie);
+
+	//EMISSION by genre
+	router.get("/emission/:genre", emission.getEmissionByCategorie);
 };
