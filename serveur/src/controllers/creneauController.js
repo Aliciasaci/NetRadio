@@ -13,6 +13,17 @@ const showCreneaux = (req, res) => {
     });
 }
 
+// Get all creneaux with their animateurs by id
+const showCreneauxById = (req, res) => {
+    creneau.getCreneauxById(req.params.id, (err, results) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+}
+
 // Get all creneaux with their animateurs by date
 const showCreneauxByDate = (req, res) => {
     creneau.getCreneauxByDate(req.params.date, (err, results) => {
@@ -76,4 +87,4 @@ const deleteCreneau = (req, res) => {
     });
 }
 
-module.exports = { showCreneaux, showCreneauxByDate, showCreneauByDateTime, createCreneau, updateCreneau, deleteCreneau };
+module.exports = { showCreneaux, showCreneauxById, showCreneauxByDate, showCreneauByDateTime, createCreneau, updateCreneau, deleteCreneau };

@@ -74,6 +74,9 @@ module.exports = app => {
     // get tous les créneaux
     router.get('/creneaux', creneau.showCreneaux);
 
+    // get tous les créneaux par id
+    router.get('/creneau/:id', creneau.showCreneauxById);
+
     // get tous les créneaux par date
     router.get('/creneaux/:date', creneau.showCreneauxByDate);
 

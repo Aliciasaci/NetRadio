@@ -24,6 +24,18 @@ Creneau.getCreneaux = (result) => {
     });
 }
 
+// Get all creneaux with their animateurs, emissions and episodes by id
+Creneau.getCreneauxById = (date, result) => {
+    db.query("SELECT * FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.idCreneau = ?", [date], (err, results) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+        } else {
+            result(null, results);
+        }
+    });
+}
+
 // Get all creneaux with their animateurs, emissions and episodes by date
 Creneau.getCreneauxByDate = (date, result) => {
     db.query("SELECT * FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.date = ?", [date], (err, results) => {
