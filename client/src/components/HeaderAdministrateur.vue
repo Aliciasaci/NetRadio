@@ -6,7 +6,7 @@
         <div id="navbar-content">
             <ul>
                 <li id="programmes">
-                    <router-link to="/Programmes"><strong>Calendrier</strong></router-link>
+                    <router-link to="/Calendrier"><strong>Calendrier</strong></router-link>
                 </li>
                 <li id="podcasts">
                     <router-link to="/"><strong>Animateurs</strong></router-link>
