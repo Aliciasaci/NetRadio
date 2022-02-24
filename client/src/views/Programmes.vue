@@ -78,33 +78,41 @@
         <div id="popup-programme" class="modal" v-if="emission_data">
             <div class="modal-content" v-if="emission_data.titreEpisode != null">
                 <span class="close" v-on:click="close()">&times;</span>
-                <h2><u>NOM DE L'EMISSION</u></h2>
+                <h3><u>NOM DE L'EMISSION</u></h3>
                 <p>{{emission_data.nomEmission}}</p>
-                <h2><u>DATE ET HEURE DE L'EMISSION</u></h2>
+
+                <h3><u>DATE ET HEURE DE L'EMISSION</u></h3>
                 <p>{{date(emission_data.date)}}</p>
                 <p>{{emission_data.heure.substr(0, 2) + 'H' + emission_data.heure.substr(3, 2)}}</p>
-                <h2><u>GENRE</u></h2>
+                
+                <h3><u>GENRE</u></h3>
                 <p>{{emission_data.genre}}</p>
-                <h2><u>DESCRIPTION DE L'EMISSION</u></h2>
+                
+                <h3><u>DESCRIPTION DE L'EMISSION</u></h3>
                 <p>{{emission_data.description}}</p>
+                
                 <div class="popup-programme-footer">
-                    <h2><u>TITRE DE L'EPISODE : {{emission_data.titreEpisode}}</u></h2>
+                    <h3><u>TITRE DE L'EPISODE : {{emission_data.titreEpisode}}</u></h3>
                     <img src="img/notification.png">
                 </div>
             </div>
             <div class="modal-content" v-else>
                 <span class="close" v-on:click="close()">&times;</span>
-                <h2><u>NOM DE L'EMISSION</u></h2>
+                <h3><u>NOM DE L'EMISSION</u></h3>
                 <p>{{emission_data.nomEmission}}</p>
-                <h2><u>DATE ET HEURE DE L'EMISSION</u></h2>
+                
+                <h3><u>DATE ET HEURE DE L'EMISSION</u></h3>
                 <p>{{date(emission_data.date)}}</p>
                 <p>{{emission_data.heure.substr(0, 2) + 'H' + emission_data.heure.substr(3, 2)}}</p>
-                <h2><u>GENRE</u></h2>
+                
+                <h3><u>GENRE</u></h3>
                 <p>{{emission_data.genre}}</p>
-                <h2><u>DESCRIPTION DE L'EMISSION</u></h2>
+                
+                <h3><u>DESCRIPTION DE L'EMISSION</u></h3>
                 <p>{{emission_data.description}}</p>
+                
                 <div class="popup-programme-footer">
-                    <h2><u>TITRE DE L'EPISODE :</u> -</h2>
+                    <h3><u>TITRE DE L'EPISODE :</u> -</h3>
                     <img src="img/notification.png">
                 </div>
             </div>
