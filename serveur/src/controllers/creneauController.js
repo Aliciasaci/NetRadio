@@ -26,6 +26,18 @@ const showCreneauxById = (req, res) => {
 }
 
 
+// Get all creneaux by animateur
+const showCreneauxByAnimateur = (req, res) => {
+    creneau.getCreneauxByAnimateur(req.params.animateur, (err, results) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+}
+
+
 // Get all creneaux with their animateurs by id
 const showCreneauxByDateTime = (req, res) => {
     creneau.getCreneauxByDateTime(req.params.date, req.params.heure, (err, results) => {
@@ -51,6 +63,17 @@ const showCreneauxByDate = (req, res) => {
 // Get a creneau with it's animateur by date and time
 const showCreneauByDateTime = (req, res) => {
     creneau.getCreneauByDateTime(req.params.date, req.params.heure, (err, results) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+}
+
+// Get a creneau by animateur and date time
+const showCreneauByAnimateurDateTime = (req, res) => {
+    creneau.getCreneauByAnimateurDateTime(req.params.animateur, req.params.date, req.params.heure, (err, results) => {
         if (err) {
             res.send(err);
         } else {
@@ -100,4 +123,4 @@ const deleteCreneau = (req, res) => {
     });
 }
 
-module.exports = { showCreneaux, showCreneauxById, showCreneauxByDateTime,  showCreneauxByDate, showCreneauByDateTime, createCreneau, updateCreneau, deleteCreneau };
+module.exports = { showCreneaux, showCreneauxById, showCreneauxByAnimateur, showCreneauxByDateTime,  showCreneauByAnimateurDateTime, showCreneauxByDate, showCreneauByDateTime, createCreneau, updateCreneau, deleteCreneau };

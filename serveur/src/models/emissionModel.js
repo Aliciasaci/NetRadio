@@ -17,7 +17,7 @@ let idEmission = 0;
 
 // Get all emissions with their episodes
 Emission.getEmissions = (result) => {
-    db.query("SELECT emi.*, ep.* FROM emission emi LEFT JOIN episode ep ON emi.idEmission = ep.emission ORDER BY emi.diffusionTime ASC", (err, results) => {
+    db.query("SELECT emi.*, ep.* FROM emission emi LEFT JOIN episode ep ON emi.idEmission = ep.idEmission ORDER BY emi.diffusionTime ASC", (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);
@@ -29,12 +29,24 @@ Emission.getEmissions = (result) => {
 
 // Get an emission with its episodes by id
 Emission.getEmissionById = (id, result) => {
-    db.query("SELECT * FROM emission emi LEFT JOIN episode ep ON emi.idEmission = ep.emission WHERE emi.idEmission = ?", [id], (err, results) => {
+    db.query("SELECT * FROM emission emi LEFT JOIN episode ep ON emi.idEmission = ep.idEmission WHERE emi.idEmission = ?", [id], (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);
         } else {
             result(null, results[0]);
+        }
+    });
+}
+
+// Get all emissions with its episodes by animateur
+Emission.getEmissionsByAnimateur = (id, result) => {
+    db.query("SELECT emi.* FROM emission emi LEFT JOIN animateur ani ON ani.idAnimateur = emi.idAnimateur WHERE emi.idAnimateur = ?", [id], (err, results) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+        } else {
+            result(null, results);
         }
     });
 }

@@ -57,6 +57,9 @@ module.exports = app => {
     // get une seule émission par id 
     router.get('/emissions/:id', emission.showEmissionById);
 
+    // get toutes les émissions par animateur
+    router.get('/emissionsAnimateur/:id', emission.showEmissionsByAnimateur);
+
     // Créer nouvelle émission
     router.post('/emissions', emission.createEmission);
 
@@ -77,6 +80,9 @@ module.exports = app => {
     // get tous les créneaux par id
     router.get('/creneau/:id', creneau.showCreneauxById);
 
+    // get tous les créneaux par id animtateur
+    router.get('/creneauxAnimateur/:animateur', creneau.showCreneauxByAnimateur);
+
     // get tous les créneaux par date
     router.get('/creneaux/:date', creneau.showCreneauxByDate);
 
@@ -85,6 +91,9 @@ module.exports = app => {
 
     // get un seul créneau par date et heure
     router.get('/creneau/:date/:heure', creneau.showCreneauByDateTime);
+
+    // get tous les créneaux par id animtateur
+    router.get('/creneauxAnimateur/:animateur/:date/:heure', creneau.showCreneauByAnimateurDateTime);
 
     // créer un créneau
     router.post('/creneaux', creneau.createCreneau);
