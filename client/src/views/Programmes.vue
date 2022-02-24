@@ -76,7 +76,7 @@
         </div>
 
         <div id="popup-programme" class="modal" v-if="emission_data">
-            <div class="modal-content" v-if="emission_data.nbEpisode != null">
+            <div class="modal-content" v-if="emission_data.titreEpisode != null">
                 <span class="close" v-on:click="close()">&times;</span>
                 <h2><u>NOM DE L'EMISSION</u></h2>
                 <p>{{emission_data.nomEmission}}</p>
@@ -88,7 +88,7 @@
                 <h2><u>DESCRIPTION DE L'EMISSION</u></h2>
                 <p>{{emission_data.description}}</p>
                 <div class="popup-programme-footer">
-                    <h2><u>N DE L'EPISODE : {{emission_data.nbEpisode}}</u></h2>
+                    <h2><u>TITRE DE L'EPISODE : {{emission_data.titreEpisode}}</u></h2>
                     <img src="img/notification.png">
                 </div>
             </div>
@@ -104,7 +104,7 @@
                 <h2><u>DESCRIPTION DE L'EMISSION</u></h2>
                 <p>{{emission_data.description}}</p>
                 <div class="popup-programme-footer">
-                    <h2><u>N DE L'EPISODE :</u> -</h2>
+                    <h2><u>TITRE DE L'EPISODE :</u> -</h2>
                     <img src="img/notification.png">
                 </div>
             </div>
@@ -234,5 +234,9 @@ export default {
     margin: 20px 10px 20px auto;
     color: white;
     background-color: #E43C3C;
+}
+
+.popup-programme-footer h2{
+    font-size: 15px;
 }
 </style>
