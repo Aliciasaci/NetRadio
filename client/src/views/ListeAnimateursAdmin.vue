@@ -40,7 +40,7 @@ export default {
   background-color: #424242;
   border: 2px solid #1D7A7A;
   padding: 20px 0;
-  border-radius: 30px;
+  border-radius: 0px;
 }
 
 #listAnimateurs {
