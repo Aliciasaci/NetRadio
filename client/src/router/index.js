@@ -39,6 +39,12 @@ const routes = [{
         name: 'ListeAnimateurs',
         component: () =>
             import ('../views/ListeAnimateursAdmin.vue')
+    },
+    {
+        path: '/Creneaux',
+        name: 'CreneauxAnimateur',
+        component: () =>
+            import ('../views/CreneauxAnimateur.vue')
     }
 
 ]
