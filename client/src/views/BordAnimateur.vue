@@ -30,7 +30,11 @@
                 <button @click="playFiles(null)" id="stop_btn"><strong>Arrêter la musique</strong></button>
             </div>
         </div>
-        <audio id="audio" src=""></audio>
+        <div class="btn">
+          <button id="save_btn" @click="saveEpisode">
+            <strong>Enregistrer l'émission</strong>
+          </button>
+        </div>
         <audio id="musique" src="" @ended="playFiles(null)"></audio>
         <div>
             <div v-for="invite in demandeInvite" :key="invite.id">
@@ -44,15 +48,11 @@
                 </div>
             </div>
         </div>
-        <div class="btn">
-          <button id="save_btn" @click="saveEpisode">
-            <strong>Enregistrer l'émission</strong>
-          </button>
+        <div class="audio">
+          <audio id="audio" src=""></audio>
         </div>
       </div>
-      <div class="audio">
-        <audio id="audio" src=""></audio>
-      </div>
+      
     </div>
     <Footer />
   </section>
@@ -332,17 +332,25 @@ export default {
         justify-content: center;
         align-items: center;
         font-size: 20px;
+        margin-top: 20px;
       }
     }
   }
  .audio{
    flex-basis: 300px;
    background-color: white;
-   margin-bottom : 1em;
+   margin : 2em auto;
+  }
+
+  #musique{
+    margin : 2em auto;
   }
 .playlist {
   grid-column: 2/3;
   margin-top: 5em;
+  form{
+    text-align: center;
+  }
   .title {
     color: white;
     text-decoration: underline;
@@ -435,6 +443,7 @@ export default {
       padding: 20px 40px;
       border-radius: 20px;
       font-size: 20px;
+      margin-bottom: 100px;
     }
     .btn {
       flex-basis: 100%;
@@ -442,7 +451,7 @@ export default {
       align-items: center;
       justify-content: center;
       text-align: center;
-      margin-top: -150px;
+      margin-top: 20px;
       #live_btn {
         background: #ff3535;
         color: white;

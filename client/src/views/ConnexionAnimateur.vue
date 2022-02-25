@@ -44,7 +44,7 @@ export default {
 						member : response.data.member,
 						status : response.data.status
 						});
-					this.$router.push("/")
+					this.$router.push("/Creneaux")
 				});
 		}
     }

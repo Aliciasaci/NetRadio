@@ -107,4 +107,7 @@ export default {
 </script>
 
 <style scoped>
+.connexionVue{
+	padding-bottom: 50px;
+}
 </style>

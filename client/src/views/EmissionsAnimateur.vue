@@ -75,7 +75,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      h1 {
+      h3 {
         position: absolute;
         top: 10%;
         width : fit-content;

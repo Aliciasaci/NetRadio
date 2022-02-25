@@ -1,7 +1,7 @@
 <template>
     <nav id="navbar-admin">
         <div id="navbar-logo">
-            <router-link to="/"><img src="img/logo.png" alt="Net'Radio"></router-link>
+            <router-link to="/Calendrier"><img src="img/logo.png" alt="Net'Radio"></router-link>
         </div>
         <div id="navbar-content">
             <ul>
