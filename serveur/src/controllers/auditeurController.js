@@ -24,11 +24,7 @@ const showAuditeurById = (req, res) => {
     });
 }
 
-<<<<<<< HEAD
 // Create New Auditeur                                                          //S'assurer de mettre le content-type à json/application
-=======
-// Create New Auditeur        // S'assurer de mettre le content-type à json/application
->>>>>>> origin/liveEnCour
 const createAuditeur = (req, res) => {
     const data = req.body;
     auditeur.insertAuditeur(data, (err, results) => {
@@ -66,9 +62,7 @@ const deleteAuditeur = (req, res) => {
     });
 }
 
-<<<<<<< HEAD
-module.exports = { deleteAuditeur, updateAuditeur, createAuditeur, showAuditeurById, showAuditeurs };
-=======
+
 // Connexion Auditeur
 const checkCredentialsAuditeur = (req, res) => {
     const email = req.body.email;
@@ -105,4 +99,3 @@ const checkCredentialsAuditeur = (req, res) => {
 }
 
 module.exports = { deleteAuditeur, updateAuditeur, createAuditeur, showAuditeurById, showAuditeurs, checkCredentialsAuditeur };
->>>>>>> origin/liveEnCour

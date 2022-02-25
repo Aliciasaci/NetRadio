@@ -68,8 +68,6 @@ Auditeur.deleteAuditeurById = (id, result) => {
     });
 }
 
-<<<<<<< HEAD
-=======
 // Connect as an auditeur
 Auditeur.checkCredentials = (email,password, result) => {
     db.query("SELECT * FROM auditeur WHERE emailAuditeur = ? AND mdpAuditeur = ?", [email, password], (err, results) => {
@@ -83,5 +81,4 @@ Auditeur.checkCredentials = (email,password, result) => {
 }
 
 
->>>>>>> origin/liveEnCour
 module.exports = Auditeur;

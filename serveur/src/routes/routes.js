@@ -8,6 +8,8 @@ module.exports = app => {
     const episode = require("../controllers/episodeController");
     const emission = require('../controllers/emissionController');
     const creneau = require('../controllers/creneauController');
+    const categorie = require("../controllers/categorieController");
+
 
     /**
      * Routes des auditeurs
