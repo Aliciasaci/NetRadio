@@ -5,6 +5,7 @@ module.exports = app => {
 
     const auditeur = require('../controllers/auditeurController');
     const animateur = require('../controllers/animateurController');
+    const episode = require("../controllers/episodeController");
     const emission = require('../controllers/emissionController');
     const creneau = require('../controllers/creneauController');
 
@@ -46,6 +47,27 @@ module.exports = app => {
     // delete un animateur
     router.delete('/animateurs/:id', animateur.deleteAnimateur);
 
+    // get les émissions d'un animateur
+    router.get("/animateurs/:id/emissions", animateur.showEmissionsByAnimateur);
+
+
+    /**
+     * Routes des episodes
+     */
+    // get tous les épisodes
+    router.get("/episodes", episode.showEpisodes);
+
+    // get un seul episode par id
+    router.get("/episodes/:id", episode.showEpisodeById);
+
+    // créer un episode
+    router.post("/episodes", episode.createEpisode);
+
+    // update un episode
+    router.put("/episodes/:id", episode.updateEpisode);
+
+    // delete un episode
+    router.delete("/episodes/:id", episode.deleteEpisode);
 
 
     /**
@@ -56,9 +78,6 @@ module.exports = app => {
 
     // get une seule émission par id 
     router.get('/emissions/:id', emission.showEmissionById);
-
-    // get toutes les émissions par animateur
-    router.get('/emissionsAnimateur/:id', emission.showEmissionsByAnimateur);
 
     // Créer nouvelle émission
     router.post('/emissions', emission.createEmission);
@@ -80,7 +99,7 @@ module.exports = app => {
     // get tous les créneaux par id
     router.get('/creneau/:id', creneau.showCreneauxById);
 
-    // get tous les créneaux par id animtateur
+    // get tous les créneaux par id animateur
     router.get('/creneauxAnimateur/:animateur', creneau.showCreneauxByAnimateur);
 
     // get tous les créneaux par date
@@ -92,7 +111,7 @@ module.exports = app => {
     // get un seul créneau par date et heure
     router.get('/creneau/:date/:heure', creneau.showCreneauByDateTime);
 
-    // get tous les créneaux par id animtateur
+    // get un créneau par id animateur et date heure
     router.get('/creneauxAnimateur/:animateur/:date/:heure', creneau.showCreneauByAnimateurDateTime);
 
     // créer un créneau
@@ -100,6 +119,9 @@ module.exports = app => {
 
     // update un créneau
     router.put('/creneaux/:date/:heure', creneau.updateCreneau);
+
+    // update un créneau by animateur, date et heure
+    router.put('/creneauxAnimateur/:animateur/:date/:heure', creneau.updateCreneauByAnimateurDateTime);
 
     // delete un créneau
     router.delete('/creneaux/:date/:heure', creneau.deleteCreneau);

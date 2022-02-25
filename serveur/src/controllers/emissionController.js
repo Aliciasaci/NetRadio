@@ -24,17 +24,6 @@ const showEmissionById = (req, res) => {
     });
 }
 
-// Get all emissions with their episodes by animateur
-const showEmissionsByAnimateur = (req, res) => {
-    emission.getEmissionsByAnimateur(req.params.id, (err, results) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(results);
-        }
-    });
-}
-
 
 // Create a new emission                                                       //S'assurer de mettre le content-type à json/application
 const createEmission = (req, res) => {
@@ -74,4 +63,4 @@ const deleteEmission = (req, res) => {
     });
 }
 
-module.exports = { deleteEmission, updateEmission, createEmission, showEmissionsByAnimateur, showEmissionById, showEmissions };
+module.exports = { deleteEmission, updateEmission, createEmission, showEmissionById, showEmissions };

@@ -24,6 +24,7 @@ const showAnimateurById = (req, res) => {
     });
 }
 
+
 // Create New Auditeur                                                          //S'assurer de mettre le content-type à json/application
 const createAnimateur = (req, res) => {
     const data = req.body;
@@ -62,4 +63,15 @@ const deleteAnimateur = (req, res) => {
     });
 }
 
-module.exports = { deleteAnimateur, updateAnimateur, createAnimateur, showAnimateurById, showAnimateurs };
+
+const showEmissionsByAnimateur = (req, res) => {
+    animateur.getEmissionsByAnimateur(req.params.id, (err, results) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+}
+
+module.exports = { deleteAnimateur, updateAnimateur, createAnimateur, showAnimateurById, showEmissionsByAnimateur, showAnimateurs };

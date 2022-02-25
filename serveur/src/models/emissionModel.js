@@ -39,17 +39,6 @@ Emission.getEmissionById = (id, result) => {
     });
 }
 
-// Get all emissions with its episodes by animateur
-Emission.getEmissionsByAnimateur = (id, result) => {
-    db.query("SELECT emi.* FROM emission emi LEFT JOIN animateur ani ON ani.idAnimateur = emi.idAnimateur WHERE emi.idAnimateur = ?", [id], (err, results) => {
-        if (err) {
-            console.log(err);
-            result(err, null);
-        } else {
-            result(null, results);
-        }
-    });
-}
 
 // Insert a new emission to Database
 Emission.insertEmission = (data, result) => {

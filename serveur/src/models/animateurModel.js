@@ -68,4 +68,16 @@ Animateur.deleteAnimateurById = (id, result) => {
     });
 }
 
+//Get toutes les émissions d'un animateur
+Animateur.getEmissionsByAnimateur = (id, result) => {
+    db.query("SELECT * FROM emission WHERE idAnimateur = ?", [id], (err, results) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+        } else {
+            result(null, results);
+        }
+    });
+}
+
 module.exports = Animateur;

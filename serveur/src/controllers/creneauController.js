@@ -110,6 +110,22 @@ const updateCreneau = (req, res) => {
 }
 
 
+// Update a creneau by animateur, date and time
+const updateCreneauByAnimateurDateTime = (req, res) => {
+    const data = req.body;
+    const animateur = req.params.animateur;
+    const date = req.params.date;
+    const heure = req.params.heure;
+    creneau.updateCreneauByAnimateurDateTime(data, animateur, date, heure, (err, results) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+}
+
+
 // Delete a creneau
 const deleteCreneau = (req, res) => {
     const date = req.params.date;
@@ -123,4 +139,4 @@ const deleteCreneau = (req, res) => {
     });
 }
 
-module.exports = { showCreneaux, showCreneauxById, showCreneauxByAnimateur, showCreneauxByDateTime,  showCreneauByAnimateurDateTime, showCreneauxByDate, showCreneauByDateTime, createCreneau, updateCreneau, deleteCreneau };
+module.exports = { showCreneaux, showCreneauxById, showCreneauxByAnimateur, showCreneauxByDateTime,  showCreneauByAnimateurDateTime, showCreneauxByDate, showCreneauByDateTime, createCreneau, updateCreneau, updateCreneauByAnimateurDateTime, deleteCreneau };
