@@ -4,7 +4,7 @@
     <h1 id="title">MES CRÉNEAUX</h1>
     <div id="listeCreneaux">
       <ul v-for="creneau in creneaux" v-bind:key="creneau.idCreneau">
-        <li v-if="creneau.idEmission == null">
+        <li>
             <h4>{{date(creneau.date) + ' à ' + creneau.heure.substr(0,2) + 'H' + creneau.heure.substr(3,2)}}</h4>
             <button v-on:click="programmer(creneau.date, creneau.heure)" type="submit" class="btn-programmer">Programmer</button>
         </li>
@@ -14,7 +14,7 @@
             <div class="modal-content">
                 <span class="close" v-on:click="close()">&times;</span>
                 <h3><u>NOM DE L'EMISSION</u></h3>
-                <select name="emissions" id="emission">
+                <select name="emissions" id="emission" v-model="selectedEmission">
                     <option v-for="emission in emissions" v-bind:key="emission.idEmission" v-bind:value="{ id: emission.idEmission, nom: emission.nomEmission }">{{emission.nomEmission}}</option>
                 </select>
 
@@ -22,8 +22,9 @@
                 <p id="dateheure">{{date(creneau_data.date) + ' - ' + creneau_data.heure.substr(0,2) + 'h' + creneau_data.heure.substr(3,2)}}</p>
 
                 <h3 id="episode"><u>TITRE DE L'EPISODE</u></h3>
-                <input type="text" id="inputEpisode" />
-                <p><button type="submit">Confirmer</button></p>
+                <input type="text" id="inputEpisode" v-model="inputEpisode"/>
+                <p><button type="submit" v-on:click="confirmer(momentDate(creneau_data.date), creneau_data.heure, creneau_data.idAnimateur)">Confirmer</button></p>
+                <p>{{success}}</p>
             </div>
         </div>
     <Footer />
@@ -40,7 +41,11 @@ export default {
         return {
             creneaux: null,
             creneau_data: null,
-            emissions: null
+            emissions: null,
+            selectedEmission: null,
+            inputEpisode: null,
+            success: null,
+            idEpisode: null
         }
     },
     methods: {
@@ -54,6 +59,7 @@ export default {
                 });
             });
         },
+
         close() {
             document.querySelectorAll(".close").forEach(closeBtn => {
                 closeBtn.addEventListener('click', () => {
@@ -66,6 +72,7 @@ export default {
                 }
             }
         },
+
         date(value) {
             if (value) {
                 return moment(String(value)).format('dddd, DD MMMM YYYY');
@@ -73,9 +80,35 @@ export default {
                 return moment().format('dddd, DD MMMM YYYY');
             }
         },
+
         momentDate(value){
             return moment(value).format('YYYY-MM-DD');
         },
+
+        confirmer(date, heure, animateur){
+            const episode = {
+                idEmission: this.selectedEmission.id,
+                titreEpisode: this.inputEpisode
+            };
+            
+            if(this.inputEpisode == null)
+            {
+                this.updateCreneau(date, heure, animateur, null);
+                this.success = "Votre émission a été bien programmée";
+            }
+            else{
+                axios
+                    .post("http://localhost:3000/episodes", episode)
+                    .then(response => {
+                        this.updateCreneau(date, heure, animateur, response.data.insertId);
+                        this.success = "Votre émission a été bien programmée";
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        },
+
         getCreneau(date, heure){
             axios
                 .get("http://localhost:3000/creneauxAnimateur/" + 1 + '/' + date + '/' + heure)
@@ -86,11 +119,28 @@ export default {
                     console.log(error);
                 });
         },
+
         getListeEmissions(){
             axios
-                .get("http://localhost:3000/emissionsAnimateur/" + 1)
+                .get("http://localhost:3000/animateurs/" + 1 + '/emissions')
                 .then(response => {
                     this.emissions = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+
+        updateCreneau(date, heure, animateur, episode){
+            const creneau = {
+                idEmission: this.selectedEmission.id,
+                idEpisode: episode
+            };
+
+            axios
+                .put("http://localhost:3000/creneauxAnimateur/" + animateur + '/' + date + '/' + heure, creneau)
+                .then(response => {
+                    console.log(response.data);
                 })
                 .catch(error => {
                     console.log(error);
@@ -101,7 +151,7 @@ export default {
         axios
             .get("http://localhost:3000/creneauxAnimateur/" + 1)
             .then(response => {
-                this.creneaux = response.data;
+                this.creneaux = response.data.filter(creneauxFiltered => creneauxFiltered.idEmission == null && creneauxFiltered.idEpisode == null);
             })
             .catch(error => {
                 console.log(error);
@@ -125,6 +175,7 @@ export default {
 #listeCreneaux {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 18%;
 }
 
 #listeCreneaux ul{

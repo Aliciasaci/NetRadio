@@ -67,7 +67,7 @@ export default {
   methods: {
     getCreneaux(){
       axios
-        .get("http://localhost:3000/creneau/" + this.momentDate(this.selectedDate) + this.selectedHeure.heure)
+        .get("http://localhost:3000/creneaux/" + this.momentDate(this.selectedDate) + this.selectedHeure.heure)
         .then(response => {
             this.creneaux = response.data;
         })
@@ -75,14 +75,12 @@ export default {
             console.log(error);
         });
     },
-
     createCreneau(){
       const creneau = {
         "date": this.momentDate(this.selectedDate),
         "heure": this.selectedHeure.heure,
         "idAnimateur": this.selectedAnimateur.id
       };
-
       axios
       .post("http://localhost:3000/creneaux", creneau)
       .then(response => {
@@ -92,14 +90,12 @@ export default {
           console.log(error);
       });
     },
-
     updateCreneau(){
       const creneau = {
         "date": this.momentDate(this.selectedDate),
         "heure": this.selectedHeure.heure,
         "idAnimateur": this.selectedAnimateur.id
       };
-
       axios
       .put("http://localhost:3000/creneaux/" + this.momentDate(this.selectedDate) + '/' + this.selectedHeure.heure, creneau)
       .then(response => {
@@ -109,11 +105,9 @@ export default {
           console.log(error);
       });
     },
-
     date(value) {
       return moment(value).format('dddd, DD MMMM YYYY');
     },
-
     momentDate(value){
       return moment(value).format('YYYY-MM-DD');
     }
@@ -138,16 +132,13 @@ export default {
   grid-column-gap: 50px;
   margin: 5%;
 }
-
 .calendar{
   grid-column: 1/2;
   height: 250px;
 }
-
 .calendar-form{
   grid-column: 2/3;
 }
-
 .form{
   display: flex;
   flex-direction: column;
@@ -157,7 +148,6 @@ export default {
   border-radius: 10px;
   margin: 0 15%;
 }
-
 #times{
   width: 100%;
   font-size: 19px;
@@ -168,12 +158,10 @@ export default {
   color: whitesmoke;
   border: none;
 }
-
 .vc-container {
   --day-content-height : 100px; // size of date cell - set your custom size here
   --day-content-width : 100px;
 }
-
 .form h1{
   color: whitesmoke;
   text-decoration: underline;
@@ -181,7 +169,6 @@ export default {
   margin-bottom: 10%;
   margin-top: 40px;
 }
-
 button{
   background-color: green;
   border: 2px solid green;
@@ -193,7 +180,6 @@ button{
   font-weight: bold;
   margin-right: 20px;
 }
-
 #button-submit{
   display: flex;
   justify-content: center;
@@ -201,37 +187,31 @@ button{
   padding-left: 30px;
   margin-bottom: 50px;
 }
-
 #update{
   background-color: rgb(0, 106, 255);
   border: 1px solid rgb(0, 106, 255);
 }
-
 #update:hover {
   background-color: rgb(0, 106, 255, 0.6);
   border: 1px solid rgb(0, 106, 255, 0.2);
   color: rgba(255, 255, 255, 0.5);
 }
-
 #programmer:hover{
   background-color: rgba(green, 0.6);
   border: 2px solid rgba(green, 0.2);
   color: rgba(255, 255, 255, 0.5);
 }
-
 #date{
   color: #FFD600;
   font-weight: bold;
   text-align: center;
   margin-bottom: 40px;
 }
-
 #response{
   color: greenyellow;
   text-align: center;
   margin-bottom: 40px;
 }
-
 #listCreneaux{
   color: white;
   margin-top: 50px;
