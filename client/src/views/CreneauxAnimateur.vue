@@ -45,7 +45,8 @@ export default {
             selectedEmission: null,
             inputEpisode: null,
             success: null,
-            idEpisode: null
+            idEpisode: null,
+            idAnimateur: 2
         }
     },
     methods: {
@@ -111,7 +112,7 @@ export default {
 
         getCreneau(date, heure){
             axios
-                .get("http://localhost:3000/creneauxAnimateur/" + 1 + '/' + date + '/' + heure)
+                .get("http://localhost:3000/animateurs/" + this.idAnimateur + '/' + date + '/' + heure + '/creneau')
                 .then(response => {
                     this.creneau_data = response.data[0];
                 })
@@ -122,7 +123,7 @@ export default {
 
         getListeEmissions(){
             axios
-                .get("http://localhost:3000/animateurs/" + 1 + '/emissions')
+                .get("http://localhost:3000/animateurs/" + this.idAnimateur + '/emissions')
                 .then(response => {
                     this.emissions = response.data;
                 })
@@ -138,7 +139,7 @@ export default {
             };
 
             axios
-                .put("http://localhost:3000/creneauxAnimateur/" + animateur + '/' + date + '/' + heure, creneau)
+                .put("http://localhost:3000/animateurs/" + animateur + '/' + date + '/' + heure + '/creneau', creneau)
                 .then(response => {
                     console.log(response.data);
                 })
@@ -149,7 +150,7 @@ export default {
     },
     created(){
         axios
-            .get("http://localhost:3000/creneauxAnimateur/" + 1)
+            .get("http://localhost:3000/animateurs/" + this.idAnimateur + '/creneaux')
             .then(response => {
                 this.creneaux = response.data.filter(creneauxFiltered => creneauxFiltered.idEmission == null && creneauxFiltered.idEpisode == null);
             })
