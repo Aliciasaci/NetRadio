@@ -13,7 +13,7 @@ const Creneau = function(creneau) {
 
 // Get all creneaux with their animateurs, emissions and episodes
 Creneau.getCreneaux = (result) => {
-    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode ORDER BY cre.heure ASC", 
+    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode ORDER BY cre.date, cre.heure", 
     (err, results) => {
         if (err) {
             console.log(err);
@@ -26,7 +26,7 @@ Creneau.getCreneaux = (result) => {
 
 // Get all creneaux with their animateurs, emissions and episodes by id
 Creneau.getCreneauxById = (date, result) => {
-    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.idCreneau = ?", [date], (err, results) => {
+    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.idCreneau = ? ORDER BY cre.date, cre.heure", [date], (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);
@@ -38,7 +38,7 @@ Creneau.getCreneauxById = (date, result) => {
 
 // Get all creneaux with their animateurs, emissions and episodes by animateur
 Creneau.getCreneauxByAnimateur = (animateur, result) => {
-    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.idAnimateur = ? ORDER BY cre.date ASC", [animateur], (err, results) => {
+    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.idAnimateur = ? ORDER BY cre.date, cre.heure", [animateur], (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);
@@ -50,7 +50,7 @@ Creneau.getCreneauxByAnimateur = (animateur, result) => {
 
 // Get all creneaux with their animateurs, emissions and episodes by date
 Creneau.getCreneauxByDate = (date, result) => {
-    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.date = ?", [date], (err, results) => {
+    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.date = ? ORDER BY cre.date, cre.heure", [date], (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);
@@ -62,7 +62,7 @@ Creneau.getCreneauxByDate = (date, result) => {
 
 // Get all creneaux with their animateurs, emission and episode by date and time
 Creneau.getCreneauxByDateTime = (date, heure, result) => {
-    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.date = ? AND cre.heure >= ? ORDER BY cre.heure ASC LIMIT 4", [date, heure], (err, results) => {
+    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.date = ? AND cre.heure >= ? OORDER BY cre.date, cre.heure LIMIT 4", [date, heure], (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);
@@ -74,7 +74,7 @@ Creneau.getCreneauxByDateTime = (date, heure, result) => {
 
 // Get a creneau with it's animateur, emissions and episodes by animateur and date time
 Creneau.getCreneauByAnimateurDateTime = (animateur, date, heure, result) => {
-    db.query("SELECT cre.*, epi.*, emi.*, ani.* FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.idAnimateur = ? AND cre.date = ? AND cre.heure = ? ORDER BY cre.date ASC", [animateur, date, heure], (err, results) => {
+    db.query("SELECT cre.*, epi.*, emi.*, ani.* FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.idAnimateur = ? AND cre.date = ? AND cre.heure = ? ORDER BY cre.date, cre.heure", [animateur, date, heure], (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);
@@ -86,7 +86,7 @@ Creneau.getCreneauByAnimateurDateTime = (animateur, date, heure, result) => {
 
 // Get un creneau with it's animateur, emission and episode by date and time
 Creneau.getCreneauByDateTime = (date, heure, result) => {
-    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.date = ? AND cre.heure = ?", [date, heure], (err, results) => {
+    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.date = ? AND cre.heure = ? ORDER BY cre.date, cre.heure", [date, heure], (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);
