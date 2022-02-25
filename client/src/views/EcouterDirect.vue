@@ -8,7 +8,7 @@
           <div id="ledirect-content-img">
               <img src="/img/lejournal.png" alt="Le journal">
           </div>
-          <button @click="quitLive" type="submit" id="btn-stop">Arrêter le direct</button>
+          <router-link to="/"><button type="submit" id="btn-stop">Arrêter le direct</button></router-link>
       </div>
     <Footer />
   </section>
@@ -35,13 +35,13 @@ mounted(){
 });
 },
 methods : {
- quitLive() {
-      this.$router.push("/");
-    },
-  }
+
+}
 }
 </script>
 
 <style lang="scss">
-
+#ledirect-content{
+  padding-bottom: 70px;
+}
 </style>

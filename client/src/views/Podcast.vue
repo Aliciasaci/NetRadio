@@ -30,12 +30,12 @@
             </div>
             <div id="podcast-content-mypodcast">
                 <div id="podcast-content-mypodcast-title">
-                    <h3>Émissions et podcasts de {{animateur.fullNameAnimateur}}</h3>
+                    <h3>PODCASTS DE "{{animateur.fullNameAnimateur}}"</h3>
                 </div>
                 <div id="podcast-content-mypodcast-emissions">
                     <div  v-for="emission  in emissions" :key="emission.idEmission" class="podcast-content-mypodcast-emission">
                         <div class="podcast-content-mypodcast-emission-head">
-                            <h5><u>EMISSION : {{emission.title}}</u></h5>
+                            <h5><u>EMISSION : {{emission.nomEmission}}</u></h5>
                             <img src="/img/favoris.png" alt="Favoris">
                         </div>
                      <podcast :emission="emission"/>
@@ -99,8 +99,4 @@ export default {
 </script>
 
 <style lang="scss">
-body {
-  text-align: center;
-  color: white;
-}
 </style>

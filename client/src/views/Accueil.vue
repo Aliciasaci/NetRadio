@@ -5,7 +5,12 @@
         <div id="content-left">
             <img src="img/bg-emission.png">
             <div id="content-info" v-if="emission_data">
-                <h1>{{emission_data.nomEmission + " : " + emission_data.titleEpisode}}</h1>
+                <div v-if="emission_data.titreEpisode != null">
+                    <h1>{{emission_data.nomEmission + " : " + emission_data.titreEpisode}}</h1>
+                </div>
+                <div v-else>
+                    <h1>{{emission_data.nomEmission}}</h1>
+                </div>
                 <h3>Par {{emission_data.fullNameAnimateur}}</h3>
                 <router-link to="/EcouterDirect">
                     <button type="submit" id="btn-play">
@@ -18,8 +23,14 @@
         <div id="content-right">
             <div class="content-program" v-for="emission in emissions" v-bind:key="emission.idCreneau">
                 <div class="content-program-info" v-on:click="getEmissionById(emission.idCreneau)">
-                    <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
-                    <p class="content-program-name"><strong>{{emission.nomEmission + " : " + emission.titleEpisode}}</strong></p>
+                    <div v-if="emission.titreEpisode != null">
+                        <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
+                        <p class="content-program-name"><strong>{{emission.nomEmission + " : " + emission.titreEpisode}}</strong></p>
+                    </div>
+                    <div v-else>
+                        <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
+                        <p class="content-program-name"><strong>{{emission.nomEmission}}</strong></p>
+                    </div>
                 </div>
             </div> 
         </div>
@@ -124,5 +135,7 @@ export default {
     margin-top: -15%;
 }
 
-
+#content-accueil{
+    padding-bottom: 100px;
+}
 </style>

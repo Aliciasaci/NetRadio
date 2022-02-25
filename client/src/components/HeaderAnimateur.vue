@@ -1,12 +1,12 @@
 <template>
     <nav id="navbar-anim">
         <div id="navbar-logo">
-            <router-link to="/"><img src="img/logo.png" alt="Net'Radio"></router-link>
+            <router-link to="/Creneaux"><img src="img/logo.png" alt="Net'Radio"></router-link>
         </div>
         <div id="navbar-content">
             <ul>
                 <li id="programmes">
-                    <router-link to="/Programmes"><strong>Créneaux</strong></router-link>
+                    <router-link to="/Creneaux"><strong>Mes créneaux</strong></router-link>
                 </li>
                 <li id="podcasts">
                     <router-link :to="{name : 'ProfilAnimateur', params :{id: idAnimateur}}"><strong>Mes podcasts</strong></router-link>
@@ -38,11 +38,11 @@ export default {
    #navbar-anim{
        background-color: #424242;
        display: grid;
-       grid-template-columns: 0.3fr 1fr 0.1fr;
+       grid-template-columns: 0.3fr 1.5fr 0.1fr;
    }
 
    #navbar-anim #navbar-content ul{
-       grid-template-columns: 0.16fr 0.22fr 0.27fr;
+       grid-template-columns: 0.24fr 0.4fr 0.27fr;
    }
 
    #navbar-anim #navbar-content ul #programmes{

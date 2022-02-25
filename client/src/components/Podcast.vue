@@ -3,7 +3,7 @@
     <ul  v-for="episode  in episodes" :key="episode.idEpisode" class="podcast-content-mypodcast-emission-list">
         <li>
           <h5>{{episode.titreEpisode}}</h5>
-          <router-link :to="{name : 'Play', params :{id: episode.idEpisode}}"><img src="/img/play.png" alt="Réecouter podcast" /></router-link>
+          <router-link :to="{name : 'Play', params :{id: episode.idEpisode}}" style='margin: 15px 0 0 120px'><img src="/img/play.png" alt="Réecouter podcast"/></router-link>
           <!-- <img src="/img/telecharger.png" alt="Télécharger podcast" /> -->
         </li>
       </ul>

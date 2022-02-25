@@ -2,12 +2,12 @@
   <section>
     <HeaderAnimateur />
     <div id="detail-creneaux-programmes-content">
-      <h1><u><strong>Nom de l'émission</strong></u></h1>
+      <h1><u><strong>NOM DE L'ÉMISSION</strong></u></h1>
       <h3>Le journal _ Episode 3</h3>
-      <h1><u><strong>Date et heure de l'émission</strong></u></h1>
+      <h1><u><strong>DATE ET HEURE DE L'ÉMISSION</strong></u></h1>
       <h3>Mercredi, 14 décembre 2021 10h</h3>
       <h3>10h</h3>
-      <h1><u><strong>Descriptions de l'émission</strong></u></h1>
+      <h1><u><strong>DESCRIPTION DE L'ÉMISSION</strong></u></h1>
       <div class="description">
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -16,7 +16,7 @@
           scrambled it to make a type specimen book
         </p>
       </div>
-      <button class="btn-start">Lancer l'émission</button>
+      <router-link to="/EnDirect"><button class="btn-start">Lancer l'émission</button></router-link>
     </div>
     <Footer />
   </section>

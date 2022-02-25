@@ -381,7 +381,6 @@ footer {
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
-  padding-top: 20px;
 }
 
 #detail-creneaux-programmes-content {
@@ -516,7 +515,6 @@ footer {
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
-  padding-top: 20px;
 }
 
 #programmes-content #programmes-content-emission .programmes-content-emission-list li .btn-info:hover {

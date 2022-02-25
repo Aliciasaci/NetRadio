@@ -77,4 +77,8 @@ export default {
 #btn_play {
   cursor: pointer;
 }
+
+#ledirect-content{
+  padding-bottom: 70px;
+}
 </style>

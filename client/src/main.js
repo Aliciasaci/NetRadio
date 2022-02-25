@@ -6,8 +6,6 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VCalendar from 'v-calendar';
 
-
-
 Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false

@@ -2,10 +2,10 @@
   <section>
     <HeaderAnimateur />
     <div class="main">
-      <h1 class="title">Mes émissions</h1>
+      <h1 class="title">MES ÉMISSIONS</h1>
       <div class="btn-wrapper">
-        <button id="add_btn"><h2>Ajouter une émissions</h2></button>
-        <router-link to="/CreneauxProgrammes"><button id="show_btn"><h2>Mes créneaux programmées</h2></button></router-link>
+        <button id="add_btn"><h3>AJOUTER UNE ÉMISSION</h3></button>
+        <router-link to="/CreneauxProgrammes"><button id="show_btn"><h3>MES CRÉNEAUX PROGRAMMÉS</h3></button></router-link>
       </div>
       <div class="emissions-wrapper">
         <div v-for="emission in emissions" :key="emission.idEmission" class="card-emission">
@@ -48,16 +48,17 @@ export default {
 
 <style lang="scss">
 .main {
+  padding-bottom: 100px;
   .title {
     color: white;
-    margin: 2em auto auto auto;
+    margin: 2em auto 5em auto;
     text-decoration: underline;
     background-color: #464141;
     border: 2px solid #ff3535;
     padding: 20px 40px;
     border-radius: 20px;
     font-size: 20px;
-    width: 7.5em;
+    width: 9em;
     text-align: center;
   }
   .emissions-wrapper {
@@ -82,12 +83,14 @@ export default {
       }
       .read-more {
         font-weight: bold;
+        font-size: 16px;
         position: absolute;
         top: 60%;
         width: 20%;
         margin: 0em 40% 0em 40%;
-        border: none;
-        padding: 1.5em 1em 1.5em 1em;
+        border: 1px solid black;
+        border-radius: 20px;
+        padding: 1em 1em;
         cursor: pointer;
         &:hover {
           background-color: black;

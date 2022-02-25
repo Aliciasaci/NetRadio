@@ -199,6 +199,7 @@ export default {
 
 #programmes-content{
     margin: 0 2% 0 2%;
+    padding-bottom: 100px;
 }
 
 .programmes-content-date {
@@ -244,7 +245,16 @@ export default {
     background-color: #E43C3C;
 }
 
-.popup-programme-footer h2{
-    font-size: 15px;
+.popup-programme-footer h3{
+    background-color: #E43C3C;
+    padding: 10px 20px;
+    width: fit-content;
+    border-radius: 15px;
+    margin-left: 80px;
+}
+
+
+#programmes-content-emission .programmes-content-emission-list li .btn-info{
+   padding-top: -20px;
 }
 </style>

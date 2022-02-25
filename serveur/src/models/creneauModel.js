@@ -62,7 +62,7 @@ Creneau.getCreneauxByDate = (date, result) => {
 
 // Get all creneaux with their animateurs, emission and episode by date and time
 Creneau.getCreneauxByDateTime = (date, heure, result) => {
-    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.date = ? AND cre.heure >= ? OORDER BY cre.date, cre.heure LIMIT 4", [date, heure], (err, results) => {
+    db.query("SELECT cre.*, epi.*, emi.*, ani.*  FROM creneau cre LEFT JOIN animateur ani ON cre.idAnimateur = ani.idAnimateur LEFT JOIN emission emi ON cre.idEmission = emi.idEmission LEFT JOIN episode epi ON cre.idEpisode = epi.idEpisode WHERE cre.date = ? AND cre.heure >= ? ORDER BY cre.date, cre.heure LIMIT 4", [date, heure], (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);

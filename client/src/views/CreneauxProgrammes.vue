@@ -3,11 +3,11 @@
     <HeaderAnimateur />
     <div id="creneaux-programmes-content">
       <h1>
-        <u><strong>Mes créneaux programmés</strong></u>
+        <u><strong>MES CRÉNEAUX PROGRAMMÉS</strong></u>
       </h1>
       <ul class="programmes-content-list" >
         <li v-for="creneau  in creneaux" :key="creneau.idCreneau">
-          <h3>{{creneau.title}} - {{creneau.titreEpisode}} - {{creneau.heure}} - {{creneau.date}}</h3>
+          <h3>{{creneau.nomEmission}} - {{creneau.titreEpisode}} : {{date(creneau.date) + ' à '}} {{creneau.heure.substr(0,2) + 'H' + creneau.heure.substr(3,2)}}</h3>
           <router-link type="submit" class="btn-info" :to="{ name: 'DetailCreneauProgramme' }"><span>Voir plus</span></router-link>
         </li>
       </ul>
@@ -18,6 +18,8 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
+
 export default {
   data() {
     return {
@@ -39,7 +41,14 @@ export default {
         console.log(err);
       }
     },
+    date(value) {
+      return moment(value).format('dddd, DD MMMM YYYY');
+    }
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+#creneaux-programmes-content .programmes-content-list li .btn-info{
+  padding-top: 20px;
+}
+</style>
