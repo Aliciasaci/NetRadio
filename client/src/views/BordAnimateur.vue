@@ -17,21 +17,32 @@
           </div>
         </div>
         <div class="playlist">
-          <h1 class="title">LISTE DE MUSIQUES</h1>
-          <ul class="musicList scroller">
-            <li>Musique 1</li>
-            <li>Musique 2</li>
-            <li>Musique 3</li>
-            <li>Musique 1</li>
-            <li>Musique 2</li>
-            <li>Musique 3</li>
-            <li>Musique 1</li>
-            <li>Musique 2</li>
-            <li>Musique 3</li>
-          </ul>
-          <div class="btn">
-            <button id="stop_btn"><strong>Arrêter la musique</strong></button>
-          </div>
+            <h1 class="title">LISTE DE MUSIQUES</h1>
+            <form action="" @submit.prevent="addFiles" method="">
+                <input id="add_files" type="file" accept=".mp3, .m4a" multiple />
+                <button>Valider</button>
+            </form>
+            <ul class="musicList scroller">
+                <li v-for="musique in files" @click="playFiles(musique.id)" :id="'musique'+musique.id" 
+                :class="{colorPlay: musique.isPlay, noColorPlay: !musique.isPlay}" :key="musique.id">{{musique.name}}</li>
+            </ul>
+            <div class="btn">
+                <button @click="playFiles(null)" id="stop_btn"><strong>Arrêter la musique</strong></button>
+            </div>
+        </div>
+        <audio id="audio" src=""></audio>
+        <audio id="musique" src="" @ended="playFiles(null)"></audio>
+        <div>
+            <div v-for="invite in demandeInvite" :key="invite.id">
+                {{invite.id}}
+                <div v-if="!invite.accepted">
+                    <button @click="accept(invite.id)" class="accept_bt">Accepter</button>
+                    <button @click="reject(invite.id)" class="reject_bt">Refuser</button>
+                </div>
+                <div v-else>
+                    <button @click="ejectInvite(invite.id)" class="eject_bt">Ejecter invité</button>
+                </div>
+            </div>
         </div>
         <div class="btn">
           <button id="save_btn" @click="saveEpisode">
@@ -66,6 +77,10 @@ export default {
       id: "1",
       link: "",
       ret: false,
+      files: [],
+      playingFile: 0,
+      button: true,
+      demandeInvite: []
     };
   },
   mounted() {
@@ -76,9 +91,24 @@ export default {
     //Disable the save button
     document.querySelector("#save_btn").disabled = true;
     document.querySelector("#save_btn").style.backgroundColor = "#86B697";
+
+    // recoit la demande d'un futur invité à l'être
+    this.socket.on("choise", (idInvite) => {
+        this.demandeInvite.push(idInvite);
+    });
+    // recoit le son de l'invité
+    this.socket.on("voiceInvite", (arrayBuffer) => {
+        let blob = new Blob([arrayBuffer], { type: "audio/ogg; codecs=opus" });
+        this.savedChunks.push(blob);
+        this.audio = document.createElement("audio");
+        this.audio.src = window.URL.createObjectURL(blob);
+        this.audio.play();
+    });
   },
   methods: {
     startLive() {
+      this.button = !this.button;
+
       let constraints = {
         audio: true,
       };
@@ -123,6 +153,8 @@ export default {
     },
 
     stopLive() {
+      this.button = !this.button;
+
       console.log("Live stoped");
       this.bool = false;
       this.isActive = false;
@@ -146,6 +178,74 @@ export default {
       this.savedChunks = [];
       const audioURL = window.URL.createObjectURL(this.blob);
       this.audio.src = audioURL;
+    },
+
+    addFiles() {
+      var inp = document.querySelector('#add_files');
+      for (var i = 0; i < inp.files.length; ++i) {
+          var name = inp.files.item(i).name.split('.')[0];
+          this.files.push({
+              "id": i,
+              "name": name,
+              "isPlay": false
+          });
+      }
+    },
+
+    playFiles(id) {
+      if(id !== null) {
+          this.playingFile = id;
+      }
+      let musique = document.querySelector('#add_files').files.item(this.playingFile);
+      this.resetColor();
+      if(musique !== null){
+          let audio = document.querySelector("#musique");
+          audio.setAttribute("controls", "");
+
+          audio.src = URL.createObjectURL(musique);
+          audio.volume = 0.2;
+          audio.load();
+          audio.play();
+
+          this.files[this.playingFile].isPlay = true;
+      }else{
+          console.log("Plus de musiques !");
+          this.resetColor();
+          this.files = [];
+      }
+      this.playingFile++;
+    },
+
+    resetColor() {
+      this.files.forEach(musique => {
+          musique.isPlay = false;
+      });
+    },
+
+    accept(idInvite){
+      this.socket.emit('giveVoice', {id: idInvite, response: true});
+      this.acceptedById(idInvite);
+    },
+
+    reject(idInvite) {
+      this.socket.emit('giveVoice', {id: idInvite, response: false});
+      this.demandeInvite = this.demandeInvite.filter(invite => invite.id !== idInvite);
+    },
+
+    acceptedById(idInvite) {
+      this.demandeInvite.forEach((element, index, array) =>  {
+          if(idInvite === element.id) {
+              array[index].accepted = true;
+              return true;
+          }
+          inc++;
+      });
+      return false;
+    },
+
+    ejectInvite(idInvite) {
+      this.socket.emit("inviteDeconnecter");
+      this.demandeInvite = this.demandeInvite.filter(invite => invite.id !== idInvite);
     },
 
     saveEpisode() {
@@ -240,64 +340,87 @@ export default {
    background-color: white;
    margin-bottom : 1em;
   }
-  .playlist {
-    grid-column: 2/3;
-    margin-top: 5em;
-    .title {
+.playlist {
+  grid-column: 2/3;
+  margin-top: 5em;
+  .title {
+    color: white;
+    text-decoration: underline;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 2em;
+  }
+  .musicList {
+    width: 60%;
+    margin: 3.5em auto auto auto;
+    list-style-type: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+  }
+  .musicList li {
+    background-color: rgba(darkred, 0.7);
+    padding: 20px 20px;
+    margin-bottom: 10px;
+  }
+  .musicList li:hover {
+    background-color: rgba(lightcoral, 0.8);
+    color: yellow;
+  }
+  .scroller {
+    height: 50%;
+    overflow: scroll;
+    scrollbar-color: rebeccapurple green;
+    scrollbar-width: thin;
+  }
+  .btn {
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 2em;
+    margin-left: 5%;
+    #stop_btn {
+      background: rgb(70, 63, 63);
       color: white;
-      text-decoration: underline;
-      font-size: 20px;
-      text-align: center;
-      margin-bottom: 2em;
-    }
-    .musicList {
-      width: 60%;
-      margin: 3.5em auto auto auto;
-      list-style-type: none;
-      font-size: 18px;
-      font-weight: bold;
-      color: white;
-      text-align: center;
-      cursor: pointer;
-    }
-    .musicList li {
-      background-color: rgba(darkred, 0.7);
-      padding: 20px 20px;
-      margin-bottom: 10px;
-    }
-    .musicList li:hover {
-      background-color: rgba(lightcoral, 0.8);
-      color: yellow;
-    }
-    .scroller {
-      height: 50%;
-      overflow: scroll;
-      scrollbar-color: rebeccapurple green;
-      scrollbar-width: thin;
-    }
-    .btn {
-      flex-basis: 100%;
+      border: none;
+      border-radius: 5px;
+      width: fit-content;
+      padding: 15px 25px;
       display: flex;
-      align-items: center;
       justify-content: center;
-      text-align: center;
-      margin-top: 2em;
-      margin-left: 5%;
-      #stop_btn {
-        background: rgb(70, 63, 63);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        width: fit-content;
-        padding: 15px 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 20px;
-      }
+      align-items: center;
+      font-size: 20px;
     }
   }
-  .live {
+}
+
+//button pour le live
+.liveButton {
+    background-color: lightcoral;
+}
+.noLiveButton {
+    background-color: #FF3535;
+}
+.stopButton {
+    color: grey;
+}
+.noStopButton {
+    color: white;
+}
+
+//couleur playlist
+.colorPlay {
+    background-color: green;
+}
+.noColorPlay {
+    background-color: rgba(darkred, 0.7);
+}
+
+.live {
     grid-column: 1/2;
     display: flex;
     flex-wrap: wrap;
@@ -390,6 +513,10 @@ export default {
         transform: scale(3.5, 3.5);
         background-color: rgba(red, 0);
       }
+    }
+
+    #audio {
+      flex-basis: 100%;
     }
   }
 }

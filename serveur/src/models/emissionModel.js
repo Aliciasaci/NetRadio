@@ -95,5 +95,19 @@ Emission.getEpisodesByEmission = (id, result) => {
     });
 }
 
+Emission.getEmissionByGenre = (genre, result) => {
+	db.query(
+		"SELECT * FROM emission WHERE Genre = ?",
+		[genre],
+		(err, results) => {
+			if (err) {
+				console.log(err);
+				result(err, null);
+			} else {
+				result(null, results);
+			}
+		}
+	);
+};
 
 module.exports = Emission;

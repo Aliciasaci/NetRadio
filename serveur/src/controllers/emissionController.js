@@ -84,4 +84,15 @@ const showEpisodesByEmission = (req, res) => {
         }
     });
 }
-module.exports = { deleteEmission, updateEmission, createEmission, showEmissionById, showEmissionsByAnimateur, showEmissions, showEpisodesByEmission };
+
+const getEmissionByCategorie = (req, res) => {
+	const genre = req.params.genre;
+	emission.getEmissionByGenre(genre, (err, results) => {
+		if (err) {
+			res.send(err);
+		} else {
+			res.json(results);
+		}
+	});
+};
+module.exports = { deleteEmission, updateEmission, createEmission, showEmissionById, showEmissionsByAnimateur, showEmissions, showEpisodesByEmission, getEmissionByCategorie };

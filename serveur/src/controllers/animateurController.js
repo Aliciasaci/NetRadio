@@ -62,4 +62,37 @@ const deleteAnimateur = (req, res) => {
     });
 }
 
-module.exports = { deleteAnimateur, updateAnimateur, createAnimateur, showAnimateurById, showAnimateurs };
+
+const checkCredentialsAnimateur = (req, res) => {
+	const email = req.body.email;
+	const password = req.body.password;
+	var rand = function () {
+		return Math.random().toString(36).substr(2); // remove `0.`
+	};
+
+	var token = function () {
+		return rand() + rand(); // to make it longer
+	};
+
+	animateur.checkCredentials(email, password, (err, results) => {
+		if (err) {
+			console.log("error dans le controller");
+			res.send(err);
+		} else {
+			if (Object.keys(results).length != 0) {
+				res.json({
+					message: "Connexion réussi",
+					token: token(),
+					status: "animateur",
+					member: true,
+				});
+			} else {
+				res.json({
+					message: "Impossible de se connecter",
+				});
+			}
+		}
+	});
+};
+
+module.exports = { deleteAnimateur, updateAnimateur, createAnimateur, showAnimateurById, showAnimateurs, checkCredentialsAnimateur };
