@@ -47,9 +47,6 @@ module.exports = app => {
     // delete un animateur
     router.delete('/animateurs/:id', animateur.deleteAnimateur);
 
-    // get les émissions d'un animateur
-    router.get("/animateurs/:id/emissions", animateur.showEmissionsByAnimateur);
-
 
     /**
      * Routes des episodes
@@ -79,6 +76,9 @@ module.exports = app => {
     // get une seule émission par id 
     router.get('/emissions/:id', emission.showEmissionById);
 
+    // get toutes les émissions d'un animateur
+    router.get("/animateurs/:id/emissions", emission.showEmissionsByAnimateur);
+
     // Créer nouvelle émission
     router.post('/emissions', emission.createEmission);
 
@@ -100,7 +100,7 @@ module.exports = app => {
     router.get('/creneau/:id', creneau.showCreneauxById);
 
     // get tous les créneaux par id animateur
-    router.get('/creneauxAnimateur/:animateur', creneau.showCreneauxByAnimateur);
+    router.get('/animateurs/:animateur/creneaux', creneau.showCreneauxByAnimateur);
 
     // get tous les créneaux par date
     router.get('/creneaux/:date', creneau.showCreneauxByDate);
@@ -112,7 +112,7 @@ module.exports = app => {
     router.get('/creneau/:date/:heure', creneau.showCreneauByDateTime);
 
     // get un créneau par id animateur et date heure
-    router.get('/creneauxAnimateur/:animateur/:date/:heure', creneau.showCreneauByAnimateurDateTime);
+    router.get('/animateurs/:animateur/:date/:heure/creneau', creneau.showCreneauByAnimateurDateTime);
 
     // créer un créneau
     router.post('/creneaux', creneau.createCreneau);
@@ -121,7 +121,7 @@ module.exports = app => {
     router.put('/creneaux/:date/:heure', creneau.updateCreneau);
 
     // update un créneau by animateur, date et heure
-    router.put('/creneauxAnimateur/:animateur/:date/:heure', creneau.updateCreneauByAnimateurDateTime);
+    router.put('/animateurs/:animateur/:date/:heure/creneau', creneau.updateCreneauByAnimateurDateTime);
 
     // delete un créneau
     router.delete('/creneaux/:date/:heure', creneau.deleteCreneau);

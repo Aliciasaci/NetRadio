@@ -39,6 +39,18 @@ Emission.getEmissionById = (id, result) => {
     });
 }
 
+//Get toutes les émissions d'un animateur
+Emission.getEmissionsByAnimateur = (id, result) => {
+    db.query("SELECT * FROM emission WHERE idAnimateur = ?", [id], (err, results) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+        } else {
+            result(null, results);
+        }
+    });
+}
+
 
 // Insert a new emission to Database
 Emission.insertEmission = (data, result) => {
