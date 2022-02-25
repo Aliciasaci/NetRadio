@@ -39,6 +39,10 @@ html, body
   @include navbar-content('ledirect')
 
 
+#navbar-content ul #creneaux
+  @include navbar-content('creneaux')
+
+
 #btn-search
   @include btn-type('search')
 
@@ -204,6 +208,43 @@ footer
 
 #podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul li img:nth-of-type(2):hover
   @include hover('download')
+
+
+//Les créneaux programmés
+#creneaux-programmes-content
+  @include creneaux-programmes-content
+
+#creneaux-programmes-content h1
+  @include creneaux-content-type('header')
+
+
+#creneaux-programmes-content .programmes-content-list
+  @include creneaux-content-type('list')
+
+#creneaux-programmes-content .programmes-content-list li
+  @include creneaux-content-type('list-content')
+
+#creneaux-programmes-content .programmes-content-list li .btn-info
+  @include btn-type('info')
+
+
+//Détail des créneaux programmés 
+#detail-creneaux-programmes-content
+  @include detail-creneaux-programmes-content
+
+#detail-creneaux-programmes-content h1
+  @include detail-creneaux-programmes-content-type('header')
+
+#detail-creneaux-programmes-content .description
+  @include detail-creneaux-programmes-content-type('description')
+
+#detail-creneaux-programmes-content p
+  @include detail-creneaux-programmes-content-type('p')
+
+#detail-creneaux-programmes-content .btn-start
+  @include btn-type('confirm')
+
+
 
 
 #programmes-content

@@ -7,7 +7,6 @@ const cors = require("cors");
 // init express
 const app = express();
 
-const FileReader = require("filereader");
 // parse requests of content-type - application/json
 app.use(express.json());
 

@@ -2,20 +2,15 @@
 const db = require("../config/database.js");
 
 //Constructeur
-const Emission = function(emission, episode) {
+const Emission = function(emission) {
     this.nomEmission = emission.nomEmission;
-    this.diffusionDate = emission.diffusionDate;
-    this.diffusionTime = emission.diffusionTime;
     this.description = emission.description;
     this.genre = emission.genre;
     this.idAnimateur = emission.idAnimateur;
-    this.titleEpisode = episode.titleEpisode;
-    this.nbEpisode = episode.nbEpisode;
 };
 
-let idEmission = 0;
 
-// Get all emissions with their episodes
+// Get toutes les émissions
 Emission.getEmissions = (result) => {
     db.query("SELECT emi.*, ep.* FROM emission emi LEFT JOIN episode ep ON emi.idEmission = ep.idEmission ORDER BY emi.diffusionTime ASC", (err, results) => {
         if (err) {
@@ -27,7 +22,7 @@ Emission.getEmissions = (result) => {
     });
 }
 
-// Get an emission with its episodes by id
+// Get une émission par id 
 Emission.getEmissionById = (id, result) => {
     db.query("SELECT * FROM emission emi LEFT JOIN episode ep ON emi.idEmission = ep.idEmission WHERE emi.idEmission = ?", [id], (err, results) => {
         if (err) {
@@ -52,7 +47,7 @@ Emission.getEmissionsByAnimateur = (id, result) => {
 }
 
 
-// Insert a new emission to Database
+//insérer une émission en base de donéne
 Emission.insertEmission = (data, result) => {
     db.query("INSERT INTO emission SET ?", [data], (err, results) => {
         if (err) {
@@ -64,7 +59,7 @@ Emission.insertEmission = (data, result) => {
     });
 }
 
-// Update an emission to database
+// Update une emission par son id
 Emission.updateEmissionById = (data, id, result) => {
     db.query("UPDATE emission SET ? WHERE idEmission = ?", [data, id], (err, results) => {
         if (err) {
@@ -76,7 +71,7 @@ Emission.updateEmissionById = (data, id, result) => {
     });
 }
 
-// Delete an emission from database
+//Delete emission de la base de données
 Emission.deleteEmissionById = (id, result) => {
     db.query("DELETE FROM emission WHERE idEmission = ?", [id], (err, results) => {
         if (err) {
@@ -87,5 +82,18 @@ Emission.deleteEmissionById = (id, result) => {
         }
     });
 }
+
+//get tous les épisodes d'une emission
+Emission.getEpisodesByEmission = (id, result) => {
+    db.query("SELECT * FROM episode WHERE idEmission = ?", [id], (err, results) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+        } else {
+            result(null, results);
+        }
+    });
+}
+
 
 module.exports = Emission;

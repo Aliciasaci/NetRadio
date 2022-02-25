@@ -61,7 +61,7 @@ const updateEmission = (req, res) => {
 }
 
 
-// Delete an emission 
+// Delete an emission
 const deleteEmission = (req, res) => {
     const id = req.params.id;
     emission.deleteEmissionById(id, (err, results) => {
@@ -73,4 +73,15 @@ const deleteEmission = (req, res) => {
     });
 }
 
-module.exports = { deleteEmission, updateEmission, createEmission, showEmissionById, showEmissionsByAnimateur, showEmissions };
+
+const showEpisodesByEmission = (req, res) => {
+    const id = req.params.id;
+    emission.getEpisodesByEmission(id, (err, results) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+}
+module.exports = { deleteEmission, updateEmission, createEmission, showEmissionById, showEmissionsByAnimateur, showEmissions, showEpisodesByEmission };

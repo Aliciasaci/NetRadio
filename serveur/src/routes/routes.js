@@ -88,7 +88,8 @@ module.exports = app => {
     // delete une émission
     router.delete('/emissions/:id', emission.deleteEmission);
 
-
+    //get les épisodes d'une émissions
+    router.get('/emissions/:id/episodes', emission.showEpisodesByEmission)
 
     /**
      * Routes des créneaux

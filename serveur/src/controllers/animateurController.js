@@ -24,7 +24,6 @@ const showAnimateurById = (req, res) => {
     });
 }
 
-
 // Create New Auditeur                                                          //S'assurer de mettre le content-type à json/application
 const createAnimateur = (req, res) => {
     const data = req.body;

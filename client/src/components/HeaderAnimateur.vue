@@ -9,10 +9,10 @@
                     <router-link to="/Programmes"><strong>Créneaux</strong></router-link>
                 </li>
                 <li id="podcasts">
-                    <router-link to="/"><strong>Podcasts</strong></router-link>
+                    <router-link :to="{name : 'ProfilAnimateur', params :{id: idAnimateur}}"><strong>Mes podcasts</strong></router-link>
                 </li>
                 <li id="emissions">
-                    <router-link to="/">
+                    <router-link to="/EmissionsAnimateur">
                         <strong>Mes émissions</strong>
                     </router-link>
                 </li>
@@ -25,7 +25,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data(){
+        return{
+            idAnimateur : 1,
+        }
+    }
+};
 </script>
 
 <style lang="scss">
@@ -56,3 +62,4 @@ export default {};
        justify-content: center;
    }
 </style>
+

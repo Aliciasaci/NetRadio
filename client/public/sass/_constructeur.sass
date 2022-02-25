@@ -124,10 +124,13 @@ $third-color-default: #242424 !default
   @if($type == "emissions")
     border-right: $border-right-default
 
+  
+  @if($type == "creneaux")
+    border-right: $border-right-default
+
 
   @if($type == "ledirect")
     @include background-color(rgba(24,24,24,0.4))
-
 
 
 @mixin navbar-content-size($size)
@@ -175,6 +178,19 @@ $third-color-default: #242424 !default
     grid-column: 2/3
     @include padding(18px, 10px, 18px, 0)
 
+
+@mixin navbar-creneaux($size)
+  @if ($size == "small")
+    grid-column: 1/2
+
+
+  @if ($size == "medium")
+    grid-column: 1/2
+
+
+  @if ($size == "large")
+    grid-column: 1/2
+    @include padding(18px, 10px, 18px, 0)
 
 
 @mixin navbar-emissions($size)
@@ -270,6 +286,9 @@ $third-color-default: #242424 !default
   font-weight: bold
   text-align: center
   bottom: 0
+  width: 100%
+  margin-left: -10px
+  position: fixed
 
 
 @mixin input($width, $height, $font)
@@ -351,7 +370,8 @@ $third-color-default: #242424 !default
     border: 3px solid #808080
     font-weight: bold
     cursor: pointer
-
+    text-decoration: none
+    padding-top: 20px
 
   @if($type == "connection")
     text-align: center
@@ -404,7 +424,8 @@ $third-color-default: #242424 !default
     border-radius: 10px
     border: 3px solid #3BBD39
     font-weight: bold
-    padding: 10px 45px
+    padding: 15px 45px
+    cursor: pointer
 
 
   @if($type == "form")
@@ -1164,3 +1185,58 @@ $third-color-default: #242424 !default
 
   @if($type == 'weeks-span')
     padding: 10px
+
+
+@mixin creneaux-programmes-content
+  @include text-color($first-color-default)
+  text-align: center
+
+
+@mixin creneaux-content-type($type)
+  @if($type == 'list')
+    list-style: none
+    margin: 8em 30px 20px 0
+  
+  
+  @if($type == 'header')
+    color: white
+    margin: 2em auto auto auto
+    text-decoration: underline
+    background-color: #464141
+    border: 2px solid #ff3535
+    padding: 20px 40px
+    border-radius: 20px
+    font-size: 20px
+    width: fit-content
+    text-align: center
+
+  @if($type == 'list-content')
+    @include background-color(#7B2020)
+    @include text-color($first-color-default)
+    padding: 10px 0 10px 40px
+    display: grid
+    grid-template-columns: 80% 15%
+    margin: 0 0 10px 0
+    text-align: start
+    font-size: 18px
+  
+
+@mixin detail-creneaux-programmes-content-type($type)
+  @if($type == 'header')
+    margin: 3em 0 0 0
+  
+  @if($type == 'p')
+    width: 50em
+    font-size: 20px
+    text-align: center
+  
+  @if($type == 'description')
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-bottom: 2em
+
+  
+@mixin detail-creneaux-programmes-content
+  @include text-color($first-color-default)
+  text-align: center
