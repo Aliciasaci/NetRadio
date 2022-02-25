@@ -28,7 +28,6 @@ export default {
       try {
         const response = await axios.get(`http://localhost:3000/emissions/${this.emission.idEmission}/episodes`);
         this.episodes = response.data;
-        console.log(this.episodes);
       } catch (err) {
         console.log(err);
       }

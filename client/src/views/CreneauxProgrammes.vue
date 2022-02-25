@@ -7,8 +7,8 @@
       </h1>
       <ul class="programmes-content-list" >
         <li v-for="creneau  in creneaux" :key="creneau.idCreneau">
-          <h3>{{creneau.title}} - {{creneau.titreEpisode}} - {{creneau.heure}} - {{creneau.date}}</h3>
-          <router-link type="submit" class="btn-info" :to="{ name: 'DetailCreneauProgramme' }"><span>Voir plus</span></router-link>
+          <h3>{{creneau.title}} - {{creneau.titreEpisode}} - {{creneau.heure}} -{{creneau.date}}</h3>
+          <router-link type="submit" class="btn-info" :to="{ name: 'DetailCreneauProgramme', params :{id: creneau.idCreneau}}"><span>Voir plus</span></router-link>
         </li>
       </ul>
     </div>
@@ -23,8 +23,8 @@ export default {
     return {
       test: false,
       idAnimateur : 1,
-      creneaux : []
-    };
+      creneaux : [],
+        };
   },
   mounted() {
     this.getCreneauxByAnimateur();
@@ -34,12 +34,17 @@ export default {
       try {
         const response = await axios.get(`http://localhost:3000/animateurs/${this.idAnimateur}/creneaux`);
         this.creneaux = response.data;
-        console.log(this.creneaux);
       } catch (err) {
-        console.log(err);
       }
     },
   },
+     formatDate(date) {
+       this.dateFormatted = date.substring(0,10);
+       let year = this.dateFormatted.substring(0,4);
+       let month = this.dateFormatted.substring(5,7)
+       let day = this.dateFormatted.substring(8,10)
+       this.dateFormatted = day+"/"+month+"/"+year
+    },
 };
 </script>
 <style lang="scss"></style>

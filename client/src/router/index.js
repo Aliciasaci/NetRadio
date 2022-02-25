@@ -71,15 +71,20 @@ const routes = [{
             import ('../views/ProfilAnimateur.vue')
     },
     {
-        path: '/DetailCreneauProgramme/',
+        path: '/DetailCreneauProgramme/:id',
         name: 'DetailCreneauProgramme',
         component: () =>
             import ('../views/DetailCreneauProgramme.vue')
     },
+    {
+        path: '/BordAnimateur/:id?',
+        name: 'BordAnimateur',
+        component: () =>
+            import ('../views/BordAnimateur.vue')
+    },
 ]
 
 const router = new VueRouter({
-    // mode: 'history',
     base: process.env.BASE_URL,
     routes
 })

@@ -4,7 +4,7 @@
     <div class="wrapper">
       <div class="main">
         <div class="live">
-          <h1 class="title">LE JOURNAL</h1>
+          <h1 class="title">{{titleEmission}}</h1>
           <span :class="{ liveicon: isActive }"></span>
           <img src="img/live.jpg" />
           <div class="btn">
@@ -61,10 +61,11 @@ export default {
       audio: "",
       blob: {},
       episodeName: "",
+      titleEmission : this.$route.query.titleEmission,
       save: false,
       id: "1",
       link: "",
-      ret: false,
+            
     };
   },
   mounted() {
@@ -75,6 +76,7 @@ export default {
     //Disable the save button
     document.querySelector("#save_btn").disabled = true;
     document.querySelector("#save_btn").style.backgroundColor = "#86B697";
+
   },
   methods: {
     startLive() {
@@ -151,7 +153,7 @@ export default {
       var Dropbox = require("dropbox").Dropbox;
       var dbx = new Dropbox({
         accessToken:
-          "sl.BCh5MOqINm3_gBnbB0LPVJp5q72tXhHhdFEyZ98fDRZBxrEZ-ABc1Fd6TFmU6Qewg0qo0Jy9N06ArG9xzz2pCDv9aalxBOSnzyJJnPml7YUVJTovswvbXTPY9sqgNxfDbb2agxH2mq1j",
+          "sl.BCsFwgtXB5twtoaxhNUvcEZRTnz_yi6lK6VpJ15_tM8eRQVb5UQb76fZUC65hJ8J2PGhIrTGEmptsRjO_emyFNHVezsb3DWzWgaeRAR9jyYU4Ek5-KMQjCqOW5nQh7l02tkqfqPYUnKT",
       });
       this.episodeName = prompt(
         "Entrez le titre de votre épisode. Attention ! vous ne pouvez pas avoir le même nom d'épisode plus d'une fois"
@@ -179,7 +181,6 @@ export default {
             })
             .then((response) => {
               this.link = response.result.url;
-              console.log(this.link);
               //Save the link in the database
               this.putEpisodeLinkInDatabase(this.link);
             }),
@@ -190,7 +191,7 @@ export default {
       try {
         await axios.post("http://localhost:3000/episodes", {
           titreEpisode: this.episodeName,
-          idEmission: "1",
+          idEmission: this.$route.query.idEmission,
           statusSauvegarde: "0",
           statusPodcast: "0",
           lien: this.link,
