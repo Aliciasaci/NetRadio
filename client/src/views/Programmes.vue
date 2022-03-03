@@ -159,8 +159,10 @@ export default {
         },
         date(value) {
             if (value) {
+                moment.locale('fr');
                 return moment(String(value)).format('dddd, DD MMMM YYYY');
             } else {
+                moment.locale('fr');
                 return moment().format('dddd, DD MMMM YYYY');
             }
         },
