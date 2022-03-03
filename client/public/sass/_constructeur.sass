@@ -925,9 +925,8 @@ $third-color-default: #242424 !default
 
 
   @if($type == 'content')
-    display: grid
-    grid-template-columns: 50% 50%
-    margin: 0 0 50px 0
+    margin: auto
+    width: 25%
 
 
   @if($type == 'footer')
@@ -951,7 +950,6 @@ $third-color-default: #242424 !default
     border: 2px solid #FF3535
     border-radius: 30px
     padding: 30px 80px 30px 70px
-    margin: 0 0 0 100px
 
 
   @if($type == 'form-label')
@@ -991,7 +989,6 @@ $third-color-default: #242424 !default
     border: 2px solid #FF3535
     border-radius: 30px
     padding: 30px 80px 30px 70px
-    margin: 0 100px 0 0
 
 
   @if($type == 'form-label')
@@ -1021,11 +1018,12 @@ $third-color-default: #242424 !default
 
 
 @mixin compte-footer-type($type)
-  @if($type == 'invite')
-    grid-column: 1/2
-    margin: auto auto auto 150px
+  @if($type == 'animateur')
+    text-align: center
     font-size: $font-size-default
     font-weight: bold
+    color: white
+    margin: 3em 0 0 0
 
 
   @if($type == 'btn')

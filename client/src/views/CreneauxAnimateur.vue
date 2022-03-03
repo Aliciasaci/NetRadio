@@ -46,7 +46,7 @@ export default {
             inputEpisode: null,
             success: null,
             idEpisode: null,
-            idAnimateur: 2
+            idAnimateur: 1
         }
     },
     methods: {

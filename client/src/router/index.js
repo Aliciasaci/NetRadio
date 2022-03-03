@@ -28,8 +28,8 @@ const routes = [
             import ('../views/Programmes.vue')
     },
     {
-        path: '/EnDirect',
-        name: 'EnDirect',
+        path: '/BordAnimateur',
+        name: 'BordAnimateur',
         component: () =>
             import ('../views/BordAnimateur.vue')
     },
@@ -102,7 +102,13 @@ const routes = [
 		path: "/emissions/:nom",
 		name: "EmissionsCategorie",
 		component: () => import("../views/EmissionsCategorie.vue"),
+	},
+    {
+		path: "/inscription",
+		name: "Inscription",
+		component: () => import("../views/Inscription.vue"),
 	}
+
 ]
 
 const router = new VueRouter({

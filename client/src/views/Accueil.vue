@@ -22,14 +22,24 @@
         </div>
         <div id="content-right">
             <div class="content-program" v-for="emission in emissions" v-bind:key="emission.idCreneau">
-                <div class="content-program-info" v-on:click="getEmissionById(emission.idCreneau)">
-                    <div v-if="emission.titreEpisode != null">
-                        <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
-                        <p class="content-program-name"><strong>{{emission.nomEmission + " : " + emission.titreEpisode}}</strong></p>
+                <div v-if="emission != null">
+                    <div class="content-program-info" v-on:click="getEmissionById(emission.idCreneau)">
+                        <div v-if="emission.titreEpisode != null">
+                            <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
+                            <p class="content-program-name"><strong>{{emission.nomEmission + " : " + emission.titreEpisode}}</strong></p>
+                        </div>
+                        <div v-else>
+                            <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
+                            <p class="content-program-name"><strong>{{emission.nomEmission}}</strong></p>
+                        </div>
                     </div>
-                    <div v-else>
-                        <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
-                        <p class="content-program-name"><strong>{{emission.nomEmission}}</strong></p>
+                </div>
+                <div v-else>
+                    <div class="content-program-info">
+                        <div>
+                            <p class="content-program-time"><strong>Pas d'émission</strong></p>
+                        </div>
+                       
                     </div>
                 </div>
             </div> 
@@ -55,26 +65,6 @@ export default {
         }
     },
     methods: {
-        voirDetail(id) {
-            this.getEmissionById(id);
-            document.querySelectorAll(".btn-info").forEach(programmeBtn => {
-                programmeBtn.addEventListener('click', () => {
-                    document.getElementById("popup-programme").style.display = "block";
-                });
-            });
-        },
-        close() {
-            document.querySelectorAll(".close").forEach(closeBtn => {
-                closeBtn.addEventListener('click', () => {
-                    document.getElementById("popup-programme").style.display = "none";
-                })
-            })
-            window.onclick = function (event) {
-                if (event.target === document.getElementById("popup-programme")) {
-                    document.getElementById("popup-programme").style.display = "none";
-                }
-            }
-        },
         date(value) {
             if (value) {
                 return moment(String(value)).format('dddd, DD MMMM YYYY');
@@ -108,6 +98,7 @@ export default {
             .get("http://localhost:3000/creneaux/" +  this.momentDate(this.emission_date) + "/" + this.currentTime(this.current_time))
             .then(response => {
                 this.emissions = response.data;
+                this.getEmissionById(id);
             })
             .catch(error => {
                 console.log(error);

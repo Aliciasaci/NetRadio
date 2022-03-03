@@ -3,7 +3,7 @@
     <HeaderPrincipal />
     <div id="ledirect-content">
       <div id="ledirect-content-title">
-        <h1><u>{{emission.title}} - {{episode.titreEpisode}}</u></h1>
+        <h1><u>{{emission.nomEmission}} - {{episode.titreEpisode}}</u></h1>
       </div>
       <div id="ledirect-content-img">
         <img src="/img/lejournal.png" alt="Le journal" />

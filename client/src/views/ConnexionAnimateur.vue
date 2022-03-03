@@ -17,10 +17,13 @@
 				</div>
 			</form>
         </div>
+		<Footer />
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: "ConnexionAnimateur",
 	data() {
@@ -35,16 +38,19 @@ export default {
 				email: this.emailconnexion,
 				password: this.passwordconnexion,
 			};
-			this.$api
-				.post("/connexionAnimateur",donnees)
+			axios
+				.post("http://localhost:3000/connexionAnimateur",donnees)
 				.then((response) => {
-					alert(response.data.message);
-					this.$store.commit('setToken',response.data.token);
-					this.$store.commit('adjustMember',{
-						member : response.data.member,
-						status : response.data.status
-						});
-					this.$router.push("/Creneaux")
+					if (response.data.message == "Connexion réussi") {
+						this.$store.commit('setToken',response.data.token);
+						this.$store.commit('adjustMember',{
+							member : response.data.member,
+							status : response.data.status
+							});
+						this.$router.push("/Creneaux")
+					} else {
+						this.$router.push("/connexionAnimateur")
+					}
 				});
 		}
     }

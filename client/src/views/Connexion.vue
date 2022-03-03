@@ -16,55 +16,37 @@
 					</div>
 				</div>
 			</form>
-
-			<form @submit.prevent="validationInscription()" id="compte-content-register">
-				<h1>INSCRIPTION</h1>
-				<div id="compte-content-register-form">
-					<p>Nom</p>
-					<input required v-model="nominscription" type="text" class="input" />
-					<p>Email</p>
-					<input required v-model="emailinscription" type="email" class="input" />
-					<p>Mot de passe</p>
-					<input required v-model="passwordinscription" type="password" class="input" />
-					<div class="btn">
-                        <button id="btn-register">S'inscrire</button>
-					</div>
-				</div>
-			</form>
 		</div>
 		<div id="compte-footer">
 			<p>
-				Vous êtes invité(e) ?
-                    <router-link to="/invite">
-                        <button id="btn-invitation">Cliquez ici</button>
+				Pas encore inscrit ?
+                    <router-link to="/inscription">
+                        <button id="btn-invitation">S'inscrire</button>
                     </router-link>
 			</p>
+		</div>
+		<div id="compte-footer">
 			<p>
 				Vous êtes un(e) Animateur(e) ?
                     <router-link to="/connexionAnimateur">
                         <button id="btn-invitation">Cliquez ici</button>
                     </router-link>
 			</p>
-			<div id="compte-footer-btn">
-				<router-link to="/">
-					<button type="submit" id="btn-accueil">Retourner à l'accueil</button>
-				</router-link>
-			</div>
 		</div>
 		<footer>@Net'Radio - 2021/2022</footer>
 	</div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
 	name: "ConnexionInscription",
 	data() {
 		return {
 			emailconnexion: "",
 			passwordconnexion: "",
-			nominscription: "",
-			emailinscription: "",
-			passwordinscription: ""
+			auditeurs: ""
 		};
 	},
 	methods: {
@@ -73,34 +55,20 @@ export default {
 				email: this.emailconnexion,
 				password: this.passwordconnexion,
 			};
-			this.$api
-				.post("/connexionAuditeur",donnees)
+			axios
+				.post("http://localhost:3000/connexionAuditeur", donnees)
 				.then((response) => {
-					alert(response.data.message);
-					this.$store.commit('setToken',response.data.token);
-					this.$store.commit('adjustMember',{
-						member : response.data.member,
-						status : response.data.status
-						});
-					this.$router.push("/")
+					if (response.data.message == "Connexion réussi") {
+						this.$store.commit('setToken',response.data.token);
+						this.$store.commit('adjustMember',{
+							member : response.data.member,
+							status : response.data.status
+							});
+						this.$router.push("/")
+					} else {
+						this.$router.push("/connexion")
+					}
 				});
-		},
-		validationInscription() {
-			let donnees = {
-				fullNameAuditeur: this.nominscription,
-				emailAuditeur: this.emailinscription,
-				mdpAuditeur: this.passwordinscription,
-			};
-			this.$api
-				.post("/auditeurs",donnees)
-				.then((response) => {
-					console.log(response.message);
-					alert("Compte créé, veuillez vous connecter");
-					this.nominscription = "",
-					this.emailinscription = "",
-					this.passwordinscription = ""
-				});
-
 		},
 	},
 };

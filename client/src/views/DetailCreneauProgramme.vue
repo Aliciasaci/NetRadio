@@ -2,28 +2,62 @@
   <section>
     <HeaderAnimateur />
     <div id="detail-creneaux-programmes-content">
-      <h1><u><strong>NOM DE L'ÉMISSION</strong></u></h1>
-      <h3>Le journal _ Episode 3</h3>
-      <h1><u><strong>DATE ET HEURE DE L'ÉMISSION</strong></u></h1>
-      <h3>Mercredi, 14 décembre 2021 10h</h3>
-      <h3>10h</h3>
-      <h1><u><strong>DESCRIPTION DE L'ÉMISSION</strong></u></h1>
+      <h1>
+        <u><strong>Nom de l'émission</strong></u>
+      </h1>
+      <h3>{{creneau.nomEmission}} _ {{creneau.titreEpisode}}</h3>
+      <h1>
+        <u><strong>Date et heure de l'émission</strong></u>
+      </h1>
+      <h3>{{dateFormatted}} à {{creneau.heure}}</h3>
+      <h1>
+        <u><strong>Descriptions de l'émission</strong></u>
+      </h1>
       <div class="description">
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book
+          {{creneau.description}}
         </p>
       </div>
-      <router-link to="/EnDirect"><button class="btn-start">Lancer l'émission</button></router-link>
+      <router-link :to="{ name: 'BordAnimateur', params :{id: creneau.idCreneau} ,query: { idEmission: creneau.idEmission, titleEmission : creneau.titre}}"><button class="btn-start">Lancer l'émission</button></router-link>
     </div>
     <Footer />
   </section>
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+export default {
+  data() {
+    return {
+      creneau : [],
+      dateFormatted : ""
+    };
+  },
+  mounted() {
+    this.getCreneauInformationsById()
+  },
+  methods: {
+    async getCreneauInformationsById() {
+      try {
+        let idCreneau = this.$route.params.id;
+        const response = await axios.get(
+          `http://localhost:3000/creneau/${idCreneau}`
+        );
+        this.creneau = response.data[0]
+        this.formatDate(this.creneau.date)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+     formatDate(date) {
+       this.dateFormatted = date.substring(0,10);
+       let year = this.dateFormatted.substring(0,4);
+       let month = this.dateFormatted.substring(5,7)
+       let day = this.dateFormatted.substring(8,10)
+       this.dateFormatted = day+"/"+month+"/"+year
+    },
+  }
+};
 </script>
 
 <style></style>
