@@ -106,6 +106,7 @@ export default {
       });
     },
     date(value) {
+      moment.locale('fr');
       return moment(value).format('dddd, DD MMMM YYYY');
     },
     momentDate(value){
