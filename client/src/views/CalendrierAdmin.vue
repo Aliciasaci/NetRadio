@@ -3,7 +3,7 @@
     <HeaderAdministrateur />
     <div class="calendar-form">
       <div class="calendar">
-       <v-date-picker v-model="selectedDate" is-dark style="height: 250px;" is-expanded ></v-date-picker>
+       <v-date-picker locale="fr" v-model="selectedDate" is-dark style="height: 250px;" is-expanded ></v-date-picker>
        <div id="listCreneaux" v-bind:getCreneaux="getCreneaux()">
        <div v-for="creneau in creneaux" v-bind:key="creneau.idCreneau">
          <ul>
