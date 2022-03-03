@@ -86,7 +86,8 @@ const checkCredentialsAuditeur = (req, res) => {
                     "message" : "Connexion réussi",
                     "token" : token(),
                     "status" : "auditeur",
-                    "member" : true
+                    "member" : true,
+                    "idAuditeur": results[0]["idAuditeur"],
                 });
             } else {
                 res.json({

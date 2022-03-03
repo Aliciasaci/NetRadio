@@ -62,7 +62,8 @@ export default {
 						this.$store.commit('setToken',response.data.token);
 						this.$store.commit('adjustMember',{
 							member : response.data.member,
-							status : response.data.status
+							status : response.data.status,
+							idMembre : response.data.idAuditeur
 							});
 						this.$router.push("/")
 					} else {

@@ -9,7 +9,8 @@ export default new Vuex.Store({
         events: [],
         token : "",
         member : false,
-        status : ""
+        status : "",
+        idMembre: ""
     },
     getters: {
         EVENTS: state => state.events
@@ -30,7 +31,8 @@ export default new Vuex.Store({
         },
         adjustMember(state,adjustement){
             state.member = adjustement.member,
-            state.status = adjustement.status
+            state.status = adjustement.status,
+            state.idMembre = adjustement.idMembre
         }
     },
     actions: {},

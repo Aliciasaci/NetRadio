@@ -85,6 +85,7 @@ const checkCredentialsAnimateur = (req, res) => {
 					token: token(),
 					status: "animateur",
 					member: true,
+                    idAnimateur: results[0]["idAnimateur"],
 				});
 			} else {
 				res.json({

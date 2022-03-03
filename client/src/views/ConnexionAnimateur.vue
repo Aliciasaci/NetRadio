@@ -45,7 +45,8 @@ export default {
 						this.$store.commit('setToken',response.data.token);
 						this.$store.commit('adjustMember',{
 							member : response.data.member,
-							status : response.data.status
+							status : response.data.status,
+							idMembre : response.data.idAnimateur
 							});
 						this.$router.push("/Creneaux")
 					} else {
