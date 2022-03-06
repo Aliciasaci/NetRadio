@@ -1,12 +1,13 @@
 <template>
 <section v-if="emission">
     <ul  v-for="episode  in episodes" :key="episode.idEpisode" class="podcast-content-mypodcast-emission-list">
+       <router-link :to="{name : 'Play', params :{id: episode.idEpisode}}" style='margin: 15px 0 0 120px'>
         <li>
-          <h5>{{episode.titreEpisode}}</h5>
-          <router-link :to="{name : 'Play', params :{id: episode.idEpisode}}" style='margin: 15px 0 0 120px'><img src="/img/play.png" alt="Réecouter podcast"/></router-link>
+          <h3>{{episode.titreEpisode}}</h3>
           <!-- <img src="/img/telecharger.png" alt="Télécharger podcast" /> -->
         </li>
-      </ul>
+      </router-link>
+     </ul>
 </section>
 </template>
 

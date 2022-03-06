@@ -23,19 +23,16 @@
         <div id="compte-footer">
 			<p>
 				Vous avez déjà un compte ?
-                    <router-link to="/connexion">
-                        <button id="btn-invitation">Se connecter</button>
-                    </router-link>
+                    <router-link to="/connexion">Se connecter</router-link>
 			</p>
-        </div>
-		<div id="compte-footer">
 			<p>
 				Vous êtes un(e) Animateur(e) ?
-                    <router-link to="/connexionAnimateur">
-                        <button id="btn-invitation">Cliquez ici</button>
-                    </router-link>
+                    <router-link to="/connexionAnimateur">Cliquez ici</router-link>
 			</p>
         </div>
+	
+			
+ 
 		<Footer />
 	</div>
 </template>

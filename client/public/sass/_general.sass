@@ -102,16 +102,26 @@ footer
   @include podcasts-content-type('title')
 
 
+// #podcasts-content #podcasts-content-list
+//   @include podcasts-content-type('list')
+
 #podcasts-content #podcasts-content-list
-  @include podcasts-content-type('list')
+  @include podcasts-content-type('ul-content')
 
-
-#podcasts-content #podcasts-content-list ul a li
+#podcasts-content #podcasts-content-list li 
   @include podcasts-content-type('list-content')
 
+#podcasts-content #podcasts-content-list li a
+  @include podcasts-content-type('list-content-a')
 
-#podcasts-content #podcasts-content-list ul a li:hover
-  @include hover('podcasts')
+#podcasts-content #podcasts-content-list li a h3
+  @include podcasts-content-type('list-content-h3')
+
+#podcasts-content #podcasts-content-list li img
+  @include podcasts-content-type('list-content-img')
+
+#podcasts-content #podcasts-content-list li a h3:hover
+  @include hover('lighter-title')
 
 
 #podcast-content #podcast-content-profile #podcast-content-profile-info #btn-subscribe
@@ -142,56 +152,58 @@ footer
   @include podcast-content-type('info')
 
 
-#podcast-content #podcast-content-info #podcast-content-announcement
-  @include podcast-content-type('announcement')
+// #podcast-content #podcast-content-info #podcast-content-announcement
+//   @include podcast-content-type('announcement')
 
 
 #podcast-content #podcast-content-info #podcast-content-mypodcast
   @include podcast-content-type('mypodcast')
 
 
-#podcast-content #podcast-content-info #podcast-content-announcement #podcast-content-announcement-title
-  @include podcast-content-annoucement('title')
+// #podcast-content #podcast-content-info #podcast-content-announcement #podcast-content-announcement-title
+//   @include podcast-content-annoucement('title')
 
 
-#podcast-content #podcast-content-info #podcast-content-announcement #podcast-content-announcement-content ul li
-  @include podcast-content-annoucement('content')
+// #podcast-content #podcast-content-info #podcast-content-announcement #podcast-content-announcement-content ul li
+//   @include podcast-content-annoucement('content')
 
 
-#podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-title
+#podcast-content #podcast-content-info #podcast-content-mypodcast-title
   @include podcast-content-mypodcast('title')
 
 
-#podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions
+#podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions
   @include podcast-content-mypodcast('emissions')
 
 
-#podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission
+#podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission
   @include podcast-content-mypodcast('emission')
 
 
-#podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission .podcast-content-mypodcast-emission-head
+#podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission .podcast-content-mypodcast-emission-head
   @include podcast-content-mypodcast('emission-head')
 
 
-#podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission .podcast-content-mypodcast-emission-head h5
+#podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission .podcast-content-mypodcast-emission-head h5
   @include podcast-content-mypodcast('emission-title')
 
 
-#podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission .podcast-content-mypodcast-emission-head img
+#podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission .podcast-content-mypodcast-emission-head img
   @include podcast-content-mypodcast('favoris')
 
 
-#podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission .podcast-content-mypodcast-emission-head img:hover
+#podcast-content #podcast-content-info #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission .podcast-content-mypodcast-emission-head img:hover
   @include hover('favoris')
 
 
-#podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul li
+#podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul li 
   @include podcast-content-mypodcast('content')
 
+#podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul a
+  @include text-decoration('none')
 
-#podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul li h5
-  @include podcast-content-mypodcast('h5')
+// #podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul a li h5
+  // @include podcast-content-mypodcast('h5')
 
 
 #podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul li img:nth-of-type(1)
@@ -387,9 +399,11 @@ footer
 //  @include compte-type('footer')
 
 
-#compte-footer p
- @include compte-footer-type('animateur')
+#compte-footer p 
+ @include compte-footer-type('p')
 
+#compte-footer p a
+ @include compte-footer-type('link')
 
 #compte-footer #compte-footer-btn
   @include compte-footer-type('btn')

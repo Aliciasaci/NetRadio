@@ -3,8 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const routes = [
-    {
+const routes = [{
         path: '/',
         name: 'Accueil',
         component: () =>
@@ -17,10 +16,11 @@ const routes = [
             import ('../views/EcouterDirect.vue')
     },
     {
-		path: "/connexion",
-		name: "ConnexionInscription",
-		component: () => import("../views/Connexion.vue"),
-	},
+        path: "/connexion",
+        name: "ConnexionInscription",
+        component: () =>
+            import ("../views/Connexion.vue"),
+    },
     {
         path: '/Programmes',
         name: 'Programmes',
@@ -94,20 +94,29 @@ const routes = [
             import ('../views/DetailCreneauProgramme.vue')
     },
     {
-		path: "/connexionAnimateur",
-		name: "ConnexionAnimateur",
-		component: () => import("../views/ConnexionAnimateur.vue"),
-	},
-	{
-		path: "/emissions/:nom",
-		name: "EmissionsCategorie",
-		component: () => import("../views/EmissionsCategorie.vue"),
-	},
+        path: "/connexionAnimateur",
+        name: "ConnexionAnimateur",
+        component: () =>
+            import ("../views/ConnexionAnimateur.vue"),
+    },
     {
-		path: "/inscription",
-		name: "Inscription",
-		component: () => import("../views/Inscription.vue"),
-	}
+        path: "/emissions/:nom",
+        name: "EmissionsCategorie",
+        component: () =>
+            import ("../views/EmissionsCategorie.vue"),
+    },
+    {
+        path: "/inscription",
+        name: "Inscription",
+        component: () =>
+            import ("../views/Inscription.vue"),
+    },
+    {
+        path: "/DetailEmission/:id",
+        name: "DetailEmission",
+        component: () =>
+            import ("../views/DetailEmission.vue"),
+    }
 
 ]
 

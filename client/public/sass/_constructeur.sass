@@ -545,6 +545,8 @@ $third-color-default: #242424 !default
   @if($type == 'navbar')
     @include background-color($second-color-default)
 
+  @if($type == 'lighter-title')
+     color: grey
 
   @if($type == 'search')
     @include background-color(lightcoral)
@@ -624,7 +626,7 @@ $third-color-default: #242424 !default
     @include background-color(lightgray)
     @include text-color($first-color-default)
     border: 3px solid lightgray
-
+  
 
 
 @mixin content($type)
@@ -661,21 +663,36 @@ $third-color-default: #242424 !default
     @include text-color($first-color-default)
     @include padding(40px, 0, 30px, 0)
     text-align: center
-
-
-  @if($type == 'list')
-    margin: 0 0 100px 0
-
+    
+  @if($type == 'ul-content')
+    display: flex
+    flex-wrap: wrap
+    align-items: center
 
   @if($type == 'list-content')
-    @include background-color(#7B2020)
     @include text-color($first-color-default)
+    flex-basis: 18%
+    height: 200px
+    list-style: none
     @include padding(20px, 20px, 20px, 20px)
     font-size: $font-size-default
-    list-style: none
-    margin: 0 50px 8px 20px
+    font-weight: bold
+    margin: 0em 2em 8em 2em
+
+    
+  @if($type == 'list-content-h3')
+    color: white
     font-weight: bold
     text-decoration: none
+    text-align: center
+    
+  @if($type == 'list-content-a')
+    text-decoration: none
+    position: relative
+ 
+  @if($type == 'list-content-img')
+    width:100%
+  
 
 
 
@@ -690,19 +707,19 @@ $third-color-default: #242424 !default
 
 @mixin podcast-content-type($type)
   @if($type == 'img')
-    border: 8px solid #7B2020
+    border: 4px solid #7B2020
     @include img-width(100%)
 
 
   @if($type == 'profile')
     @include text-color($first-color-default)
     font-size: $font-size-default
-    border: 8px solid #7B2020
-    padding: 20px 0 140px 30px
+    border: 4px solid #7B2020
     display: grid
     grid-template-columns: 70% 20%
     grid-column-gap: 2%
-    height: fit-content
+    height: 200px
+    padding: 0 20px 0 20px
 
 
   @if($type == 'notification')
@@ -717,21 +734,22 @@ $third-color-default: #242424 !default
 
 
   @if($type == 'info')
-    display: grid
-    grid-template-columns: 22% 72%
-    grid-column-gap: 25px
+    // display: grid
+    // grid-template-columns: 22% 72%
+    // grid-column-gap: 25px
     margin: 0 0 80px 70px
 
 
-  @if($type == 'announcement')
-    border: 8px solid #7B2020
-    padding: 0 20px 0 0
-    font-size: $font-size-default
-    @include text-color($first-color-default)
+  // @if($type == 'announcement')
+  //   border: 8px solid #7B2020
+  //   padding: 0 20px 0 0
+  //   font-size: $font-size-default
+  //   @include text-color($first-color-default)
 
 
   @if($type == 'mypodcast')
     padding: 0 0 0 30px
+    width:100%s
     font-size: $font-size-default
     @include text-color($first-color-default)
 
@@ -741,39 +759,45 @@ $third-color-default: #242424 !default
   display: grid
   grid-template-rows: 0.1fr 1fr
   grid-row-gap: 40px
+  width: 90%
+  margin: auto
 
 
 
-@mixin podcast-content-annoucement($type)
-  @if($type == 'title')
-    @include text-color(#FFD600)
-    font-size: 25px
-    text-align: center
-    margin: 0 0 0 20px
+// @mixin podcast-content-annoucement($type)
+//   @if($type == 'title')
+//     @include text-color(#FFD600)
+//     font-size: 25px
+//     text-align: center
+//     margin: 0 0 0 20px
 
 
-  @if($type == 'content')
-    margin: 0 20px 10px -30px
-    border: 5px solid #7B2020
-    @include background-color(rgba(0,0,0,0.6))
-    padding: 20px 0 20px 30px
-    font-size: $font-size-default
-    @include text-color(#FFD600)
-    list-style: none
-    width: 100%
+//   @if($type == 'content')
+//     margin: 0 20px 10px -30px
+//     border: 5px solid #7B2020
+//     @include background-color(rgba(0,0,0,0.6))
+//     padding: 20px 0 20px 30px
+//     font-size: $font-size-default
+//     @include text-color(#FFD600)
+//     list-style: none
+//     width: 100%
+
+
+@mixin text-decoration($type)
+  @if($type == 'none')
+    text-decoration: none
 
 
 
 @mixin podcast-content-mypodcast($type)
   @if($type == 'title')
-    border: 3px solid #7B2020
+    border: 2px solid #7B2020
     @include background-color(#424242)
     @include text-color($first-color-default)
     font-size: $font-size-default
     text-align: center
-    padding: 5px  10px 0 -10px
     border-radius: 50px
-    width: 40%
+    width: 30%
     margin: auto
 
 
@@ -784,9 +808,11 @@ $third-color-default: #242424 !default
     font-size: $font-size-default
     @include text-color($first-color-default)
     list-style: none
-    width: 100%
+    width: 60%
     display: grid
-    grid-template-columns: 80% 10% 10%
+    // grid-template-columns: 80% 10% 10%
+    margin: auto
+    text-decoration: none
 
 
   @if($type == 'emissions')
@@ -800,12 +826,14 @@ $third-color-default: #242424 !default
   @if($type == 'emission-title')
     font-size: 22px
     font-weight: bold
-    grid-column: 1/2
+    // grid-column: 1/2
+    color: white
+    margin-left: 15em
 
 
   @if($type == 'emission-head')
-    display: grid
-    grid-template-columns: 90% 10%
+    // display: grid
+    // grid-template-columns: 90% 10%
 
 
   @if($type == 'favoris')
@@ -826,9 +854,9 @@ $third-color-default: #242424 !default
     margin: auto
 
 
-  @if($type == 'h5')
-    grid-column: 1/2
-    font-size: $font-size-default
+  // @if($type == 'h5')
+  //   // grid-column: 1/2
+  //   font-size: $font-size-default
 
 
 @mixin programmes-content
@@ -921,7 +949,7 @@ $third-color-default: #242424 !default
 
   @if($type == 'logo')
     width: 40%
-    margin: 30px 0 50px 0
+    margin: 10px 0 30px 0
 
 
   @if($type == 'content')
@@ -988,7 +1016,7 @@ $third-color-default: #242424 !default
     @include text-color($first-color-default)
     border: 2px solid #FF3535
     border-radius: 30px
-    padding: 30px 80px 30px 70px
+    padding: 20px 80px 20px 70px
 
 
   @if($type == 'form-label')
@@ -998,7 +1026,7 @@ $third-color-default: #242424 !default
 
 
   @if($type == 'form-title')
-    padding: 20px 0 0 0
+    padding: 0 0 0 0
 
 
   @if($type == 'form-input')
@@ -1023,14 +1051,22 @@ $third-color-default: #242424 !default
     font-size: $font-size-default
     font-weight: bold
     color: white
-    margin: 3em 0 0 0
 
 
   @if($type == 'btn')
     grid-column: 2/3
     margin: auto
 
+  @if($type == 'link')
+    font-size: $font-size-default
+    font-weight: bold
+    color: #CC3838
 
+  @if($type == 'p')
+    text-align: center
+    font-size: $font-size-default
+    font-weight: bold
+    color: white
 
 @mixin popup($type)
   @if($type == 'modal')
@@ -1198,7 +1234,7 @@ $third-color-default: #242424 !default
   @if($type == 'header')
     color: white
     margin: 2em auto auto auto
-    text-decoration: underline
+    // text-decoration: underline
     background-color: #464141
     border: 2px solid #ff3535
     padding: 20px 40px

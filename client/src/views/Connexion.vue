@@ -20,17 +20,11 @@
 		<div id="compte-footer">
 			<p>
 				Pas encore inscrit ?
-                    <router-link to="/inscription">
-                        <button id="btn-invitation">S'inscrire</button>
-                    </router-link>
+                    <router-link to="/inscription">S'inscrire</router-link>
 			</p>
-		</div>
-		<div id="compte-footer">
 			<p>
 				Vous êtes un(e) Animateur(e) ?
-                    <router-link to="/connexionAnimateur">
-                        <button id="btn-invitation">Cliquez ici</button>
-                    </router-link>
+                    <router-link to="/connexionAnimateur">Cliquez ici</router-link>
 			</p>
 		</div>
 		<footer>@Net'Radio - 2021/2022</footer>

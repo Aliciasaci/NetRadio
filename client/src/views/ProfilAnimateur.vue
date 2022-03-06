@@ -16,7 +16,7 @@
             </div>
         </div>
         <div id="podcast-content-info">
-            <div id="podcast-content-announcement">
+            <!-- <div id="podcast-content-announcement">
                 <div id="podcast-content-announcement-title">
                     <h5><u>Annonces à la une !</u></h5>
                 </div>
@@ -27,7 +27,7 @@
                         <li>Annonce 3</li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
             <div id="podcast-content-mypodcast">
                 <div id="podcast-content-mypodcast-title">
                     <h4>ÉMISSIONS ET PODCASTS DE "{{animateur.fullNameAnimateur}}"</h4>
