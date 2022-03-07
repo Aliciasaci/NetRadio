@@ -18,7 +18,10 @@
           {{creneau.description}}
         </p>
       </div>
-      <router-link :to="{ name: 'BordAnimateur', params :{id: creneau.idCreneau} ,query: { idEmission: creneau.idEmission, titleEmission : creneau.titre}}"><button class="btn-start">Lancer l'émission</button></router-link>
+      <button class="btn-start" @click="checkCreneau()">
+        Lancer l'émission
+        <router-link :to="{ name: 'BordAnimateur', params :{id: creneau.idCreneau} ,query: { idEmission: creneau.idEmission, titleEmission : creneau.titre}}"></router-link>
+      </button>
     </div>
     <Footer />
   </section>
@@ -26,10 +29,13 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
+
 export default {
   data() {
     return {
       creneau : [],
+      emission: "",
       dateFormatted : ""
     };
   },
@@ -56,6 +62,24 @@ export default {
        let day = this.dateFormatted.substring(8,10)
        this.dateFormatted = day+"/"+month+"/"+year
     },
+    getCurrentTime(){
+          const today = new Date();
+          return today.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit', second: '2-digit'});
+      },
+    momentDate(){
+          return moment().format('YYYY-MM-DD');
+    },
+    checkCreneau(){
+      axios
+        .get("http://localhost:3000/creneaux/" +  this.momentDate() + '/' + this.getCurrentTime())
+        .then(response => {
+            this.emission = response.data;
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
   }
 };
 </script>

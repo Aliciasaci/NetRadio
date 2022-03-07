@@ -3,7 +3,7 @@
     <HeaderPrincipal />
       <div id="ledirect-content">
           <div id="ledirect-content-title">
-              <h1><u>"LE JOURNAL" - EPISODE 101</u></h1>
+              <h1><u>"{{emission}}" - {{episode}} </u></h1>
           </div>
           <div id="ledirect-content-img">
               <img src="/img/lejournal.png" alt="Le journal">
@@ -19,13 +19,16 @@
 import { io } from "socket.io-client";
 
 export default {
+
  data() {
     return {
       socket: io("http://localhost:3000"),
       blob: {},
       audio: "",
       id: null,
-      invite: false
+      invite: false,
+      emission: this.$route.params.emission,
+      episode: this.$route.params.episode
     };
 },
 mounted(){

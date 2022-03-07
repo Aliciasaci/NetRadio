@@ -5,32 +5,41 @@
         <div id="content-left">
             <img src="img/bg-emission.png">
             <div id="content-info" v-if="emission_data">
-                <div v-if="emission_data.titreEpisode != null">
-                    <h1>{{emission_data.nomEmission + " : " + emission_data.titreEpisode}}</h1>
+                <div v-if="(emission_data.heure <= current_time) && (current_time < getTimePlus30Min(emission_data.heure))">
+                    <div>
+                        <h1>{{emission_data.nomEmission + " : " + emission_data.titreEpisode}}</h1>
+                    </div>
+                    <h3>Par {{emission_data.fullNameAnimateur}}</h3>
+                    <router-link :to="{name : 'EcouterDirect', params :{emission: emission_data.nomEmission, episode: emission_data.titreEpisode}}">
+                        <button type="submit" id="btn-play">
+                            <img src="img/play.png">
+                            <strong>Ecouter le direct</strong>
+                        </button>
+                    </router-link>
                 </div>
                 <div v-else>
-                    <h1>{{emission_data.nomEmission}}</h1>
+                    <div>
+                        <h1>{{ current_time + getTimePlus30Min(emission_data.heure) + emission_data.nomEmission + " : " + emission_data.titreEpisode}}</h1>
+                    </div>
+                    <h3>Par {{emission_data.fullNameAnimateur}}</h3>
                 </div>
-                <h3>Par {{emission_data.fullNameAnimateur}}</h3>
-                <router-link to="/EcouterDirect">
-                    <button type="submit" id="btn-play">
-                        <img src="img/play.png">
-                        <strong>Ecouter le direct</strong>
-                    </button>
-                </router-link>
             </div>
         </div>
         <div id="content-right">
             <div class="content-program" v-for="emission in emissions" v-bind:key="emission.idCreneau">
                 <div v-if="emission != null">
-                    <div class="content-program-info" v-on:click="getEmissionById(emission.idCreneau)">
-                        <div v-if="emission.titreEpisode != null">
+                
+                    <div v-if="(emission.heure <= current_time) && (current_time < getTimePlus30Min(emission.heure))">
+                        <div class="content-program-info" id="clicked-program" v-on:click="getEmissionById(emission.idCreneau)">
+                           
                             <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
                             <p class="content-program-name"><strong>{{emission.nomEmission + " : " + emission.titreEpisode}}</strong></p>
                         </div>
-                        <div v-else>
+                    </div>
+                    <div v-else>
+                        <div class="content-program-info" v-on:click="getEmissionById(emission.idCreneau)">
                             <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
-                            <p class="content-program-name"><strong>{{emission.nomEmission}}</strong></p>
+                            <p class="content-program-name"><strong>{{emission.nomEmission + " : " + emission.titreEpisode}}</strong></p>
                         </div>
                     </div>
                 </div>
@@ -80,7 +89,12 @@ export default {
         },
         getCurrentTime(){
             const today = new Date();
-            return today.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second: '2-digit'});
+            return today.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit', second: '2-digit'});
+        },
+        getTimePlus30Min(emission_time){
+            console.log(emission_time.slice(0,2) + emission_time.slice(3,5) + emission_time.slice(6,8))
+            const plus30 = moment(emission_time, 'HH:mm:ss A').add(30, 'minutes').format('HH:mm:ss');
+            return plus30;
         },
         getEmissionById(id) {
             axios
@@ -95,10 +109,9 @@ export default {
     },
     created(){
          axios
-            .get("http://localhost:3000/creneaux/" +  this.momentDate(this.emission_date) + "/" + this.currentTime(this.current_time))
+            .get("http://localhost:3000/creneaux/" +  this.momentDate(this.emission_date))
             .then(response => {
                 this.emissions = response.data;
-                this.getEmissionById(id);
             })
             .catch(error => {
                 console.log(error);
@@ -128,5 +141,9 @@ export default {
 
 #content-accueil{
     padding-bottom: 100px;
+}
+
+#clicked-program{
+    background-color:gray;
 }
 </style>
