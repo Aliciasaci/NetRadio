@@ -1,8 +1,5 @@
 <template>
   <section>
-      <!-- Revoir ça 
-      Recuperer uniquement les informations d'une émission sans l'id d'épisode etc.. voir pourquoi dans l'api
-      --> 
     <HeaderPrincipal />
     <div id="detail-creneaux-programmes-content" v-if="emission">
       <h1>
@@ -12,15 +9,13 @@
       <h1>
         <u><strong>Animateur</strong></u>
       </h1>
-      <h3>William</h3>
+      <h3>{{animateur.fullNameAnimateur}}</h3>
       <h1>
         <u><strong>Descriptions de l'émission</strong></u>
       </h1>
       <div class="description">
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-          corrupti quasi vero ea eius molestiae natus nulla repellendus minus,
-          harum ipsam adipisci aperiam. In est, porro molestias quo ex neque.
+         {{emission.description}}
         </p>
       </div>
     </div>
@@ -34,7 +29,8 @@ export default {
   data() {
     return {
       idEmission: this.$route.params.id,
-      emission : []
+      emission : [],
+      animateur : [],
     };
   },
   created(){
@@ -44,14 +40,25 @@ export default {
     async getEmission() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/emissions/${this.idEmission}`
+          `http://localhost:3000/emission/${this.idEmission}`
         );
-        this.emission = response.data;
-        console.log(this.emission);
+        this.emission = response.data[0];
+        this.getAnimateur(response.data[0].idAnimateur)
       } catch (err) {
         console.log(err);
       }
     },
+     async getAnimateur(idAnimateur) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/animateurs/${idAnimateur}`
+        );
+        this.animateur = response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
   },
 };
 </script>

@@ -29,9 +29,6 @@
             <div v-else>
                 <p v-on:click="emission_date = moment().add(3, 'days').format('dddd, DD MMMM YYYY')" class="notdisabled">{{moment().add(3, 'days').format('dddd, DD MMMM YYYY')}} </p>
             </div>
-        </div>
-
-        <div class="programmes-content-date">
             <div v-if="emission_date == moment().add(4, 'days').format('dddd, DD MMMM YYYY')">
                 <p v-on:click="emission_date = moment().add(4, 'days').format('dddd, DD MMMM YYYY')" class="disabled">{{moment().add(4, 'days').format('dddd, DD MMMM YYYY')}} </p>
             </div>
@@ -54,7 +51,7 @@
 
         <div id="programmes-content-emission">
             <div v-for="emission in emissions" v-bind:key="emission.id">
-                <div v-if="emission_date == date(emission.date)">
+                <div v-if="emission_date == date(emission.date) && emission.idEmission != null && emission.idEpisode != null">
                     <div class="programmes-content-emission-time">
                         <h2><u>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</u></h2>
                         <img src="img/favoris.png" alt="Favoris">

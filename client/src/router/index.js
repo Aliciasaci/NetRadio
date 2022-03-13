@@ -10,16 +10,22 @@ const routes = [{
             import ('../views/Accueil.vue')
     },
     {
-        path: '/EcouterDirect',
+        path: '/EcouterDirect/id=:id',
         name: 'EcouterDirect',
         component: () =>
             import ('../views/EcouterDirect.vue')
     },
     {
         path: "/connexion",
-        name: "ConnexionInscription",
+        name: "ConnexionInscription", //corriger ça
         component: () =>
             import ("../views/Connexion.vue"),
+    },
+    {
+        path: "/Deconnexion",
+        name: "Deconnexion",
+        component: () =>
+            import ("../views/Deconnexion.vue"),
     },
     {
         path: '/Programmes',
@@ -82,7 +88,7 @@ const routes = [{
             import ('../views/CreneauxProgrammes.vue')
     },
     {
-        path: '/ProfilAnimateur/:id',
+        path: '/ProfilAnimateur/',
         name: 'ProfilAnimateur',
         component: () =>
             import ('../views/ProfilAnimateur.vue')

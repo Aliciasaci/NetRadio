@@ -75,8 +75,11 @@ module.exports = app => {
     //get toutes les émissions
     router.get('/emissions', emission.showEmissions);
 
-    // get une seule émission par id 
+
     router.get('/emissions/:id', emission.showEmissionById);
+
+    //get une emission par son ID
+    router.get('/emission/:id', emission.showEmission);
 
     // get toutes les émissions d'un animateur
     router.get("/animateurs/:id/emissions", emission.showEmissionsByAnimateur);
@@ -133,22 +136,22 @@ module.exports = app => {
     /**
      * Routes des connexions
      */
-	// Auditeur connexion
-	router.post("/connexionAuditeur", auditeur.checkCredentialsAuditeur);
+    // Auditeur connexion
+    router.post("/connexionAuditeur", auditeur.checkCredentialsAuditeur);
 
-	// Animateur connexion
-	router.post("/connexionAnimateur", animateur.checkCredentialsAnimateur);
+    // Animateur connexion
+    router.post("/connexionAnimateur", animateur.checkCredentialsAnimateur);
 
 
     /**
      * Routes des categories
      */
-	// get les categories
-	router.get("/categories", categorie.showCategories);
+    // get les categories
+    router.get("/categories", categorie.showCategories);
 
-	// create a categorie
-	router.post("/createCategorie", categorie.createCategorie);
+    // create a categorie
+    router.post("/createCategorie", categorie.createCategorie);
 
-	//EMISSION by genre
-	router.get("/emission/:genre", emission.getEmissionByCategorie);
+    //EMISSION by genre
+    router.get("/emission/:genre", emission.getEmissionByCategorie);
 }

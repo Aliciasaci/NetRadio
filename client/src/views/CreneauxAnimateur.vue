@@ -4,7 +4,7 @@
     <h1 id="title">MES CRÉNEAUX</h1>
     <div id="listeCreneaux">
       <ul v-for="creneau in creneaux" v-bind:key="creneau.idCreneau">
-        <li>
+        <li v-if="creneau.date >= getCurrentTime() ">
             <h4>{{date(creneau.date) + ' à ' + creneau.heure.substr(0,2) + 'H' + creneau.heure.substr(3,2)}}</h4>
             <button v-on:click="programmer(creneau.date, creneau.heure)" type="submit" class="btn-programmer">Programmer</button>
         </li>
@@ -148,7 +148,12 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
-        }
+        },
+        getCurrentTime(){
+            const today = new Date();
+            return today.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit', second: '2-digit'});
+        
+        },
     },
     created(){
         axios

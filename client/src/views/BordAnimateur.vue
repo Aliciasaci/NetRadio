@@ -252,7 +252,7 @@ export default {
       var Dropbox = require("dropbox").Dropbox;
       var dbx = new Dropbox({
         accessToken:
-          "sl.BDExAMWTscPJk4z2M6AAOKEEwG0nOeje1IYkrQctBy5gkEL57gZ-3tEKny1ZnK2GDtg0UD4pulQZ3QHDk1L5ApQKmcfIwsQcwo-ybEAjRo_sighAp4rHArNE5uNgimurEMJV3dbb9tDp",
+          "sl.BDbnXI0uOwYvDwaXCGm_M6dQlLlxyFV_EB0IWm4wwNhiSdO6RqObkuHNrE72Zcy0XVbKTLb-vXUD7THSEbhgVeqOWJsgHU24ep7NDK-gMpSDt7FCpr98XcQC_nUWO3qCuoitJwmOT0AC",
       });
       this.episodeName = prompt(
         "Entrez le titre de votre épisode. Attention ! vous ne pouvez pas avoir le même nom d'épisode plus d'une fois"
