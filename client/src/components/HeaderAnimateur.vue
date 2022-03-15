@@ -9,7 +9,7 @@
                     <router-link to="/Creneaux"><strong>Mes créneaux</strong></router-link>
                 </li>
                 <li id="podcasts">
-                    <router-link :to="{name : 'ProfilAnimateur', params :{id: idAnimateur}}"><strong>Mes podcasts</strong></router-link>
+                    <router-link :to="{name : 'Podcast', params : {id:this.$store.state.idMembre}}"><strong>Mes podcasts</strong></router-link>
                 </li>
                 <li id="emissions">
                     <router-link to="/EmissionsAnimateur">
@@ -18,19 +18,17 @@
                 </li>
             </ul>
         </div>
-        <div id="navbar-compte">
-            <router-link to="/"><img src="img/compte.png" alt="Connexion"></router-link>
+         <div v-if="this.$store.state.token" id="navbar-compte">
+            <router-link to="/Deconnexion"><img src="img/logout.png" alt="deconnexion"></router-link>
+        </div>
+        <div v-else id="navbar-compte">
+            <router-link to="/connexion"><img src="img/compte.png" alt="Connexion"></router-link>
         </div>
     </nav>
 </template>
 
 <script>
 export default {
-    data(){
-        return{
-            idAnimateur : 1,
-        }
-    }
 };
 </script>
 

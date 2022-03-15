@@ -1,6 +1,11 @@
 <template>
   <section>
+    <div v-if="this.$store.state.idMembre == idAnimateur">
+    <HeaderAnimateur />
+    </div>
+    <div v-else>
     <HeaderPrincipal />
+    </div>
   <div id="podcast-content">
         <div id="podcast-content-profile">
             <img src="" alt="George">

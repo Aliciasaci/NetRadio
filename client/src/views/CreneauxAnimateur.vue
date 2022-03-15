@@ -80,7 +80,7 @@ export default {
                 return moment(String(value)).format('dddd, DD MMMM YYYY');
             } else {
                 moment.locale('fr');
-                return moment().format('dddd, DD MMMM YYYY');
+                return moment().format('YYYY-MM-DD');
             }
         },
 
@@ -148,13 +148,24 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
+        },
+        getCurrentTime(){
+            const today = new Date();
+            return today.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit', second: '2-digit'});
+        },
+        getTimePlus30Min(emission_time){
+            const plus30 = moment(emission_time, 'HH:mm:ss A').add(30, 'minutes').format('HH:mm:ss');
+            return plus30;
         }
     },
     created(){
         axios
             .get("http://localhost:3000/animateurs/" + this.idAnimateur + '/creneaux')
             .then(response => {
-                this.creneaux = response.data.filter(creneauxFiltered => creneauxFiltered.idEmission == null && creneauxFiltered.idEpisode == null);
+                this.creneaux = response.data.filter(creneauxFiltered => creneauxFiltered.idEmission == null && creneauxFiltered.idEpisode == null 
+                                && this.momentDate(creneauxFiltered.date) >= this.date() 
+                                && ((creneauxFiltered.heure <= this.getCurrentTime() && this.getCurrentTime() < this.getTimePlus30Min(creneauxFiltered.heure)) 
+                                || creneauxFiltered.heure > this.getCurrentTime()));
             })
             .catch(error => {
                 console.log(error);

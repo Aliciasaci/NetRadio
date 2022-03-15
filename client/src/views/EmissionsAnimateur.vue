@@ -4,7 +4,7 @@
     <div class="main">
       <h1 class="title">MES ÉMISSIONS</h1>
       <div class="btn-wrapper">
-        <button id="add_btn"><h3>AJOUTER UNE ÉMISSION</h3></button>
+        <router-link to="/AjouterEmission"><button id="add_btn"><h3>AJOUTER UNE ÉMISSION</h3></button></router-link>
         <router-link to="/CreneauxProgrammes"><button id="show_btn"><h3>MES CRÉNEAUX PROGRAMMÉS</h3></button></router-link>
       </div>
       <div class="emissions-wrapper">
@@ -58,7 +58,7 @@ export default {
     padding: 20px 40px;
     border-radius: 20px;
     font-size: 20px;
-    width: 9em;
+    width: fit-content;
     text-align: center;
   }
   .emissions-wrapper {

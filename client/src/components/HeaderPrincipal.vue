@@ -6,7 +6,7 @@
         <div id="navbar-content">
             <ul>
                 <li id="programmes">
-                    <router-link to="/DetailEmission"><strong>Programmes</strong></router-link>
+                    <router-link to="/Programmes"><strong>Programmes</strong></router-link>
                 </li>
                 <li id="podcasts">
                     <router-link to="/Podcasts"><strong>Podcasts</strong></router-link>
@@ -25,7 +25,10 @@
             <input type="text" value="Recherche..."/>
             <button type="submit" id="btn-search"><i class="fas fa-search"></i></button>
         </div>
-        <div id="navbar-compte">
+        <div v-if="this.$store.state.token" id="navbar-compte">
+            <router-link to="/Deconnexion"><img src="img/logout.png" alt="Deconnexion"></router-link>
+        </div>
+        <div v-else id="navbar-compte">
             <router-link to="/connexion"><img src="img/compte.png" alt="Connexion"></router-link>
         </div>
     </nav>

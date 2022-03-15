@@ -252,7 +252,7 @@ export default {
       var Dropbox = require("dropbox").Dropbox;
       var dbx = new Dropbox({
         accessToken:
-          "sl.BDExAMWTscPJk4z2M6AAOKEEwG0nOeje1IYkrQctBy5gkEL57gZ-3tEKny1ZnK2GDtg0UD4pulQZ3QHDk1L5ApQKmcfIwsQcwo-ybEAjRo_sighAp4rHArNE5uNgimurEMJV3dbb9tDp",
+          "sl.BD0KA5t2YHP2LhQPeq7DfZR9K6sm7fCBKAAfseU4_49bWTT8KW1Ru7lxyYOMWkYno9YAu0VEni2gd8rShCUKWkwc6gfdCZm6NEgcbS1RtuSkmjAJOLs8JfD2NBSK4nmXs82lQBOlewpQ",
       });
       this.episodeName = prompt(
         "Entrez le titre de votre épisode. Attention ! vous ne pouvez pas avoir le même nom d'épisode plus d'une fois"
@@ -291,7 +291,7 @@ export default {
       try {
         await axios.post("http://localhost:3000/episodes", {
           titreEpisode: this.episodeName,
-          idEmission: "1",
+          idEmission: "2",
           statusSauvegarde: "0",
           statusPodcast: "0",
           lien: this.link,

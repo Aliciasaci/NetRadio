@@ -10,7 +10,7 @@
                         <h1>{{emission_data.nomEmission + " : " + emission_data.titreEpisode}}</h1>
                     </div>
                     <h3>Par {{emission_data.fullNameAnimateur}}</h3>
-                    <router-link :to="{name : 'EcouterDirect', params :{emission: emission_data.nomEmission, episode: emission_data.titreEpisode}}">
+                    <router-link :to="{name : 'EcouterDirect', params :{id: emission_data.idCreneau}}">
                         <button type="submit" id="btn-play">
                             <img src="img/play.png">
                             <strong>Ecouter le direct</strong>
@@ -19,36 +19,29 @@
                 </div>
                 <div v-else>
                     <div>
-                        <h1>{{ current_time + getTimePlus30Min(emission_data.heure) + emission_data.nomEmission + " : " + emission_data.titreEpisode}}</h1>
+                        <h1>{{emission_data.nomEmission + " : " + emission_data.titreEpisode}}</h1>
                     </div>
                     <h3>Par {{emission_data.fullNameAnimateur}}</h3>
                 </div>
             </div>
+            <div v-else>
+                    <h1 id="h1">Cliquez sur l'émission en cours pour rejoindre...</h1>
+            </div>
         </div>
         <div id="content-right">
             <div class="content-program" v-for="emission in emissions" v-bind:key="emission.idCreneau">
-                <div v-if="emission != null">
-                
+                <div v-if="emission != null && emission.idEmission != null && emission.idEpisode != null ">
                     <div v-if="(emission.heure <= current_time) && (current_time < getTimePlus30Min(emission.heure))">
-                        <div class="content-program-info" id="clicked-program" v-on:click="getEmissionById(emission.idCreneau)">
-                           
+                        <div class="content-program-info" @click="getEmissionByIdCreneau(emission.idCreneau)">
                             <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
                             <p class="content-program-name"><strong>{{emission.nomEmission + " : " + emission.titreEpisode}}</strong></p>
                         </div>
                     </div>
                     <div v-else>
-                        <div class="content-program-info" v-on:click="getEmissionById(emission.idCreneau)">
+                        <div class="content-program-info" v-on:click="getEmissionByIdCreneau(emission.idCreneau)" id="clicked-program">
                             <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
                             <p class="content-program-name"><strong>{{emission.nomEmission + " : " + emission.titreEpisode}}</strong></p>
                         </div>
-                    </div>
-                </div>
-                <div v-else>
-                    <div class="content-program-info">
-                        <div>
-                            <p class="content-program-time"><strong>Pas d'émission</strong></p>
-                        </div>
-                       
                     </div>
                 </div>
             </div> 
@@ -70,7 +63,7 @@ export default {
             emission_data: null,
             current_time: this.getCurrentTime(),
             emission_time: null,
-            emission_date: this.date()
+            emission_date: this.date(),
         }
     },
     methods: {
@@ -96,7 +89,7 @@ export default {
             const plus30 = moment(emission_time, 'HH:mm:ss A').add(30, 'minutes').format('HH:mm:ss');
             return plus30;
         },
-        getEmissionById(id) {
+        getEmissionByIdCreneau(id) {
             axios
                 .get("http://localhost:3000/creneau/" + id)
                 .then(response => {
@@ -128,7 +121,7 @@ export default {
 }
 
 .content-program-info:hover{
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.1);
 }
 
 #content-accueil #content-left #content-info{
@@ -136,7 +129,7 @@ export default {
     color: white;
     text-align: center;
     padding-left: 50px;
-    margin-top: -15%;
+    margin-top: -10%;
 }
 
 #content-accueil{
@@ -145,5 +138,11 @@ export default {
 
 #clicked-program{
     background-color:gray;
+}
+#h1{
+    color : rgb(253, 253, 253);
+    position : absolute;
+    top : 500px;
+    left : 320px;
 }
 </style>

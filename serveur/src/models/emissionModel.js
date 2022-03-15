@@ -34,6 +34,20 @@ Emission.getEmissionById = (id, result) => {
     });
 }
 
+
+//Get toutes les émissions d'un animateur
+Emission.getEmission = (id, result) => {
+    db.query("SELECT * FROM emission WHERE idEmission = ?", [id], (err, results) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+        } else {
+            result(null, results);
+        }
+    });
+}
+
+
 //Get toutes les émissions d'un animateur
 Emission.getEmissionsByAnimateur = (id, result) => {
     db.query("SELECT * FROM emission WHERE idAnimateur = ?", [id], (err, results) => {
@@ -96,18 +110,17 @@ Emission.getEpisodesByEmission = (id, result) => {
 }
 
 Emission.getEmissionByGenre = (genre, result) => {
-	db.query(
-		"SELECT * FROM emission WHERE Genre = ?",
-		[genre],
-		(err, results) => {
-			if (err) {
-				console.log(err);
-				result(err, null);
-			} else {
-				result(null, results);
-			}
-		}
-	);
+    db.query(
+        "SELECT * FROM emission WHERE Genre = ?", [genre],
+        (err, results) => {
+            if (err) {
+                console.log(err);
+                result(err, null);
+            } else {
+                result(null, results);
+            }
+        }
+    );
 };
 
 module.exports = Emission;

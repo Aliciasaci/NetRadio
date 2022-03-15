@@ -16,18 +16,6 @@
             </div>
         </div>
         <div id="podcast-content-info">
-            <!-- <div id="podcast-content-announcement">
-                <div id="podcast-content-announcement-title">
-                    <h5><u>Annonces à la une !</u></h5>
-                </div>
-                <div id="podcast-content-announcement-content">
-                    <ul>
-                        <li>Annonce 1</li>
-                        <li>Annonce 2</li>
-                        <li>Annonce 3</li>
-                    </ul>
-                </div>
-            </div> -->
             <div id="podcast-content-mypodcast">
                 <div id="podcast-content-mypodcast-title">
                     <h4>ÉMISSIONS ET PODCASTS DE "{{animateur.fullNameAnimateur}}"</h4>
@@ -62,39 +50,39 @@ export default {
       animateur: "",
       episodes: [],
       emissions: [],
-      idAnimateur: "",
+      idAnimateur: this.$store.state.idMembre
     };
   },
   mounted() {
-    this.getAnimateur();
-    this.getEmissions();
+    console.log("ici"+this.idAnimateur);
+    // this.getAnimateur();
+    // this.getEmissions();
   },
   methods: {
-    // Récuperer toutes les émissions de l'animateur actuelle
-    async getEmissions() {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/animateurs/${this.idAnimateur}/emissions/`
-        );
-        this.emissions = response.data;
-      } catch (err) {
-        console.log(err);
-      }
+    // async getEmissions() {
+    //   try {
+    //     const response = await axios.get(
+    //       `http://localhost:3000/animateurs/${this.idAnimateur}/emissions/`
+    //     );
+    //     this.emissions = response.data;
+    //     console.log(this.emissions);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
     },
     //Get les informations d'un animateur
-    async getAnimateur() {
-      try {
-        this.idAnimateur = this.$route.params.id;
-        const response = await axios.get(
-          `http://localhost:3000/animateurs/${this.idAnimateur}`
-        ); //on recupère les infos de l'animateur 1 pour exemple
-        this.animateur = response.data;
-        // console.log(this.animateur.emailAnimateur);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-  },
+    // async getAnimateur() {
+    //   try {
+    //     const response = await axios.get(
+    //       `http://localhost:3000/animateurs/${this.idAnimateur}`
+    //     ); //on recupère les infos de l'animateur 1 pour exemple
+    //     this.animateur = response.data;
+    //     // console.log(this.animateur.emailAnimateur);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
+  // },
 };
 </script>
 

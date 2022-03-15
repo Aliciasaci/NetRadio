@@ -1,38 +1,41 @@
 <template>
   <section>
     <HeaderPrincipal />
-      <div id="ledirect-content">
-          <div id="ledirect-content-title">
-              <h1><u>"{{emission}}" - {{episode}} </u></h1>
-          </div>
-          <div id="ledirect-content-img">
-              <img src="/img/lejournal.png" alt="Le journal">
-          </div>
-          <button @click="quitLive" type="submit" id="btn-stop">Arrêter le direct</button>
-          <button @click="reqInvite" type="submit" id='inv_bt'>Devenir invité</button>
+    <div id="ledirect-content">
+      <div id="ledirect-content-title">
+        <h1><u>{{emission_data.nomEmission}} - {{emission_data.titreEpisode}}</u></h1>
       </div>
+      <div id="ledirect-content-img">
+        <img src="/img/lejournal.png" alt="Le journal" />
+      </div>
+      <button @click="quitLive" type="submit" id="btn-stop">
+        Arrêter le direct
+      </button>
+      <button @click="reqInvite" type="submit" id="inv_bt">
+        Devenir invité
+      </button>
+    </div>
     <Footer />
   </section>
 </template>
 
 <script>
 import { io } from "socket.io-client";
-
 export default {
-
- data() {
+  data() {
     return {
       socket: io("http://localhost:3000"),
       blob: {},
-      audio: "",
+      audio: null,          //remettre à "" si ça marche pas
       id: null,
       invite: false,
       emission: this.$route.params.emission,
-      episode: this.$route.params.episode
+      episode: this.$route.params.episode,
+      emission_data : null
     };
-},
-mounted(){
-   console.log("You joined the live");
+  },
+  mounted() {
+    console.log("You joined the live");
     //recoit le son de l'animateur
     this.socket.on("voice", (arrayBuffer) => {
       let blob = new Blob([arrayBuffer], { type: "audio/ogg; codecs=opus" });
@@ -43,7 +46,7 @@ mounted(){
     //recois le son de l'invité
     this.socket.on("voiceInvite", (arrayBuffer) => {
       console.log("test");
-      if(this.invite) {
+      if (this.invite) {
         let blob = new Blob([arrayBuffer], { type: "audio/ogg; codecs=opus" });
         let audio = document.createElement("audio");
         audio.src = window.URL.createObjectURL(blob);
@@ -55,66 +58,82 @@ mounted(){
     });
     // recoit la réponse de l'animateur
     this.socket.on("authorisation", (invite) => {
-      if(this.id === invite.id){
-        if(invite.response) {
+      if (this.id === invite.id) {
+        if (invite.response) {
           console.log("je suis invité");
           this.invite = invite.response;
 
           let constraints = {
-                audio: true
-            };
-            let mediaRecorder;
+            audio: true,
+          };
+          let mediaRecorder;
 
-            navigator.mediaDevices.getUserMedia(constraints).then((mediaStream) => {
-                mediaRecorder = new MediaRecorder(mediaStream);
-                mediaRecorder.onstart = () => {
-                    this.chunks = [];
-                };
+          navigator.mediaDevices
+            .getUserMedia(constraints)
+            .then((mediaStream) => {
+              mediaRecorder = new MediaRecorder(mediaStream);
+              mediaRecorder.onstart = () => {
+                this.chunks = [];
+              };
 
-                // Lorsque la donnée son est prête.
-                mediaRecorder.ondataavailable = (e) => {
-                  this.chunks.push(e.data);
-                  let blob = new Blob(this.chunks, {
-                      type: "audio/mp3; codecs=opus"
-                  });
-                  if (this.invite) {
-                      this.socket.emit("radioInvite", blob);
-                  }
-                };
+              // Lorsque la donnée son est prête.
+              mediaRecorder.ondataavailable = (e) => {
+                this.chunks.push(e.data);
+                let blob = new Blob(this.chunks, {
+                  type: "audio/mp3; codecs=opus",
+                });
+                if (this.invite) {
+                  this.socket.emit("radioInvite", blob);
+                }
+              };
 
-                //Commencer le live
-                mediaRecorder.start();
+              //Commencer le live
+              mediaRecorder.start();
 
-                //L'interval de diffusion
-                setInterval(() => {
-                    if (this.invite) {
-                        mediaRecorder.stop();
-                        mediaRecorder.start();
-                    }
-                }, 1000);
+              //L'interval de diffusion
+              setInterval(() => {
+                if (this.invite) {
+                  mediaRecorder.stop();
+                  mediaRecorder.start();
+                }
+              }, 1000);
             });
-        }else{
-          console.log("Demande refuser !");
+        } else {
+          console.log("Demande refusée !");
         }
       }
     });
+
+    //charger les informations de l'emissions actuelle.
+    axios
+      .get("http://localhost:3000/creneau/" + this.$route.params.id)
+      .then((response) => {
+        this.emission_data = response.data[0];
+        console.log(this.emission_data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
-  methods : {
+  methods: {
     quitLive() {
       this.$router.push("/");
     },
-    reqInvite(){
-      const genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+    reqInvite() {
+      const genRanHex = (size) =>
+        [...Array(size)]
+          .map(() => Math.floor(Math.random() * 16).toString(16))
+          .join("");
       this.id = genRanHex(20);
       console.log(this.id);
       this.socket.emit("invite", { id: this.id, accepted: false });
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss">
-#ledirect-content{
+#ledirect-content {
   padding-bottom: 70px;
 }
 </style>
