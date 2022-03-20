@@ -71,6 +71,6 @@ export default {
 
 <style scoped>
 .connexionVue{
-	padding-bottom: 50px;
+	padding-bottom: 100px;
 }
 </style>
