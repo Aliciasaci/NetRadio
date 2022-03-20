@@ -4,7 +4,7 @@
     <div class="wrapper">
       <div class="main">
         <div class="live">
-          <h1 class="title">LE JOURNAL</h1>
+          <h1 class="title">{{this.$route.query.titleEmission}} - {{this.$route.query.titleEpisode}}</h1>
           <span :class="{ liveicon: isActive }"></span>
           <img src="img/live.jpg" />
           <div class="btn">
@@ -68,14 +68,14 @@ export default {
       socket: io("http://localhost:3000"),
       bool: false,
       isActive: false,
-      audioCtx: "",
+      audioCtx: null,
       savedChunks: [],
-      audio: "",
-      blob: {},
-      episodeName: "",
+      audio: null,
+      blob: null,
+      episodeName: this.$route.query.titleEpisode,
       save: false,
       id: "1",
-      link: "",
+      link: null,
       ret: false,
       files: [],
       playingFile: 0,
@@ -252,11 +252,8 @@ export default {
       var Dropbox = require("dropbox").Dropbox;
       var dbx = new Dropbox({
         accessToken:
-          "sl.BD0KA5t2YHP2LhQPeq7DfZR9K6sm7fCBKAAfseU4_49bWTT8KW1Ru7lxyYOMWkYno9YAu0VEni2gd8rShCUKWkwc6gfdCZm6NEgcbS1RtuSkmjAJOLs8JfD2NBSK4nmXs82lQBOlewpQ",
+          "sl.BD0SaOoQQ7k2ziTm-zj-btm0KREK6xc4XPtTsS6RXtSomIe9_E47M1tqfUeZojylsrtGtIGdjx7ZoEeoHBj3YLiQYt1NzRx2uyM6-uYanQZ1ygZH2cwTo6SdpeDA5yII9VAvsmAL4_HJ",
       });
-      this.episodeName = prompt(
-        "Entrez le titre de votre épisode. Attention ! vous ne pouvez pas avoir le même nom d'épisode plus d'une fois"
-      );
       dbx
         .filesUpload({
           path: `/NETRADIO/A${this.id}/${this.episodeName}.mp3`,
@@ -288,10 +285,11 @@ export default {
       );
     },
     async putEpisodeLinkInDatabase(link) {
+      console.log(this.episodeName);
       try {
         await axios.post("http://localhost:3000/episodes", {
           titreEpisode: this.episodeName,
-          idEmission: "2",
+          idEmission: this.$route.query.idEmission,
           statusSauvegarde: "0",
           statusPodcast: "0",
           lien: this.link,

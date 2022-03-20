@@ -343,6 +343,7 @@ $third-color-default: #242424 !default
     @include text-color($first-color-default)
     font-weight: bold
     margin: 20px 0 50px 0
+    border: none
 
 
   @if($type == "pause")
@@ -439,8 +440,42 @@ $third-color-default: #242424 !default
     border-radius: 10px
     border: 3px solid dodgerblue
     font-weight: bold
-    padding: 10px 40px
-    margin: 0 0 0 30px
+    padding: 10px 30px
+    width: fit-content
+
+
+  @if($type == "update")
+    position: absolute
+    text-align: center
+    font-size: $font-size-default
+    @include background-color(#3982bd)
+    @include text-color($first-color-default)
+    border-radius: 10px
+    border: 3px solid #3982bd
+    font-weight: bold
+    padding: 10px 30px
+    cursor: pointer
+    right: 11em
+
+  
+  @if($type == "icone-delete")
+    position: absolute
+    text-align: center
+    font-weight: bold
+    padding: 10px 30px
+    cursor: pointer
+    right: 11em
+    margin-top: 10px
+
+    
+  @if($type == "icone-update")
+    position: absolute
+    text-align: center
+    font-weight: bold
+    padding: 10px 30px
+    cursor: pointer
+    right: 11em
+    margin-top: 10px
 
 
 
@@ -582,7 +617,7 @@ $third-color-default: #242424 !default
 
 
   @if($type == 'podcasts')
-    @include background-color(rgba(#E43C3C,0.5))
+    @include background-color(rgba(#E43C3C,0.6))
     text-decoration: none
 
 
@@ -627,6 +662,21 @@ $third-color-default: #242424 !default
     @include text-color($first-color-default)
     border: 3px solid lightgray
   
+  @if($type == 'invitation')
+    @include background-color(#87CEFA)
+    @include text-color($first-color-default)
+    border: 3px solid #87CEFA
+  
+  @if($type == 'icone-delete')
+    @include background-color(rgba(#E43C3C,0.9))
+    text-decoration: none
+    border-radius: 100px
+
+  @if($type == 'icone-update')
+    @include background-color(rgba(#39a6ad,0.9))
+    text-decoration: none
+    border-radius: 100px
+
 
 
 @mixin content($type)
@@ -692,6 +742,7 @@ $third-color-default: #242424 !default
  
   @if($type == 'list-content-img')
     width:100%
+
   
 
 
@@ -707,8 +758,8 @@ $third-color-default: #242424 !default
 
 @mixin podcast-content-type($type)
   @if($type == 'img')
-    border: 4px solid #7B2020
-    @include img-width(100%)
+    // border: 4px solid #7B2020
+    @include img-width(65%)
 
 
   @if($type == 'profile')
@@ -786,6 +837,7 @@ $third-color-default: #242424 !default
 @mixin text-decoration($type)
   @if($type == 'none')
     text-decoration: none
+  
 
 
 
@@ -804,15 +856,14 @@ $third-color-default: #242424 !default
   @if($type == 'content')
     margin: 0 0 10px -40px
     @include background-color(#7B2020)
-    padding: 0 0 0 30px
     font-size: $font-size-default
     @include text-color($first-color-default)
     list-style: none
     width: 60%
-    display: grid
-    // grid-template-columns: 80% 10% 10%
+    display: flex
     margin: auto
     text-decoration: none
+    padding-left: 2em
 
 
   @if($type == 'emissions')
@@ -1090,6 +1141,7 @@ $third-color-default: #242424 !default
     border: 2px solid #FF3535
     width: 40%
     border-radius: 5px
+    margin-top: 3em
 
 
   @if($type == 'programme')

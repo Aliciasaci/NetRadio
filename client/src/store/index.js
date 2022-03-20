@@ -5,10 +5,10 @@ import VuexPersistence from 'vuex-persist'
 Vue.use(Vuex)
 
 const vuexLocal = new VuexPersistence({
-    storage:window.localStorage
+    storage: window.localStorage
 })
 export default new Vuex.Store({
-    plugins:[vuexLocal.plugin],
+    plugins: [vuexLocal.plugin],
     state: {
         token: "",
         member: false,
@@ -23,7 +23,7 @@ export default new Vuex.Store({
             state.member = adjustement.member,
                 state.status = adjustement.status,
                 state.idMembre = adjustement.idMembre
-        }
+        },
     },
     actions: {},
     modules: {}

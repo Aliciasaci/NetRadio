@@ -6,19 +6,19 @@
         <div id="navbar-content">
             <ul>
                 <li id="programmes">
-                    <router-link to="/Programmes"><strong>Programmes</strong></router-link>
+                    <router-link to="/Programmes"><strong>Programme</strong></router-link>
                 </li>
                 <li id="podcasts">
                     <router-link to="/Podcasts"><strong>Podcasts</strong></router-link>
                 </li>
-                <li id="ledirect">
-                    <router-link to="/EcouterDirect">
+                <!-- <li id="ledirect">
+                    <router-link :to="{name:'EcouterDirect'">
                         <div id="ledirect-play">
                             <img src="img/ledirect.png" alt="Le direct">
                         </div>
                         <div id="ledirect-text"><strong>LE DIRECT</strong></div>
                     </router-link>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div id="navbar-search">

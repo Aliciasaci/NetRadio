@@ -17,6 +17,16 @@
 				</div>
 			</form>
         </div>
+		<div id="compte-footer">
+			<p>
+				Pas encore inscrit ?
+                    <router-link to="/inscription">S'inscrire</router-link>
+			</p>
+			<p>
+				Vous êtes un auditeur ?
+                    <router-link to="/connexion">Cliquez ici</router-link>
+			</p>
+		</div>
 		<Footer />
     </div>
 </template>

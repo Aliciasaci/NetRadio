@@ -90,6 +90,12 @@ footer
 #ledirect-content #btn-stop:hover
   @include hover('stop')
 
+#ledirect-content #invitation
+  @include btn-type('invitation')
+
+#ledirect-content #invitation:hover
+  @include hover('invitation')
+
 #ledirect-content #ledirect-content-title
   @include ledirect-content-type('title')
 
@@ -100,6 +106,13 @@ footer
 
 #podcasts-content #podcasts-content-title
   @include podcasts-content-type('title')
+
+
+#podcast-content #btn-update
+  @include btn-type('update')
+
+#podcast-content #btn-update:hover
+  @include hover('invitation')
 
 
 // #podcasts-content #podcasts-content-list
@@ -196,11 +209,12 @@ footer
   @include hover('favoris')
 
 
-#podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul li 
+#podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul li
   @include podcast-content-mypodcast('content')
 
-#podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul a
-  @include text-decoration('none')
+#podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul li:hover
+  @include hover('podcasts')
+
 
 // #podcast-content #podcast-content-info #podcast-content-mypodcast #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul a li h5
   // @include podcast-content-mypodcast('h5')
@@ -497,6 +511,34 @@ footer
   @include hover('notification')
 
 
+
+
+#popup-modifier-emission
+  @include popup('programme')
+  @include popup('modal')
+
+
+#popup-modifier-emission .modal-content p
+  @include popup('programme-content')
+
+
+#popup-modifier-emission .modal-content .popup-modifier-emission-footer h2
+  @include popup('programme-episode')
+
+
+#popup-modifier-emission .modal-content .popup-modifier-emission-footer
+  @include popup('programme-footer')
+
+
+#popup-modifier-emission .modal-content .popup-modifier-emission-footer img
+  @include popup('programme-notification')
+
+
+#popup-modifier-emission .modal-content .popup-modifier-emission-footer img:hover
+  @include hover('notification')
+
+
+
 .container
   @include container
 
@@ -680,3 +722,16 @@ footer
 
   #podcast-content #podcast-content-profile
     @include podcast-content-profile('large')
+
+  #icone-delete
+    @include btn-type('icone-delete')
+
+  #icone-update
+    @include btn-type('icone-update')
+
+  
+  #podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul a li #icone-delete:hover
+    @include hover('icone-delete')
+
+  #podcast-content #podcast-content-info  #podcast-content-mypodcast-emissions .podcast-content-mypodcast-emission ul a li #icone-update:hover
+     @include hover('icone-update')

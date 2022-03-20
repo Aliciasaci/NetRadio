@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div v-if="this.$store.state.idMembre == idAnimateur">
+    <div v-if="this.$store.state.idMembre == idAnimateur && this.$store.state.token">
     <HeaderAnimateur />
     </div>
     <div v-else>
@@ -8,31 +8,22 @@
     </div>
   <div id="podcast-content">
         <div id="podcast-content-profile">
-            <img src="" alt="George">
+            <img :src="avatar(animateur)" alt="George">
             <div id="podcast-content-profile-info">
                 <div id="podcast-content-profile-info-detail">
                     <h3><strong></strong>{{animateur.fullNameAnimateur}}</h3>
                     <p><strong></strong>{{animateur.descAnimateur}}</p>
                 </div>
-                <div id="podcast-content-profile-info-btn">
-                    <button type="submit" id="btn-subscribe">S'abonner</button>
+                <div id="podcast-content-profile-info-btn" v-if="this.$store.state.status != 'animateur'">
+                    <button type="submit" id="btn-subscribe">s'abonner</button>
                     <img src="/img/notification.png" alt="Notification">
+                </div>
+                <div id="podcast-content-profile-info-btn" v-else>
+                    <button type="submit" id="btn-update">Modifier</button>
                 </div>
             </div>
         </div>
         <div id="podcast-content-info">
-            <!-- <div id="podcast-content-announcement">
-                <div id="podcast-content-announcement-title">
-                    <h5><u>Annonces à la une !</u></h5>
-                </div>
-                <div id="podcast-content-announcement-content">
-                    <ul>
-                        <li>Annonce 1</li>
-                        <li>Annonce 2</li>
-                        <li>Annonce 3</li>
-                    </ul>
-                </div>
-            </div> -->
                 <div id="podcast-content-mypodcast-title">
                     <h3>PODCASTS DE "{{animateur.fullNameAnimateur}}"</h3>
                 </div>

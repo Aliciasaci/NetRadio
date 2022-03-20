@@ -2,17 +2,17 @@
   <section>
     <HeaderPrincipal />
     <div id="ledirect-content">
-      <div id="ledirect-content-title">
+      <div id="ledirect-content-title" v-if="emission_data">
         <h1><u>{{emission_data.nomEmission}} - {{emission_data.titreEpisode}}</u></h1>
       </div>
       <div id="ledirect-content-img">
         <img src="/img/lejournal.png" alt="Le journal" />
       </div>
       <button @click="quitLive" type="submit" id="btn-stop">
-        Arrêter le direct
+        Quitter le direct
       </button>
-      <button @click="reqInvite" type="submit" id="inv_bt">
-        Devenir invité
+      <button @click="reqInvite" type="submit" id="invitation">
+        Demander à participer
       </button>
     </div>
     <Footer />

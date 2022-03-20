@@ -27,7 +27,7 @@
                     <router-link to="/connexionAnimateur">Cliquez ici</router-link>
 			</p>
 		</div>
-		<footer>@Net'Radio - 2021/2022</footer>
+		<Footer />
 	</div>
 </template>
 

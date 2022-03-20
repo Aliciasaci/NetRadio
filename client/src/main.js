@@ -8,17 +8,21 @@ import VCalendar from 'v-calendar';
 
 Vue.use(VueAxios, axios);
 
+
+import { Outils } from "./mixins/Outils.js";
+Vue.mixin(Outils);
+
 Vue.config.productionTip = false
 
 Vue.use(VCalendar, {
     formats: {
-      title: "MMMM YYYY",
-      weekdays: "W",
-      navMonths: "MMM",
-      input: ["L", "YYYY-MM-DD", "YYYY/MM/DD"],
-      dayPopover: "L"
+        title: "MMMM YYYY",
+        weekdays: "W",
+        navMonths: "MMM",
+        input: ["L", "YYYY-MM-DD", "YYYY/MM/DD"],
+        dayPopover: "L"
     }
-  });
+});
 
 
 /*Vue.prototype.$api = axios.create({

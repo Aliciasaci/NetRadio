@@ -31,7 +31,6 @@ export default {
   },
   mounted() {
     this.getCreneauxByAnimateur();
-    console.log(this.getCurrentTime());
   },
   methods: {
     async getCreneauxByAnimateur() {
@@ -45,11 +44,6 @@ export default {
       moment.locale('fr');
       return moment(value).format('dddd, DD MMMM YYYY');
     },
-     getCurrentTimes(){
-            const today = new Date();
-            return today.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit', second: '2-digit'});
-        
-     },
   },
 
 };

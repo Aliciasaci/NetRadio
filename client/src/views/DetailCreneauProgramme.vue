@@ -18,7 +18,8 @@
           {{creneau.description}}
         </p>
       </div>
-      <router-link :to="{ name: 'BordAnimateur', params :{id: creneau.idCreneau} ,query: { idEmission: creneau.idEmission, titleEmission : creneau.titre}}"><button class="btn-start">Lancer l'émission</button></router-link>
+      <router-link v-if="(this.dateFormatted == this.current_date) && (creneau.heure <= current_time) && (current_time < getTimePlus30Min(creneau.heure))" :to="{ name: 'BordAnimateur', params :{id: creneau.idCreneau} ,query: { idEmission: creneau.idEmission, titleEmission : creneau.nomEmission, titleEpisode : creneau.titreEpisode}}"><button class="btn-start">Lancer l'émission</button></router-link>
+      <div v-else><h2>Vous ne pouvez pas encore lancer cette émission.</h2></div>
     </div>
     <Footer />
   </section>
@@ -26,11 +27,14 @@
 
 <script>
 import axios from "axios";
+import moment from 'moment';
 export default {
   data() {
     return {
       creneau : [],
-      dateFormatted : ""
+      dateFormatted : "",
+      current_time: this.getCurrentTime(),
+      current_date: this.getCurrentDate()
     };
   },
   mounted() {
@@ -44,20 +48,40 @@ export default {
           `http://localhost:3000/creneau/${idCreneau}`
         );
         this.creneau = response.data[0]
-        this.formatDate(this.creneau.date)
+        this.dateFormatted = this.momentDate(this.creneau.date)
       } catch (err) {
         console.log(err);
       }
     },
-     formatDate(date) {
-       this.dateFormatted = date.substring(0,10);
-       let year = this.dateFormatted.substring(0,4);
-       let month = this.dateFormatted.substring(5,7)
-       let day = this.dateFormatted.substring(8,10)
-       this.dateFormatted = day+"/"+month+"/"+year
+     date(value) {
+            if (value) {
+                return moment(String(value)).format('dddd, DD MMMM YYYY');
+            } else {
+                return moment().format('dddd, DD MMMM YYYY');
+            }
+        },
+        momentDate(value){
+            return moment(value).format('YYYY-MM-DD');
+        },
+    getCurrentDate() {
+                moment.locale('fr');
+                return moment().format('YYYY-MM-DD');
+        },
+    getCurrentTime(){
+            const today = new Date();
+            return today.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit', second: '2-digit'});
     },
+    getTimePlus30Min(emission_time){
+            console.log(emission_time.substring(0,2) + emission_time.substring(3,5) + emission_time.substring(6,8))
+            const plus30 = moment(emission_time, 'HH:mm:ss A').add(30, 'minutes').format('HH:mm:ss');
+            return plus30;
+    }
   }
 };
 </script>
 
-<style></style>
+<style lang="scss">
+h2{
+  color : red;
+}
+</style>

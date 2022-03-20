@@ -97,6 +97,7 @@ export default {
                 .get("http://localhost:3000/creneau/" + id)
                 .then(response => {
                     this.emission_data = response.data[0];
+                    
                 })
                 .catch(error => {
                     console.log(error);
