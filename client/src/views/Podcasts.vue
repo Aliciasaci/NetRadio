@@ -9,7 +9,7 @@
         <ul id="podcasts-content-list" >
           <li v-for="animateur in animateurs" :key="animateur.idAnimateur">
              <router-link :to="{name : 'Podcast', params :{id: animateur.idAnimateur}}">
-                <img src="../../public/img/podcast_1.jpg" rel="podcast">
+                <img :src="avatar(animateur)" rel="podcast">
                 <h3>{{animateur.fullNameAnimateur}}</h3>
             </router-link>
         </li>

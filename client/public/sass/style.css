@@ -188,6 +188,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  margin-left: 3em;
 }
 
 #podcasts-content #podcasts-content-list li {
@@ -195,10 +196,8 @@ footer {
   flex-basis: 18%;
   height: 200px;
   list-style: none;
-  padding: 20px 20px 20px 20px;
   font-size: 20px;
   font-weight: bold;
-  margin: 0em 2em 8em 2em;
 }
 
 #podcasts-content #podcasts-content-list li a {
@@ -211,10 +210,12 @@ footer {
   font-weight: bold;
   text-decoration: none;
   text-align: center;
+  position: absolute;
+  left: 3.5em;
 }
 
 #podcasts-content #podcasts-content-list li img {
-  width: 100%;
+  width: 70%;
 }
 
 #podcasts-content #podcasts-content-list li a h3:hover {

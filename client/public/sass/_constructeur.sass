@@ -718,16 +718,15 @@ $third-color-default: #242424 !default
     display: flex
     flex-wrap: wrap
     align-items: center
+    margin-left: 3em
 
   @if($type == 'list-content')
     @include text-color($first-color-default)
     flex-basis: 18%
     height: 200px
     list-style: none
-    @include padding(20px, 20px, 20px, 20px)
     font-size: $font-size-default
     font-weight: bold
-    margin: 0em 2em 8em 2em
 
     
   @if($type == 'list-content-h3')
@@ -735,15 +734,15 @@ $third-color-default: #242424 !default
     font-weight: bold
     text-decoration: none
     text-align: center
+    position: absolute
+    left: 3.5em
     
   @if($type == 'list-content-a')
     text-decoration: none
     position: relative
  
   @if($type == 'list-content-img')
-    width:100%
-
-  
+    width:70%
 
 
 

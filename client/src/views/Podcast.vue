@@ -8,7 +8,7 @@
     </div>
   <div id="podcast-content">
         <div id="podcast-content-profile">
-            <img :src="avatar(animateur)" alt="George">
+            <img :src="avatar(animateur)" alt="img-profil">
             <div id="podcast-content-profile-info">
                 <div id="podcast-content-profile-info-detail">
                     <h3><strong></strong>{{animateur.fullNameAnimateur}}</h3>
