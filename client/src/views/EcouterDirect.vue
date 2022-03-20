@@ -129,11 +129,26 @@ export default {
       this.socket.emit("invite", { id: this.id, accepted: false });
     },
   },
+  
 };
 </script>
 
 <style lang="scss">
 #ledirect-content {
   padding-bottom: 70px;
+}
+
+#inv_bt{
+  color: white;
+  background-color: dodgerblue;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 30px;
+  border-radius: 15px;
+  margin-bottom: 50px;
+}
+
+#inv_bt:hover{
+  background-color: lightskyblue;
 }
 </style>
