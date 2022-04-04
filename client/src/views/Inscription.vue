@@ -47,20 +47,25 @@ export default {
 			nominscription: "",
 			emailinscription: "",
 			passwordinscription: "",
-            message: ""
+            	message: ""
 		};
 	},
 	methods: {
-		validationInscription() {
+		async validationInscription() {
+			const msgUint8 = new TextEncoder().encode(this.passwordinscription);// encode as (utf-8) Uint8Array
+          	const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);// hash the message
+          	const hashArray = Array.from(new Uint8Array(hashBuffer));// convert buffer to byte array
+          	const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');// convert bytes to hex string
+
 			let donnees = {
 				fullNameAuditeur: this.nominscription,
 				emailAuditeur: this.emailinscription,
-				mdpAuditeur: this.passwordinscription,
+				mdpAuditeur: hashHex,
 			};
 			axios
 				.post("http://localhost:3000/auditeurs",donnees)
 				.then((response) => {
-                    this.message = "Compte créé, veuillez vous connecter";
+                    	this.message = "Compte créé, veuillez vous connecter";
 					this.nominscription = "",
 					this.emailinscription = "",
 					this.passwordinscription = ""
