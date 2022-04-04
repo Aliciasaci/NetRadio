@@ -4,23 +4,15 @@
     <div class="main">
       <h1 class="title">MES ÉMISSIONS</h1>
       <div class="btn-wrapper">
-        <router-link to="/AjouterEmission"
-          ><button id="add_btn">
-            <h3>AJOUTER UNE ÉMISSION</h3>
-          </button></router-link
-        >
-        <router-link to="/CreneauxProgrammes"
-          ><button id="show_btn">
+        <button id="add_btn" v-on:click="createEmission()">
+          <h3>AJOUTER UNE ÉMISSION</h3>
+        </button>
+        <router-link to="/CreneauxProgrammes"><button id="show_btn">
             <h3>MES CRÉNEAUX PROGRAMMÉS</h3>
-          </button></router-link
-        >
+          </button></router-link>
       </div>
       <div class="emissions-wrapper">
-        <div
-          v-for="emission in emissions"
-          :key="emission.idEmission"
-          class="card-emission"
-        >
+        <div v-for="emission in emissions" :key="emission.idEmission" class="card-emission">
           <h3>{{ emission.nomEmission }}</h3>
           <div class="btn-wrapper">
             <button @click="voirDetail(emission.idEmission)" id="btn-info" type="submit">
@@ -29,48 +21,69 @@
             <button @click="modifierDetail(emission.idEmission)" id="btn-update" type="submit">Modifier</button>
           </div>
         </div>
+        <div id="popup-programme" class="modal">
+          <div class="modal-content">
+            <span class="close" v-on:click="close()">&times;</span>
+            <h3><u>NOM DE L'EMISSION</u></h3>
+            <input type="text" id="inputEmission" v-model="inputEmission" />
+
+            <h3 class="margin"><u>DESCRIPTION L'EMISSION</u></h3>
+            <textarea id="inputDesc" v-model="inputDesc" />
+
+            <h3 class="margin"><u>GENRE</u></h3>
+            <input type="text" id="inputGenre" v-model="inputGenre" />
+            <p><button type="submit" v-on:click="confirmer()">Confirmer</button></p>
+            <p>{{ success }}</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div id="popup-programme" class="modal" v-if="emission_data">
-      <div class="modal-content">
-        <span class="close" v-on:click="close()">&times;</span>
-        <h3><u>NOM DE L'EMISSION</u></h3>
-        <p>{{ emission_data.nomEmission }}</p>
+      <div id="popup-programme" class="modal" v-if="emission_data">
+        <div class="modal-content">
+          <span class="close" v-on:click="close()">&times;</span>
+          <h3><u>NOM DE L'EMISSION</u></h3>
+          <p>{{ emission_data.nomEmission }}</p>
 
-        <h3><u>GENRE</u></h3>
-        <p>{{ emission_data.genre }}</p>
+          <h3><u>GENRE</u></h3>
+          <p>{{ emission_data.genre }}</p>
 
-        <h3><u>DESCRIPTION DE L'EMISSION</u></h3>
-        <p>{{ emission_data.description }}</p>
+          <h3><u>DESCRIPTION DE L'EMISSION</u></h3>
+          <p>{{ emission_data.description }}</p>
+        </div>
       </div>
-    </div>
-     <div id="popup-modifier-emission" class="modal" v-if="emission_data">
-      <div class="modal-content">
-        <span class="close" v-on:click="closeUpdate()">&times;</span>
-        <h3><u>NOM DE L'EMISSION</u></h3>
-          <textarea rows="1" cols="50" type="text" id="inputEpisode" style="font-size: 20px; text-align: center" v-model="emission_data.nomEmission"></textarea>
+      <div id="popup-modifier-emission" class="modal" v-if="emission_data">
+        <div class="modal-content">
+          <span class="close" v-on:click="closeUpdate()">&times;</span>
+          <h3><u>NOM DE L'EMISSION</u></h3>
+          <textarea rows="1" cols="50" type="text" id="inputEpisode" style="font-size: 20px; text-align: center"
+            v-model="emission_data.nomEmission"></textarea>
 
-        <h3><u>GENRE</u></h3>
-          <textarea rows="1" cols="50"  type="text" id="inputEpisode"  style="font-size: 20px; text-align: center" v-model="emission_data.genre"></textarea>
+          <h3><u>GENRE</u></h3>
+          <textarea rows="1" cols="50" type="text" id="inputEpisode" style="font-size: 20px; text-align: center"
+            v-model="emission_data.genre"></textarea>
 
-        <h3><u>DESCRIPTION DE L'EMISSION</u></h3>
-          <textarea rows="5" cols="50" type="text" id="inputEpisode" style="font-size: 20px; text-align: center" v-model="emission_data.description"></textarea>
-       <p><button type="submit" v-on:click="confirmer(emission_data)">Confirmer</button></p>
+          <h3><u>DESCRIPTION DE L'EMISSION</u></h3>
+          <textarea rows="5" cols="50" type="text" id="inputEpisode" style="font-size: 20px; text-align: center"
+            v-model="emission_data.description"></textarea>
+          <p><button type="submit" v-on:click="confirmer(emission_data)">Confirmer</button></p>
+        </div>
       </div>
-    </div>
-    <Footer />
+      <Footer />
+      </div>
   </section>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-  data() {
-    return {
-      idAnimateur: this.$store.state.idMembre,
-      emissions: [],
-      emission_data: null,
-    };
+  data(){
+    return{
+      idAnimateur : this.$store.state.idMembre,                                                 //remplacer plus tard avec l'id de l'animateur connecté, on suppose que c'est l'animateur 1 qui est connecté pour le moment
+      emissions : [],
+      inputDesc: "",
+      inputEmission: "",
+      inputGenre: "",
+      success: ""
+    }
   },
   mounted() {
     this.getEmissionByAnimateur();
@@ -84,7 +97,7 @@ export default {
         });
       });
     },
-     modifierDetail(id) {
+    modifierDetail(id) {
       this.getEmissionById(id);
       document.querySelectorAll("#btn-update").forEach((programmeBtn) => {
         programmeBtn.addEventListener("click", () => {
@@ -129,38 +142,48 @@ export default {
     async getEmissionByAnimateur() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/animateurs/${this.idAnimateur}/emissions`
+          `http://localhost:3000/animateurs/${this.$store.state.idMembre}/emissions`
         );
         this.emissions = response.data;
       } catch (err) {
         console.log(err);
       }
     },
-  },
-  confirmer(nouvelle_emisson){
-            const emission = {
-                nomEmission: this.emission_data.nomEmission,
-                titreEpisode: this.emission_data.genre
-                // titreEpisode: this.emission_data.genre
-            };
-            
-            if(this.inputEpisode == null)
-            {
-                this.updateCreneau(date, heure, animateur, null);
-                this.success = "Votre émission a été bien programmée";
+    createEmission() {
+      document.getElementById("add_btn").addEventListener('click', () => {
+          document.getElementById("popup-programme").style.display = "block";
+      });
+    },
+    close() {
+        document.querySelectorAll(".close").forEach(closeBtn => {
+            closeBtn.addEventListener('click', () => {
+                document.getElementById("popup-programme").style.display = "none";
+            })
+        })
+        window.onclick = function (event) {
+            if (event.target === document.getElementById("popup-programme")) {
+                document.getElementById("popup-programme").style.display = "none";
             }
-            else{
-                axios
-                    .post("http://localhost:3000/episodes", episode)
-                    .then(response => {
-                        this.updateCreneau(date, heure, animateur, response.data.insertId);
-                        this.success = "Votre émission a été bien programmée";
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            }
-        },
+        }
+    },
+    confirmer(){
+      let data = {
+        nomEmission: this.inputEmission,
+        description: this.inputDesc,
+        genre: this.inputGenre,
+        idAnimateur: this.idAnimateur
+      };
+
+      axios
+        .post("http://localhost:3000/emissions", data)
+        .then(response => {
+            this.success = "Cette émission a été bien ajoutée";
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+  }
 };
 </script>
 
@@ -189,10 +212,10 @@ export default {
       background-color: rgb(71, 67, 67);
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      h3 {
-        margin-top: 50px;
-        width: fit-content;
+      h2 {
+        position: absolute;
+        top: 15%;
+        width : fit-content;
         color: white;
         font-size: 25px;
       }
@@ -269,5 +292,30 @@ export default {
       }
     }
   }
+}
+#inputGenre{
+    width: 50%;
+    padding: 5px 10px;
+    font-size: 15px;
+     margin: 2% auto auto auto;
+}
+
+#inputEmission{
+    width: 50%;
+    padding: 5px 10px;
+    font-size: 15px;
+    margin: 2% auto auto auto;
+}
+
+#inputDesc{
+    width: 50%;
+    height: 50px;
+    padding: 5px 10px;
+    font-size: 15px;
+    margin: 2% auto auto auto;
+}
+
+.margin{
+    margin-top: 8%;
 }
 </style>

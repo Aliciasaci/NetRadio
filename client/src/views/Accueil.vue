@@ -16,7 +16,6 @@
                             <strong>Ecouter le direct</strong>
                         </button>
                     </router-link>
-                                 <!-- <router-link :to="{name : 'Podcast', params :{id: animateur.idAnimateur}}"> -->
                 </div>
                 <div v-else>
                     <div>
@@ -33,15 +32,13 @@
             <div class="content-program" v-for="emission in emissions" v-bind:key="emission.idCreneau">
                 <div v-if="emission != null && emission.idEmission != null && emission.idEpisode != null ">
                     <div v-if="(emission.heure <= current_time) && (current_time < getTimePlus30Min(emission.heure))">
-                        <div>
-                            <div class="content-program-info" id="clicked-program" @click="getEmissionByIdCreneau(emission.idCreneau)">
-                                <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
-                                <p class="content-program-name"><strong>{{emission.nomEmission + " : " + emission.titreEpisode}}</strong></p>
-                            </div>
+                        <div class="content-program-info" @click="getEmissionByIdCreneau(emission.idCreneau)">
+                            <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
+                            <p class="content-program-name"><strong>{{emission.nomEmission + " : " + emission.titreEpisode}}</strong></p>
                         </div>
                     </div>
                     <div v-else>
-                        <div class="content-program-info" v-on:click="getEmissionByIdCreneau(emission.idCreneau)">
+                        <div class="content-program-info" v-on:click="getEmissionByIdCreneau(emission.idCreneau)" id="clicked-program">
                             <p class="content-program-time"><strong>{{emission.heure.substr(0, 2) + 'H' + emission.heure.substr(3, 2)}}</strong></p>
                             <p class="content-program-name"><strong>{{emission.nomEmission + " : " + emission.titreEpisode}}</strong></p>
                         </div>
@@ -125,7 +122,7 @@ export default {
 }
 
 .content-program-info:hover{
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.1);
 }
 
 #content-accueil #content-left #content-info{
@@ -133,7 +130,7 @@ export default {
     color: white;
     text-align: center;
     padding-left: 50px;
-    margin-top: -15%;
+    margin-top: -10%;
 }
 
 #content-accueil{

@@ -82,12 +82,6 @@ const routes = [{
             import ('../views/EmissionsAnimateur.vue')
     },
     {
-        path: '/AjouterEmission/',
-        name: 'AjouterEmission',
-        component: () =>
-            import ('../views/AjouterEmission.vue')
-    },
-    {
         path: '/CreneauxProgrammes/',
         name: 'CreneauxProgrammees',
         component: () =>

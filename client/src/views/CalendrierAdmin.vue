@@ -46,7 +46,7 @@ export default {
       heures: [ { heure: "08:00:00", description: "08H00"},
                 { heure: "08:30:00", description: "08H30"},
                 { heure: "09:00:00", description: "09H00"},
-                { heure: "19:30:00", description: "09H30"},
+                { heure: "09:30:00", description: "09H30"},
                 { heure: "10:00:00", description: "10H00"},
                 { heure: "10:30:00", description: "10H30"},
                 { heure: "11:00:00", description: "11H00"},

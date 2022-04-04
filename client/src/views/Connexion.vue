@@ -44,10 +44,15 @@ export default {
 		};
 	},
 	methods: {
-		validationConnexion() {
+		async validationConnexion() {
+			const msgUint8 = new TextEncoder().encode(this.passwordconnexion);// encode as (utf-8) Uint8Array
+          	const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);// hash the message
+          	const hashArray = Array.from(new Uint8Array(hashBuffer));// convert buffer to byte array
+          	const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');// convert bytes to hex string
+
 			let donnees = {
 				email: this.emailconnexion,
-				password: this.passwordconnexion,
+				password: hashHex,
 			};
 			axios
 				.post("http://localhost:3000/connexionAuditeur", donnees)
@@ -61,7 +66,7 @@ export default {
 							});
 						this.$router.push("/")
 					} else {
-						this.$router.push("/connexion")
+						alert("erreur lors de la connexion : ndc ou mdp incorrect")
 					}
 				});
 		},
@@ -71,6 +76,6 @@ export default {
 
 <style scoped>
 .connexionVue{
-	padding-bottom: 50px;
+	padding-bottom: 100px;
 }
 </style>

@@ -46,7 +46,7 @@ export default {
             inputEpisode: null,
             success: null,
             idEpisode: null,
-            idAnimateur: 1
+            idAnimateur: this.$store.state.idMembre
         }
     },
     methods: {
