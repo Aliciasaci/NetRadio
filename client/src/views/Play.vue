@@ -1,12 +1,17 @@
 <template>
   <section>
+   <div v-if="this.$store.state.status == 'animateur' && this.$store.state.token">
+    <HeaderAnimateur />
+    </div>
+    <div v-else>
     <HeaderPrincipal />
+    </div>
     <div id="ledirect-content">
       <div id="ledirect-content-title">
         <h1><u>{{emission.nomEmission}} - {{episode.titreEpisode}}</u></h1>
       </div>
       <div id="ledirect-content-img">
-        <img src="/img/lejournal.png" alt="Le journal" />
+        <img src="/img/emission.jpg" alt="image emission" />
       </div>
       <div>
         <img id="btn_play" src="/img/play.png" rel="play" @click="play" />
@@ -35,8 +40,8 @@ export default {
   methods: {
     async getEpisodeById() {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/episodes/${this.$route.params.id}`
+        const response = await this.$api.get(
+          `episodes/${this.$route.params.id}`
         );
         this.episode = response.data;
         this.getEmissionById(this.episode.idEmission);
@@ -47,8 +52,8 @@ export default {
 
     async getEmissionById(id) {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/emissions/${id}`
+        const response = await this.$api.get(
+          `emissions/${id}`
         );
         this.emission = response.data;
       } catch (err) {

@@ -6,7 +6,7 @@
         <h1><u>{{emission_data.nomEmission}} - {{emission_data.titreEpisode}}</u></h1>
       </div>
       <div id="ledirect-content-img">
-        <img src="/img/lejournal.png" alt="Le journal" />
+        <img src="/img/emission.jpg" alt="Le journal" />
       </div>
       <button @click="quitLive" type="submit" id="btn-stop">
         Quitter le direct
@@ -105,8 +105,8 @@ export default {
     });
 
     //charger les informations de l'emissions actuelle.
-    axios
-      .get("http://localhost:3000/creneau/" + this.$route.params.id)
+    this.$api
+      .get("creneau/" + this.$route.params.id)
       .then((response) => {
         this.emission_data = response.data[0];
         console.log(this.emission_data);

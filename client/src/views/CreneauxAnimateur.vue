@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import moment from 'moment';
 
 export default {
@@ -100,8 +99,8 @@ export default {
                 this.success = "Votre émission a été bien programmée";
             }
             else{
-                axios
-                    .post("http://localhost:3000/episodes", episode)
+                this.$api
+                    .post("episodes", episode)
                     .then(response => {
                         this.updateCreneau(date, heure, animateur, response.data.insertId);
                         this.success = "Votre émission a été bien programmée";
@@ -113,10 +112,11 @@ export default {
         },
 
         getCreneau(date, heure){
-            axios
-                .get("http://localhost:3000/animateurs/" + this.idAnimateur + '/' + date + '/' + heure + '/creneau')
+            this.$api
+                .get("animateurs/" + this.idAnimateur + '/' + date + '/' + heure + '/creneau')
                 .then(response => {
                     this.creneau_data = response.data[0];
+                    console.log("iciiii"+this.creneau_data);
                 })
                 .catch(error => {
                     console.log(error);
@@ -124,8 +124,8 @@ export default {
         },
 
         getListeEmissions(){
-            axios
-                .get("http://localhost:3000/animateurs/" + this.idAnimateur + '/emissions')
+            this.$api
+                .get("animateurs/" + this.idAnimateur + '/emissions')
                 .then(response => {
                     this.emissions = response.data;
                 })
@@ -140,8 +140,8 @@ export default {
                 idEpisode: episode
             };
 
-            axios
-                .put("http://localhost:3000/animateurs/" + animateur + '/' + date + '/' + heure + '/creneau', creneau)
+            this.$api
+                .put("animateurs/" + animateur + '/' + date + '/' + heure + '/creneau', creneau)
                 .then(response => {
                     console.log(response.data);
                 })
@@ -159,8 +159,8 @@ export default {
         }
     },
     created(){
-        axios
-            .get("http://localhost:3000/animateurs/" + this.idAnimateur + '/creneaux')
+        this.$api
+            .get("animateurs/" + this.idAnimateur + '/creneaux')
             .then(response => {
                 this.creneaux = response.data.filter(creneauxFiltered => creneauxFiltered.idEmission == null && creneauxFiltered.idEpisode == null 
                                 && this.momentDate(creneauxFiltered.date) >= this.date() 

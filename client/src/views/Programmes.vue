@@ -120,7 +120,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import moment from 'moment';
 
 export default {
@@ -164,8 +163,8 @@ export default {
             }
         },
         getEmissionById(id) {
-            axios
-                .get("http://localhost:3000/creneau/" + id)
+            this.$api
+                .get("creneau/" + id)
                 .then(response => {
                     this.emission_data = response.data[0];
                 })
@@ -178,8 +177,8 @@ export default {
         }
     },
     created(){
-         axios
-            .get("http://localhost:3000/creneaux")
+         this.$api
+            .get("creneaux")
             .then(response => {
                 this.emissions = response.data;
             })

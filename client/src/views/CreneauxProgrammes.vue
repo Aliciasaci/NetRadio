@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import moment from "moment";
 
 export default {
@@ -36,7 +35,7 @@ export default {
   methods: {
     async getCreneauxByAnimateur() {
       try {
-        const response = await axios.get(`http://localhost:3000/animateurs/${this.idAnimateur}/creneaux`);
+        const response = await this.$api.get(`animateurs/${this.idAnimateur}/creneaux`);
         this.creneaux = response.data.filter(creneauxFiltered => creneauxFiltered.idEmission != null && creneauxFiltered.idEpisode != null 
                                 && this.momentDate(creneauxFiltered.date) >= this.date() 
                                 && ((creneauxFiltered.heure <= this.getCurrentTime() && this.getCurrentTime() < this.getTimePlus30Min(creneauxFiltered.heure)) 

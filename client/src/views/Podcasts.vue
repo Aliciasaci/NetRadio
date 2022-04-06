@@ -9,7 +9,7 @@
         <ul id="podcasts-content-list" >
           <li v-for="animateur in animateurs" :key="animateur.idAnimateur">
              <router-link :to="{name : 'Podcast', params :{id: animateur.idAnimateur}}">
-                <img src="../../public/img/podcast_1.jpg" rel="podcast">
+                  <img :src="avatar(animateur)" rel="podcast">
                 <h3>{{animateur.fullNameAnimateur}}</h3>
             </router-link>
         </li>
@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
@@ -36,7 +35,7 @@ export default {
     //Get les informations d'un animateur
     async getAllAnimateur() {
       try {
-        const response = await axios.get("http://localhost:3000/animateurs");
+        const response = await this.$api.get("animateurs");
         this.animateurs = response.data;
       } catch (err) {
         console.log(err);

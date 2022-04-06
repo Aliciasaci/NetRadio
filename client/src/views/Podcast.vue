@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Podcast from "../components/Podcast.vue";
 export default {
   components: {
@@ -66,8 +65,8 @@ export default {
     // Récuperer toutes les émissions de l'animateur actuelle
     async getEmissionsByAnimateur() {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/animateurs/${this.idAnimateur}/emissions/`
+        const response = await this.$api.get(
+          `animateurs/${this.idAnimateur}/emissions/`
         );
         this.emissions = response.data;
       } catch (err) {
@@ -78,8 +77,8 @@ export default {
     async getAnimateur() {
       try {
         this.idAnimateur = this.$route.params.id;
-        const response = await axios.get(
-          `http://localhost:3000/animateurs/${this.idAnimateur}`
+        const response = await this.$api.get(
+          `animateurs/${this.idAnimateur}`
         ); 
         this.animateur = response.data;
       } catch (err) {

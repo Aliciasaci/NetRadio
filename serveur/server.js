@@ -1,6 +1,7 @@
 // require express module
 const express = require('express');
 
+
 // require cors module
 const cors = require("cors");
 
@@ -18,6 +19,7 @@ process.env.TZ = 'Europe/Paris';
 
 // require router 
 require("./src/routes/routes.js")(app);
+
 
 
 //Serveur socket.io
@@ -67,7 +69,7 @@ io.on('connection', (socket) => {
 
     // l'animateur donne le droit a la parole a l'invité
     socket.on('giveVoice', function(invite) {
-        console.log("demande accorder a "+invite.id+" est "+invite.response);
+        console.log("demande accorder a " + invite.id + " est " + invite.response);
         socket.broadcast.emit('authorisation', invite);
     });
 

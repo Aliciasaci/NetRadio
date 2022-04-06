@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
 	name: "Inscription",
@@ -62,8 +61,8 @@ export default {
 				emailAuditeur: this.emailinscription,
 				mdpAuditeur: hashHex,
 			};
-			axios
-				.post("http://localhost:3000/auditeurs",donnees)
+			this.$api
+				.post("auditeurs",donnees)
 				.then((response) => {
                     	this.message = "Compte créé, veuillez vous connecter";
 					this.nominscription = "",

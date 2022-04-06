@@ -20,8 +20,8 @@ export default {
     };
   },
   created(){
-    axios
-        .get("http://localhost:3000/animateurs")
+    this.$api
+        .get("animateurs")
         .then(response => {
             this.animateurs = response.data;
         })

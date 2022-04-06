@@ -23,7 +23,7 @@
                     <router-link to="/inscription">S'inscrire</router-link>
 			</p>
 			<p>
-				Vous êtes un(e) Animateur(e) ?
+				Vous êtes Animateur/Animatrice ?
                     <router-link to="/connexionAnimateur">Cliquez ici</router-link>
 			</p>
 		</div>
@@ -54,8 +54,8 @@ export default {
 				email: this.emailconnexion,
 				password: hashHex,
 			};
-			axios
-				.post("http://localhost:3000/connexionAuditeur", donnees)
+			this.$api
+				.post("connexionAuditeur", donnees)
 				.then((response) => {
 					if (response.data.message == "Connexion réussi") {
 						this.$store.commit('setToken',response.data.token);

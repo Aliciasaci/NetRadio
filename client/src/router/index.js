@@ -88,12 +88,6 @@ const routes = [{
             import ('../views/CreneauxProgrammes.vue')
     },
     {
-        path: '/ProfilAnimateur/',
-        name: 'ProfilAnimateur',
-        component: () =>
-            import ('../views/ProfilAnimateur.vue')
-    },
-    {
         path: '/DetailCreneauProgramme/',
         name: 'DetailCreneauProgramme',
         component: () =>
@@ -127,7 +121,6 @@ const routes = [{
 ]
 
 const router = new VueRouter({
-    // mode: 'history',
     base: process.env.BASE_URL,
     routes
 })

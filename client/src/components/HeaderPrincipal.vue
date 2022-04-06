@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import moment from 'moment';
 
 export default {
@@ -60,8 +59,8 @@ export default {
         },
     },
     created(){
-         axios
-            .get("http://localhost:3000/creneaux/" +  this.momentDate(this.emission_date))
+         this.$api
+            .get("creneaux/" +  this.momentDate(this.emission_date))
             .then(response => {
                 this.emission_data = response.data.filter(emissionsFiltered =>
                                 emissionsFiltered.heure <= this.getCurrentTime() && this.getCurrentTime() < this.getTimePlus30Min(emissionsFiltered.heure))[0];

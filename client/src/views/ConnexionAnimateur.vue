@@ -23,7 +23,7 @@
                     <router-link to="/inscription">S'inscrire</router-link>
 			</p>
 			<p>
-				Vous êtes un auditeur ?
+				Vous êtes auditeur/auditrice ?
                     <router-link to="/connexion">Cliquez ici</router-link>
 			</p>
 		</div>
@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
     name: "ConnexionAnimateur",
@@ -45,6 +44,7 @@ export default {
 	methods: {
 		async validationConnexion() {
 			const msgUint8 = new TextEncoder().encode(this.passwordconnexion);// encode as (utf-8) Uint8Array
+			console.log(msgUint8);
           	const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);// hash the message
           	const hashArray = Array.from(new Uint8Array(hashBuffer));// convert buffer to byte array
           	const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');// convert bytes to hex string
@@ -53,8 +53,8 @@ export default {
 				email: this.emailconnexion,
 				password: hashHex,
 			};
-			axios
-				.post("http://localhost:3000/connexionAnimateur",donnees)
+			this.$api
+				.post("connexionAnimateur",donnees)
 				.then((response) => {
 					if (response.data.message == "Connexion réussi") {
 						this.$store.commit('setToken',response.data.token);

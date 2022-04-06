@@ -25,10 +25,10 @@ Vue.use(VCalendar, {
 });
 
 
-/*Vue.prototype.$api = axios.create({
-    baseURL : 'http://localhost:3000',
-    params:{}
-});*/
+Vue.prototype.$api = axios.create({
+    baseURL: 'http://localhost:3000',
+    params: {}
+});
 
 Vue.component("HeaderPrincipal", () =>
     import ("@/components/HeaderPrincipal.vue"));

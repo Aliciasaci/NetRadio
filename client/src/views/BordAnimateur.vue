@@ -60,12 +60,11 @@
 
 <script>
 import { io } from "socket.io-client";
-import axios from "axios";
 
 export default {
   data() {
     return {
-      socket: io("http://localhost:3000"),
+      socket: io("http://localhost:3000/"),
       bool: false,
       isActive: false,
       audioCtx: null,
@@ -252,7 +251,7 @@ export default {
       var Dropbox = require("dropbox").Dropbox;
       var dbx = new Dropbox({
         accessToken:
-          "sl.BD0SaOoQQ7k2ziTm-zj-btm0KREK6xc4XPtTsS6RXtSomIe9_E47M1tqfUeZojylsrtGtIGdjx7ZoEeoHBj3YLiQYt1NzRx2uyM6-uYanQZ1ygZH2cwTo6SdpeDA5yII9VAvsmAL4_HJ",
+          "sl.BFJtfKBRVdp8U_4jxvcD6Al8s5tUvYET2gHcYZ-QzviRUBaAK1eul4IMpn9PwRWPa_jq6qGaj-q0J3SlOOQmxuQjeuH9teLLMaI0ejDpfxkDZZ_LhACH1fRuFpaAWKJfOogTXx4xSY_k",
       });
       dbx
         .filesUpload({
@@ -287,7 +286,7 @@ export default {
     async putEpisodeLinkInDatabase(link) {
       console.log(this.episodeName);
       try {
-        await axios.post("http://localhost:3000/episodes", {
+        await this.$api.post("episodes", {
           titreEpisode: this.episodeName,
           idEmission: this.$route.query.idEmission,
           statusSauvegarde: "0",

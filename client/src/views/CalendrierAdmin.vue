@@ -85,8 +85,8 @@ export default {
   },
   methods: {
     getCreneaux(){
-      axios
-        .get("http://localhost:3000/creneaux/" + this.momentDate(this.selectedDate) + this.selectedHeure.heure)
+      this.$api
+        .get("creneaux/" + this.momentDate(this.selectedDate) + this.selectedHeure.heure)
         .then(response => {
             this.creneaux = response.data;
         })
@@ -100,8 +100,8 @@ export default {
         "heure": this.selectedHeure.heure,
         "idAnimateur": this.selectedAnimateur.id
       };
-      axios
-      .post("http://localhost:3000/creneaux", creneau)
+      this.$api
+      .post("creneaux", creneau)
       .then(response => {
           this.post_response = "Ce créneau a été bien donné à l'animateur";
       })
@@ -115,8 +115,8 @@ export default {
         "heure": this.selectedHeure.heure,
         "idAnimateur": this.selectedAnimateur.id
       };
-      axios
-      .put("http://localhost:3000/creneaux/" + this.momentDate(this.selectedDate) + '/' + this.selectedHeure.heure, creneau)
+      this.$api
+      .put("creneaux/" + this.momentDate(this.selectedDate) + '/' + this.selectedHeure.heure, creneau)
       .then(response => {
           this.post_response = "Modification succès !";
       })
@@ -133,8 +133,8 @@ export default {
     }
   },
   created(){
-    axios
-     .get("http://localhost:3000/animateurs")
+    this.$api
+     .get("animateurs")
       .then(response => {
           this.animateurs = response.data;
       })

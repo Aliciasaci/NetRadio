@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
@@ -39,8 +38,8 @@ export default {
   methods: {
     async getEmission() {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/emission/${this.idEmission}`
+        const response = await this.$api.get(
+          `emission/${this.idEmission}`
         );
         this.emission = response.data[0];
         this.getAnimateur(response.data[0].idAnimateur)
@@ -50,8 +49,8 @@ export default {
     },
      async getAnimateur(idAnimateur) {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/animateurs/${idAnimateur}`
+        const response = await this.$api.get(
+          `animateurs/${idAnimateur}`
         );
         this.animateur = response.data;
       } catch (err) {

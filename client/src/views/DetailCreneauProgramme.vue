@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import moment from "moment";
 
 export default {
@@ -45,8 +44,8 @@ export default {
     async getCreneauInformationsById() {
       try {
         let idCreneau = this.$route.params.id;
-        const response = await axios.get(
-          `http://localhost:3000/creneau/${idCreneau}`
+        const response = await this.$api.get(
+          `creneau/${idCreneau}`
         );
         this.creneau = response.data[0]
         this.dateFormatted = this.momentDate(this.creneau.date)
