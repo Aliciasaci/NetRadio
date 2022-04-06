@@ -45,7 +45,8 @@ export default {
             inputEpisode: null,
             success: null,
             idEpisode: null,
-            idAnimateur: this.$store.state.idMembre
+            idAnimateur: this.$store.state.idMembre,
+            test: null
         }
     },
     methods: {
@@ -162,10 +163,15 @@ export default {
         this.$api
             .get("animateurs/" + this.idAnimateur + '/creneaux')
             .then(response => {
-                this.creneaux = response.data.filter(creneauxFiltered => creneauxFiltered.idEmission == null && creneauxFiltered.idEpisode == null 
-                                && this.momentDate(creneauxFiltered.date) >= this.date() 
-                                && ((creneauxFiltered.heure <= this.getCurrentTime() && this.getCurrentTime() < this.getTimePlus30Min(creneauxFiltered.heure)) 
-                                || creneauxFiltered.heure > this.getCurrentTime()));
+
+                this.creneaux = response.data.filter(creneauxFiltered => 
+                                 (creneauxFiltered.idEmission == null) 
+                                && (creneauxFiltered.idEpisode == null)
+                                && (this.momentDate(creneauxFiltered.date) >= this.date())
+                                && ((creneauxFiltered.heure <= this.getCurrentTime() && this.getCurrentTime() <= this.getTimePlus30Min(creneauxFiltered.heure))
+                                || creneauxFiltered.heure >= this.getCurrentTime()));
+              
+                
             })
             .catch(error => {
                 console.log(error);
