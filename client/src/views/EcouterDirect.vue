@@ -24,7 +24,7 @@ import { io } from "socket.io-client";
 export default {
   data() {
     return {
-      socket: io("http://localhost:3000"),
+      socket: io("http://localhost:3000/"),
       blob: {},
       audio: null,          //remettre à "" si ça marche pas
       id: null,

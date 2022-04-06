@@ -1,7 +1,7 @@
 <template>
 	<div class="connexionVue">
 		<div id="compte-header">
-			<a href="accueil.html"><img src="img/logo.png" /></a>
+			<router-link to="/"><img src="img/logo.png" /></router-link>
 		</div>
 		<div id="compte-content">
 			<form @submit.prevent="validationConnexion()" id="compte-content-connection">

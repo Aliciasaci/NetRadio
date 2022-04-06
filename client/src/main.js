@@ -26,7 +26,7 @@ Vue.use(VCalendar, {
 
 
 Vue.prototype.$api = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3000/',
     params: {}
 });
 

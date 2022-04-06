@@ -5,7 +5,7 @@
           <router-link :to="{ name: 'Play', params: { id: episode.idEpisode } }" style="margin: 15px 0 0 120px" >
             <h3>{{ episode.titreEpisode }}</h3>
           </router-link>
-          <div class="btn-wrapper" v-if="$store.state.status != 'animateur' ">
+          <div class="btn-wrapper" v-if="$store.state.status == 'animateur' ">
             <div  @click="deleteEpisode(episode.idEpisode)">
               <img src="../../public/img/trash-bin.png" id="icone-delete" />
             </div>

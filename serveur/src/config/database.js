@@ -2,10 +2,10 @@ const mysql = require("mysql");
 
 // create the connection to database
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'netradio'
+    host: 'mysql-netradio.alwaysdata.net',
+    user: 'netradio',
+    password: 'Radionet.0',
+    database: 'netradio_bd'
 });
 
 db.connect(error => {

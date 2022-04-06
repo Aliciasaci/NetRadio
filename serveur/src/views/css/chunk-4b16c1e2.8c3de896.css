@@ -1,0 +1,1 @@
+#navbar-admin{background-color:#424242;display:grid;grid-template-columns:.6fr .4fr .13fr}#navbar-admin #navbar-content ul{grid-template-columns:.55fr .85fr}#navbar-admin #navbar-content ul #programmes{grid-column:1/2}#navbar-admin #navbar-content ul #podcasts{grid-column:2/3}#navbar-compte{display:flex;justify-content:center}

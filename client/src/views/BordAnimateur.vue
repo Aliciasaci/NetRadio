@@ -73,7 +73,7 @@ export default {
       blob: null,
       episodeName: this.$route.query.titleEpisode,
       save: false,
-      id: "1",
+      id: this.$store.state.idMembre,
       link: null,
       ret: false,
       files: [],
@@ -251,7 +251,7 @@ export default {
       var Dropbox = require("dropbox").Dropbox;
       var dbx = new Dropbox({
         accessToken:
-          "sl.BFJtfKBRVdp8U_4jxvcD6Al8s5tUvYET2gHcYZ-QzviRUBaAK1eul4IMpn9PwRWPa_jq6qGaj-q0J3SlOOQmxuQjeuH9teLLMaI0ejDpfxkDZZ_LhACH1fRuFpaAWKJfOogTXx4xSY_k",
+          "sl.BFPey5N60HsUlYs2CH-AdGY3IZttxmQQ7WegQoBi9GLXO2UhcCs0O8K6xxQRmSFh8KhWHz2E51WpLWf-BUNYiAYAcTMLDNFFpR0bxVgoEskyntk-czwIuLIwe1emGneRdnIOiwK4TMJG",
       });
       dbx
         .filesUpload({
