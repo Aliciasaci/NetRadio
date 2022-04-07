@@ -4,7 +4,9 @@
     <h1 id="title">LISTE DES ANIMATEURS</h1>
     <div id="listAnimateurs">
       <ul v-for="animateur in animateurs" v-bind:key="animateur.idAnimateur">
-        <li>{{animateur.fullNameAnimateur}}</li>
+          <router-link :to="{name : 'PodcastAnimateur', params :{id: animateur.idAnimateur}}">
+             <li>{{animateur.fullNameAnimateur}}</li>
+          </router-link>
       </ul>
     </div>
     <Footer />

@@ -116,6 +116,12 @@ const routes = [{
         name: "DetailEmission",
         component: () =>
             import ("../views/DetailEmission.vue"),
+    },
+    {
+        path: "/Animateurs/:id",
+        name: "PodcastAnimateur",
+        component: () =>
+            import ("../views/PodcastAnimateur.vue"),
     }
 
 ]
