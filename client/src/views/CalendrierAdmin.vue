@@ -3,14 +3,15 @@
     <HeaderAdministrateur />
     <div class="calendar-form">
       <div class="calendar">
-       <v-date-picker locale="fr" v-model="selectedDate" is-dark style="height: 250px;" is-expanded ></v-date-picker>
-       <div id="listCreneaux" v-bind:getCreneaux="getCreneaux()">
-       <div v-for="creneau in creneaux" v-bind:key="creneau.idCreneau">
-         <ul>
-           <li>{{creneau.heure}} - {{creneau.fullNameAnimateur}}</li>
-         </ul>
-       </div>
-       </div>
+       <v-date-picker locale="fr" v-model="selectedDate" is-dark style="height: 250px;" is-expanded>
+       </v-date-picker>
+       <div id="listCreneaux" v-if="getCreneaux">
+          <div v-for="creneau in creneaux" v-bind:key="creneau.idCreneau">
+            <ul>
+              <li>{{creneau.heure}} - {{creneau.fullNameAnimateur}}</li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div class="form">
         <h1>Attribuer un créneau</h1>
@@ -58,7 +59,7 @@ export default {
                 { heure: "14:00:00", description: "14H00"},
                 { heure: "14:30:00", description: "14H30"},
                 { heure: "15:00:00", description: "15H00"},
-                { heure: "15:00:00", description: "15H30"},
+                { heure: "15:30:00", description: "15H30"},
                 { heure: "16:00:00", description: "16H00"},
                 { heure: "16:30:00", description: "16H30"},
                 { heure: "17:00:00", description: "17H00"},
@@ -80,20 +81,10 @@ export default {
       heure_text: 'Sélectionner une heure',
       selectedHeure: 'Sélectionner une heure',
       animateur_text: 'Sélectionner un animateur',
-      selectedAnimateur: 'Sélectionner un animateur'
+      selectedAnimateur: 'Sélectionner un animateur',
     };
   },
   methods: {
-    getCreneaux(){
-      this.$api
-        .get("creneaux/" + this.momentDate(this.selectedDate) + this.selectedHeure.heure)
-        .then(response => {
-            this.creneaux = response.data;
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    },
     createCreneau(){
       const creneau = {
         "date": this.momentDate(this.selectedDate),
@@ -132,16 +123,19 @@ export default {
       return moment(value).format('YYYY-MM-DD');
     }
   },
-  created(){
-    this.$api
-     .get("animateurs")
-      .then(response => {
-          this.animateurs = response.data;
-      })
-      .catch(error => {
-          console.log(error);
-      });
-  }
+  computed: {
+      getCreneaux(){
+        return this.$api
+        .get("creneaux/" + this.momentDate(this.selectedDate))
+        .then(response => {
+            this.creneaux = response.data;
+        })
+        .catch(error => {
+            console.log(error);
+        });
+      }
+  },
+
 };
 </script>
 
