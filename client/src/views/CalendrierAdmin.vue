@@ -135,6 +135,16 @@ export default {
         });
       }
   },
+  created(){
+    this.$api
+     .get("animateurs")
+      .then(response => {
+          this.animateurs = response.data;
+      })
+      .catch(error => {
+          console.log(error);
+      });
+  }
 
 };
 </script>
